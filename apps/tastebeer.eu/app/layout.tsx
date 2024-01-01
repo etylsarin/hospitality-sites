@@ -1,3 +1,5 @@
+import { version } from '../package.json';
+
 import styles from './layout.module.scss';
 
 export const metadata = {
@@ -11,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" data-version={version}>
       <body className={styles.body}>{children}</body>
     </html>
   );
