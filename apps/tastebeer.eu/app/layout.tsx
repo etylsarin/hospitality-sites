@@ -1,5 +1,7 @@
 import { version } from '../package.json';
 
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 import styles from './layout.module.scss';
 
 export const metadata = {
@@ -14,7 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-version={version}>
-      <body className={styles.body}>{children}</body>
+      <body className={styles.body}>
+        {children}
+        <SpeedInsights />
+      </body>
     </html>
   );
 }
