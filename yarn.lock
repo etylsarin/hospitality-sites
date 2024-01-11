@@ -2317,6 +2317,16 @@
     get-it "^8.4.4"
     rxjs "^7.0.0"
 
+"@sanity/client@^6.11.0":
+  version "6.11.1"
+  resolved "https://registry.yarnpkg.com/@sanity/client/-/client-6.11.1.tgz#3c36109434775d1588b171e4840e6750415da6d1"
+  integrity sha512-em4jWdXl/yZQsXRslTqF+0kj5sFM9l9tVz7pE/vPLN0aYlX+jxovzX4PBXLC1/gdJVtpT4GQRHcTBcnNSOtPNA==
+  dependencies:
+    "@sanity/eventsource" "^5.0.0"
+    "@vercel/stega" "0.1.0"
+    get-it "^8.4.4"
+    rxjs "^7.0.0"
+
 "@sanity/color@3.0.0-beta.9":
   version "3.0.0-beta.9"
   resolved "https://registry.yarnpkg.com/@sanity/color/-/color-3.0.0-beta.9.tgz#e33a2138f71ca8cec2c264fb9ac44c680be50a9c"
@@ -2478,6 +2488,23 @@
     rxjs "^7.8.1"
     suspend-react "0.1.3"
 
+"@sanity/preview-kit-compat@1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@sanity/preview-kit-compat/-/preview-kit-compat-1.4.0.tgz#153ae7be33bf62946ff3013ed96832c8e3bd2dee"
+  integrity sha512-n5gwT79ZdoGuMMMU5qDSHRsqMl6XEW0gvaXQYR5kgx6tY9HCr8Mpd0iJ8NHr0sD+/aBU7Rw4/l4i6mB3Z+bS4Q==
+
+"@sanity/preview-kit@5.0.10":
+  version "5.0.10"
+  resolved "https://registry.yarnpkg.com/@sanity/preview-kit/-/preview-kit-5.0.10.tgz#81f975e8bb72c300fa330d337e7c41ed0b253520"
+  integrity sha512-wOpZ5jcO9uYaBeiMEcJEdrDoSL+gmikNzFho33pqa+0nRmPR6hzx+ARPNPnI939Cpjd5lx6hJ4MB8cn0YrrWyw==
+  dependencies:
+    "@sanity/preview-kit-compat" "1.4.0"
+    "@vercel/stega" "0.1.0"
+    lru-cache "10.1.0"
+    mendoza "3.0.3"
+    react-fast-compare "3.2.2"
+    use-sync-external-store "1.2.0"
+
 "@sanity/preview-url-secret@^1.4.0":
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/@sanity/preview-url-secret/-/preview-url-secret-1.4.1.tgz#72646c25dc41456cc9a70b7ba7abf00b0695c37f"
@@ -2581,6 +2608,11 @@
     is-hotkey "^0.1.6"
     json5 "^2.2.3"
     lodash "^4.17.21"
+
+"@sanity/webhook@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@sanity/webhook/-/webhook-4.0.0.tgz#0f4e66d0c2c0b84a5bb0a9b12e6ac57adc974502"
+  integrity sha512-IRjtj17tHSmxHWZvgRnLZbWj8J8G4jqOWOYC25eV4EcfVn1yZCs0x+km6+PSiJgOphSX6Nm1+X6UJOT+GnWIFw==
 
 "@sinclair/typebox@^0.27.8":
   version "0.27.8"
@@ -5863,6 +5895,11 @@ groq-js@^1.1.12:
   resolved "https://registry.yarnpkg.com/groq-js/-/groq-js-1.3.0.tgz#7fc03a41c0b5a4160edfd714735e756d653b637a"
   integrity sha512-J7+JcxM0OvoowSkhNZAabCLueldEMkKzd9ufCEDRjKvkD1PcBUwyfsGvxUI59UojRCqFqp0y76LLzPzwSZTetw==
 
+groq@^3.19:
+  version "3.24.1"
+  resolved "https://registry.yarnpkg.com/groq/-/groq-3.24.1.tgz#54c3e7938e273cec34986f08a1041a3087b9caf3"
+  integrity sha512-Ay33pHdDZWe25Dnelcl3G1APrsLQ1b2ypoFuqRh4ot5zGlEPa9Bfyi2C3vZzvF9knM5tFboDLAr73vLdod69QA==
+
 gunzip-maybe@^1.4.1:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/gunzip-maybe/-/gunzip-maybe-1.4.2.tgz#b913564ae3be0eda6f3de36464837a9cd94b98ac"
@@ -7280,7 +7317,7 @@ lower-case@^2.0.2:
   dependencies:
     tslib "^2.0.3"
 
-lru-cache@^10.0.1:
+lru-cache@10.1.0, lru-cache@^10.0.1:
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-10.1.0.tgz#2098d41c2dc56500e6c88584aa656c84de7d0484"
   integrity sha512-/1clY/ui8CzjKFyjdvwPWJUYKiFVXG2I2cY0ssG7h4+hwk+XOIX7ZSG9Q7TW8TW3Kp3BUSqgFWBLgL4PJ+Blag==
@@ -7514,6 +7551,16 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
+
+next-sanity@^7.0.8:
+  version "7.0.8"
+  resolved "https://registry.yarnpkg.com/next-sanity/-/next-sanity-7.0.8.tgz#32136c04a248b3daa856e900df4d57185aae50c6"
+  integrity sha512-L3vwkbwWVgW3iHq9XqiCu5BAucTX2sF5Lz0W8uFmIhq2O/a4eq/o3IxApx/AJq6tx3yWn//YSvXTzdyktQqWVA==
+  dependencies:
+    "@sanity/client" "^6.11.0"
+    "@sanity/preview-kit" "5.0.10"
+    "@sanity/webhook" "4.0.0"
+    groq "^3.19"
 
 next@13.4.4:
   version "13.4.4"
@@ -8230,7 +8277,7 @@ react-dom@18.2.0, react-dom@^18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
-react-fast-compare@^3.2.0:
+react-fast-compare@3.2.2, react-fast-compare@^3.2.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.2.tgz#929a97a532304ce9fee4bcae44234f1ce2c21d49"
   integrity sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==
@@ -9693,7 +9740,7 @@ use-sidecar@^1.1.2:
     detect-node-es "^1.1.0"
     tslib "^2.0.0"
 
-use-sync-external-store@^1.2.0:
+use-sync-external-store@1.2.0, use-sync-external-store@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
   integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==

@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-version={version}>
+    <html lang="en" data-version={version} className={styles.html}>
       <body className={styles.body}>
         {children}
         <SpeedInsights />

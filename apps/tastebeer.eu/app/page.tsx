@@ -9,6 +9,8 @@ export default async function Index() {
    * Note: The corresponding styles are in the ./index.scss file.
    */
   return (
-    <Image src="/images/logo.png" alt="" width={92} height={278} className={styles.logo} />
+    <div className={styles.bg}>
+      <Image src="/images/logo.png" alt="" width={92} height={278} className={styles.logo} />
+    </div>
   );
 }
