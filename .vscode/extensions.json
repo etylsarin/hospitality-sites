@@ -1,8 +1,17 @@
 {
   "recommendations": [
-    "nrwl.angular-console",
-    "esbenp.prettier-vscode",
+    "clinyong.vscode-css-modules",
+    "mikestead.dotenv",
+    "dbaeumer.vscode-eslint",
+    "rvest.vs-code-prettier-eslint",
+    "codezombiech.gitignore",
+    "wix.vscode-import-cost",
     "firsttris.vscode-jest-runner",
-    "dbaeumer.vscode-eslint"
+    "unifiedjs.vscode-mdx",
+    "nrwl.angular-console",
+    "redhat.vscode-yaml",
+    "gruntfuggly.todo-tree",
+    "humao.rest-client",
+    "formulahendry.auto-rename-tag"
   ]
 }

@@ -1,6 +1,7 @@
+import Image from 'next/image';
 import { groq } from 'next-sanity';
 import { FunctionComponent } from 'react';
-import Image from 'next/image';
+
 import { client } from '../../client';
 
 import styles from './page.module.scss';

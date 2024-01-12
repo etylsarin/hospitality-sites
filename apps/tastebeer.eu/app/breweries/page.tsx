@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import { client } from '../client';
 
 const getData = async () => {

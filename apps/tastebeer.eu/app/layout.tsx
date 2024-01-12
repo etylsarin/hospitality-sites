@@ -1,6 +1,7 @@
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 import { version } from '../package.json';
 
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import styles from './layout.module.scss';
 
@@ -9,11 +10,11 @@ export const metadata = {
   description: 'Welcome to tastebeer.eu',
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) => {
   return (
     <html lang="en" data-version={version} className={styles.html}>
       <body className={styles.body}>
@@ -22,4 +23,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
