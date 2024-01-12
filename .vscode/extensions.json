@@ -12,6 +12,7 @@
     "redhat.vscode-yaml",
     "gruntfuggly.todo-tree",
     "humao.rest-client",
-    "formulahendry.auto-rename-tag"
+    "formulahendry.auto-rename-tag",
+    "esbenp.prettier-vscode"
   ]
 }

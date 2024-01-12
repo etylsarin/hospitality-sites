@@ -30,6 +30,11 @@ export default defineType({
       type: 'url',
     }),
     defineField({
+      name: 'stars',
+      title: 'Stars',
+      type: 'rating',
+    }),
+    defineField({
       name: 'image',
       title: 'Image',
       type: 'image',

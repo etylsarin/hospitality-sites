@@ -1,4 +1,5 @@
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { UiProvider } from "ui-kit";
 
 import { version } from '../package.json';
 
@@ -18,7 +19,9 @@ const RootLayout = ({
   return (
     <html lang="en" data-version={version} className={styles.html}>
       <body className={styles.body}>
-        {children}
+        <UiProvider>
+          {children}
+        </UiProvider>
         <SpeedInsights />
       </body>
     </html>

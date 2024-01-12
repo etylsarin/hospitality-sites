@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { groq } from 'next-sanity';
 import { FunctionComponent } from 'react';
+import { PageHeading } from 'ui-kit';
 
 import { client } from '../../client';
 
@@ -33,7 +34,7 @@ const BreweryDetailPage: FunctionComponent<BreweryDetailPageProps> = async ({ pa
     // const router = useRouter();
     return (
         <>
-            <h1>{name}</h1>
+            <PageHeading>{name}</PageHeading>
             <div className={styles.image}>
                 <Image
                     src={image.url}
