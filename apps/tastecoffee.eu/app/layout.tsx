@@ -4,8 +4,8 @@ import { PageWrapper } from 'ui-kit';
 import cfg from '../package.json';
 
 export const metadata = {
-  title: 'testebeer.eu',
-  description: 'Welcome to testebeer.eu',
+  title: 'tastecoffee.eu',
+  description: 'Welcome to tastecoffee.eu',
 };
 
 export interface RootLayoutProps {

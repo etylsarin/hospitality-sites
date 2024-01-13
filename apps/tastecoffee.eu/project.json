@@ -1,0 +1,58 @@
+{
+  "name": "tastecoffee.eu",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/tastecoffee.eu",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/tastecoffee.eu"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/tastecoffee.eu"
+        },
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "tastecoffee.eu:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "tastecoffee.eu:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "tastecoffee.eu:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nx/next:export",
+      "options": {
+        "buildTarget": "tastecoffee.eu:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/tastecoffee.eu/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": []
+}

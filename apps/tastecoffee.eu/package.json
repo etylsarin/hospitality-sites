@@ -1,0 +1,12 @@
+{
+    "name": "tastecoffee.eu",
+    "version": "0.1.0",
+    "license": "MIT",
+    "dependencies": {
+      "@vercel/speed-insights": "^1.0.2",
+      "next": "13.4.4",
+      "react": "18.2.0",
+      "react-dom": "18.2.0",
+      "tslib": "^2.3.0"
+    }
+}

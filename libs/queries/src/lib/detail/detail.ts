@@ -1,6 +1,6 @@
 import { groq } from 'next-sanity';
 
-import { client } from '../../query/client';
+import { client } from '../client';
 
 export interface QueryDetailParams {
     slug: string;

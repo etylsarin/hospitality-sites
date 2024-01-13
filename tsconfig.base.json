@@ -16,6 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "queries": ["libs/queries/src/index.ts"],
       "ui-kit": ["libs/ui-kit/src/index.ts"]
     }
   },
