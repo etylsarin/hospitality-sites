@@ -1,9 +1,11 @@
+import { BiLocationPlus } from 'react-icons/bi';
 import {defineField, defineType} from 'sanity';
 
-export default defineType({
+export const place = defineType({
   name: 'place',
   title: 'Place',
   type: 'document',
+  icon: BiLocationPlus,
   fields: [
     defineField({
       name: 'name',
@@ -20,6 +22,15 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{type: 'string'}],
+      options: {
+        layout: 'tags'
+      }
+    }),
+    defineField({
       name: 'location',
       title: 'Location',
       type: 'geopoint',
@@ -30,9 +41,15 @@ export default defineType({
       type: 'url',
     }),
     defineField({
-      name: 'stars',
-      title: 'Stars',
-      type: 'rating',
+      name: 'reviews',
+      title: 'Reviews',
+      type: 'array',
+      of: [{type: 'review'}],
+    }),
+    defineField({
+      name: 'established',
+      title: 'Established',
+      type: 'string',
     }),
     defineField({
       name: 'image',

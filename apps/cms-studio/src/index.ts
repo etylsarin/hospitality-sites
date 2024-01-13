@@ -1,7 +1,11 @@
-import place from './schemas/place';
-import ratingType from './schemas/rating';
+import { person } from './schemas/person';
+import { place } from './schemas/place';
+import { rating } from './schemas/rating';
+import { review } from './schemas/review';
 
 export const schemaTypes = [
+  person,
   place,
-  ratingType,
+  rating,
+  review,
 ];

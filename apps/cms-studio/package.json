@@ -2,5 +2,7 @@
     "name": "cms-studio",
     "version": "0.1.0",
     "license": "UNLICENSED",
-    "dependencies": {}
+    "dependencies": {
+        "styled-components": "^5.2 || ^6"
+    }
 }

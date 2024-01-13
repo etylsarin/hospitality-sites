@@ -2,27 +2,31 @@ import { Box, Image, Badge } from "@chakra-ui/react";
 import { FunctionComponent } from "react";
 import { BiSolidStar } from "react-icons/bi";
 
-export interface ListCardProps {
-  title: string;
-  imageUrl: string;
-  stars: number;
+export interface Review {
+  rating: number;
 }
 
-export const ListCard: FunctionComponent<ListCardProps> = ({ title, imageUrl, stars }) => {
+export interface ListCardProps {
+  name: string;
+  image: {
+    url: string;
+  };
+  established?: string;
+  reviews: Review[];
+}
+
+export const ListCard: FunctionComponent<ListCardProps> = ({ name, image, established, reviews }) => {
   const property = {
-    imageUrl: 'https://bit.ly/2Z4KKcF',
-    imageAlt: 'Rear view of modern home with pool',
-    beds: 3,
-    baths: 2,
-    title: 'Modern home in city center in the heart of historic Los Angeles',
     formattedPrice: '$1,900.00',
-    reviewCount: 34,
-    rating: 4,
   }
+
+  const rating = reviews.reduce((prev, curr) => prev + curr.rating, 0) / reviews.length;
+
+  const reviewCount = `${reviews.length} ${reviews.length === 1 ? 'review' : 'reviews'}`;
 
   return (
     <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-      <Image src={imageUrl} alt={property.imageAlt} />
+      <Image src={image.url} alt={`${name} brewery`} />
 
       <Box p='6'>
         <Box display='flex' alignItems='baseline'>
@@ -37,7 +41,7 @@ export const ListCard: FunctionComponent<ListCardProps> = ({ title, imageUrl, st
             textTransform='uppercase'
             ml='2'
           >
-            {property.beds} beds &bull; {property.baths} baths
+            {established ? `Established ${established}` : null}
           </Box>
         </Box>
 
@@ -48,7 +52,7 @@ export const ListCard: FunctionComponent<ListCardProps> = ({ title, imageUrl, st
           lineHeight='tight'
           noOfLines={1}
         >
-          {title}
+          {name}
         </Box>
 
         <Box>
@@ -64,11 +68,11 @@ export const ListCard: FunctionComponent<ListCardProps> = ({ title, imageUrl, st
             .map((_, i) => (
               <BiSolidStar
                 key={i}
-                color={i < stars ? 'black' : 'silver'}
+                color={i < rating ? 'black' : 'silver'}
               />
             ))}
           <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-            {property.reviewCount} reviews
+            {reviewCount}
           </Box>
         </Box>
       </Box>

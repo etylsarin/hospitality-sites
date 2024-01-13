@@ -1,26 +1,10 @@
 import Image from 'next/image';
-import { groq } from 'next-sanity';
 import { FunctionComponent } from 'react';
 import { PageHeading } from 'ui-kit';
 
-import { client } from '../../client';
+import { DetailResponse, queryDetail } from '../../query';
 
 import styles from './page.module.scss';
-
-const getData = async (slug: string) => {
-    return await client.fetch(groq`
-        *[_type == "place" && slug.current == $slug]{
-            name,
-            image {"url": asset->url}
-          }`, { slug });
-};
-
-export interface BreweryDetailDataProps {
-    name: string;
-    image: {
-        url: string;
-    }
-}
 
 export interface BreweryDetailPageProps {
     params: {
@@ -29,9 +13,8 @@ export interface BreweryDetailPageProps {
 } 
 
 const BreweryDetailPage: FunctionComponent<BreweryDetailPageProps> = async ({ params }) => {
-    const data: BreweryDetailDataProps[] = await getData(params.slug);
-    const { image, name } = data[0];
-    // const router = useRouter();
+    const data: DetailResponse = await queryDetail({ slug: params.slug, type: 'brewery' });
+    const { image, name } = data;
     return (
         <>
             <PageHeading>{name}</PageHeading>

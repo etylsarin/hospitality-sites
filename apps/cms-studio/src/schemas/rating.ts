@@ -1,6 +1,6 @@
 import {defineType} from 'sanity';
 
-export default defineType({
+export const rating = defineType({
   name: 'rating',
   title: 'Rating',
   type: 'number',

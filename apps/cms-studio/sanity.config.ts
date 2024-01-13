@@ -6,8 +6,9 @@ import {deskTool} from 'sanity/desk';
 import {schemaTypes} from './src';
 
 export default defineConfig({
-  name: 'default',
-  title: 'hospitality-sites',
+  name: 'hospitality-sites',
+  title: 'CMS for Next.js hospitality sites',
+  basePath: '/cms-studio',
 
   projectId: process.env.SANITY_STUDIO_PROJECT_ID as string,
   dataset: process.env.SANITY_STUDIO_DATASET as string,
