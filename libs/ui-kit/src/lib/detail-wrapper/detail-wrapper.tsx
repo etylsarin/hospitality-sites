@@ -1,7 +1,8 @@
-import { Heading } from '@chakra-ui/react';
 import Image from 'next/image';
 import { DetailResponse, queryDetail } from 'queries';
 import { FunctionComponent } from 'react';
+
+import { Text } from '../text/text';
 
 import styles from './detail-wrapper.module.scss';
 
@@ -19,7 +20,12 @@ export const DetailWrapper: FunctionComponent<DetailWrapperProps> = ({ type, slu
 
     return (
         <>
-            <Heading as="h1" size="4xl" noOfLines={1}>{name}</Heading>
+            <Text
+                tag="h2"
+                className="mt-2 !text-2xl uppercase !leading-7 md:!text-[26px] md:!leading-10 2xl:!text-[28px] 4xl:!text-3xl"
+            >
+                {name}
+            </Text>
             <div className={styles.image}>
                 <Image
                     src={image.url}

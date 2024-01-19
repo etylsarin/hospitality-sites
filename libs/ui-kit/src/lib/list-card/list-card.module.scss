@@ -1,0 +1,13 @@
+.image {
+    width: 232px;
+    height: 180px;
+    overflow: hidden;
+}
+
+.rating {
+    @apply flex items-center gap-3 leading-7;
+}
+
+.name {
+    @apply text-ellipsis text-gray-dark 2xl:mb-1.5;
+}

@@ -9,7 +9,8 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/tastecoffee.eu"
+        "outputPath": "dist/apps/tastecoffee.eu",
+        "postcssConfig": "apps/tastecoffee.eu/postcss.config.js"
       },
       "configurations": {
         "development": {
