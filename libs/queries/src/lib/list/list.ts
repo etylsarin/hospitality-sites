@@ -3,19 +3,20 @@ import { groq } from 'next-sanity';
 import { client } from '../client';
 
 export interface QueryListParams {
-    type: string;
+    section: string;
 }
 
-export const queryList = async ({ type }: QueryListParams) => {
+export const queryList = async ({ section }: QueryListParams) => {
     return await client.fetch(groq`
-        *[_type == "place" && $type in tags]{
+        *[_type == "place" && $section == sections]{
         slug,
         name,
         reviews,
         established,
-        image {"url": asset->url}
+        location,
+        images[] {"url": asset->url}
         }
-    `, { type });
+    `, { section });
 };
 
 export interface Review {
@@ -30,9 +31,10 @@ export interface ListItem {
     name: string;
     reviews: Review[];
     established: string;
-    image: {
+    location: unknown;
+    images: {
         url: string;
-    }
+    }[]
 }
 
 export type ListResponse = ListItem[]

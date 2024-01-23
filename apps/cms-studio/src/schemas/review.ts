@@ -1,10 +1,10 @@
-import { BiMessage } from 'react-icons/bi';
+// import { ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline';
 import {defineField, defineType} from 'sanity';
 
 export const review = defineType({
   name: 'review',
   title: 'Review',
-  icon: BiMessage,
+//  icon: ChatBubbleBottomCenterTextIcon as any,
   type: 'document',
   fields: [
     defineField({

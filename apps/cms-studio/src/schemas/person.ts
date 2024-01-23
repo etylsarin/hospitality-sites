@@ -1,10 +1,10 @@
-import { BiUser } from 'react-icons/bi';
+// import { UserIcon } from '@heroicons/react/24/outline';
 import {defineField, defineType} from 'sanity';
 
 export const person = defineType({
   name: 'person',
   title: 'Person',
-  icon: BiUser,
+//  icon: UserIcon as any,
   type: 'document',
   fields: [
     defineField({

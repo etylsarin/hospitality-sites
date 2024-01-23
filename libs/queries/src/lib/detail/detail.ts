@@ -4,20 +4,19 @@ import { client } from '../client';
 
 export interface QueryDetailParams {
     slug: string;
-    type: string;
 }
 
-export const queryDetail = async ({ slug, type }: QueryDetailParams) => {
+export const queryDetail = async ({ slug }: QueryDetailParams) => {
     return await client.fetch(groq`
-        *[_type == "place" && $type in tags && slug.current == $slug][0]{
+        *[_type == "place" && slug.current == $slug][0]{
             name,
-            image {"url": asset->url}
-          }`, { slug, type });
+            images[] {"url": asset->url}
+          }`, { slug });
 };
 
 export interface DetailResponse {
     name: string;
-    image: {
+    images: {
         url: string;
-    }
+    }[]
 }

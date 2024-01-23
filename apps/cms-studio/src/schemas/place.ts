@@ -1,11 +1,11 @@
-import { BiLocationPlus } from 'react-icons/bi';
+// import { MapPinIcon } from '@heroicons/react/24/outline';
 import {defineField, defineType} from 'sanity';
 
 export const place = defineType({
   name: 'place',
   title: 'Place',
   type: 'document',
-  icon: BiLocationPlus,
+//  icon: MapPinIcon as any,
   fields: [
     defineField({
       name: 'name',
@@ -22,8 +22,19 @@ export const place = defineType({
       },
     }),
     defineField({
-      name: 'tags',
-      title: 'Tags',
+      name: 'sections',
+      title: 'Sections',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Beer', value: 'beer'},
+          {title: 'Coffee', value: 'coffee'}
+        ]
+      }
+    }),
+    defineField({
+      name: 'categories',
+      title: 'Categories',
       type: 'array',
       of: [{type: 'string'}],
       options: {
@@ -52,15 +63,13 @@ export const place = defineType({
       type: 'string',
     }),
     defineField({
-      name: 'image',
-      title: 'Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      name: 'images',
+      title: 'Images',
+      type: 'array',
+      of: [{type: 'image'}],
     }),
   ],
   preview: {
-    select: {title: 'name', media: 'image'},
+    select: {title: 'name', media: 'images.0'},
   },
 });
