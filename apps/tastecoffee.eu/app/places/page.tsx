@@ -3,7 +3,7 @@ import { ListWrapper } from 'ui-kit';
 
 export interface CafesListPageProps {}
 
-export const categories = [
+const categories = [
   { id: 'roaster', label: 'Roaster' },
   { id: 'cafe', label: 'Cafe' },
   { id: 'bakery', label: 'Bakery' },
