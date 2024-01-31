@@ -2,7 +2,9 @@ import { groq } from 'next-sanity';
 
 import type { Geopoint } from '@sanity/google-maps-input';
 
-import { client } from '../client';
+import { client } from '../client/client';
+import { Review } from '../review/review';
+import { GeoAddress } from '../geo-address/geo-address';
 
 export interface QueryDetailParams {
     slug: string;
@@ -19,24 +21,6 @@ export const queryDetail = async ({ slug }: QueryDetailParams) => {
             images[] {"url": asset->url}
           }`, { slug });
 };
-
-export interface Author {
-    name: string;
-    avatar: string;
-}
-
-export interface Review {
-    author: Author;
-    rating: number;
-    date: string;
-    overview: string;
-}
-
-export interface GeoAddress {
-    address: string;
-    city: string;
-    country: string;
-}
 
 export interface DetailResponse {
     name: string;

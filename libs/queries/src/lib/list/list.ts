@@ -1,6 +1,7 @@
 import { groq } from 'next-sanity';
 
-import { client } from '../client';
+import { client } from '../client/client';
+import { Review } from '../review/review';
 
 export interface QueryListParams {
     section: string;
@@ -18,11 +19,6 @@ export const queryList = async ({ section }: QueryListParams) => {
         }
     `, { section });
 };
-
-export interface Review {
-    author: string;
-    rating: number;
-}
 
 export interface ListItem {
     slug: {
