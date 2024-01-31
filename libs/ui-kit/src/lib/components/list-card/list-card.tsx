@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ListItem } from 'queries';
 import { FunctionComponent } from 'react';
+import { CurrencyEuroIcon } from '@heroicons/react/24/outline';
 
 import { ActionIcon } from '../action-icon/action-icon';
 import { AddToWishlist } from '../add-to-wishlist/add-to-wishlist';
@@ -19,6 +20,7 @@ import {
 
 export interface ListCardProps extends Omit<ListItem, 'slug'> {
   id: string;
+  category?: string;
 };
 
 export const ListCard: FunctionComponent<ListCardProps> = ({
@@ -26,11 +28,12 @@ export const ListCard: FunctionComponent<ListCardProps> = ({
   name,
   reviews,
   established,
-  images
+  images,
+  category,
 }) => {
   const rating = reviews && reviews.length ? reviews.reduce((prev, curr) => prev + curr.rating, 0) / reviews.length : 0;
   const reviewCount = `${reviews?.length || 0} ${reviews?.length === 1 ? 'review' : 'reviews'}`;
-  const est = established ? `Est. ${established}` : '';
+  const est = established ? `Since ${established}` : '';
   const detailUrl = `places/${id}`;
 
   return (
@@ -96,19 +99,25 @@ export const ListCard: FunctionComponent<ListCardProps> = ({
         <Link href={detailUrl}>
           <div className="content pt-3">
             <div className="mb-1 flex items-center gap-5">
-              <span className="relative flex items-center font-bold text-gray-dark">
-                {est}
+              <span className="relative flex items-center font-bold text-gray-dark before:absolute before:-right-3 before:block before:h-1 before:w-1 before:rounded-full before:bg-gray-dark">
+                #12 of 243 {category}
               </span>
+              <span className="font-bold">{est}</span>
             </div>
             <h4 className="text-ellipsis text-gray-dark 2xl:mb-1.5">{name}</h4>
             <p className="mb-3 text-gray-light xl:mb-3">LOCATION</p>
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <p className="text-gray-light">
-                <span className="font-bold text-gray-dark xl:text-[18px] 3xl:text-xl">
-                  PRICE
-                </span>{' '}
-                avg/day
-              </p>
+              <div className="text-gray-light">
+                <div
+                  className={clsx(
+                    '[&>svg]:outline-current',
+                    'flex h-[14px] w-[28px] 3xl:h-[18px] 3xl:w-[36px]'
+                  )}
+                >
+                  <CurrencyEuroIcon />
+                  <CurrencyEuroIcon />
+                </div>
+              </div>
               <div className="flex items-center gap-3 leading-7">
                 <Rating
                   allowHalf

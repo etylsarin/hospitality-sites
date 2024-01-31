@@ -423,7 +423,9 @@
 	@apply bg-white transition shadow-card;
 }
 .transparent-header.is-scrolling .brand-logo,
-.transparent-header.is-scrolling .primary-nav li a {
+.transparent-header.is-scrolling .primary-nav li a,
+.transparent-header.no-background .brand-logo,
+.transparent-header.no-background .primary-nav li a {
 	@apply text-black;
 }
 .header-default.is-scrolling, .addlisting-header.is-scrolling, .dashboard-header.is-scrolling {

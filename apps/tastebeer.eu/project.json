@@ -29,7 +29,8 @@
       "configurations": {
         "development": {
           "buildTarget": "tastebeer.eu:build:development",
-          "dev": true
+          "dev": true,
+          "port": 4100
         },
         "production": {
           "buildTarget": "tastebeer.eu:build:production",

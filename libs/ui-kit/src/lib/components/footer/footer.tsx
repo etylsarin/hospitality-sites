@@ -3,21 +3,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
-
-const menuItems = [
-  {
-    label: 'Home',
-    path: '/',
-  },
-  {
-    label: 'Explore',
-    path: '/',
-  },
-  {
-    label: 'Help',
-    path: '/',
-  },
-];
+import { menuItems } from '../../configs';
 
 export interface FooterProps {
   className?: string;

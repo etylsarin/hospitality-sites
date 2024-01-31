@@ -1,11 +1,11 @@
-// import { MapPinIcon } from '@heroicons/react/24/outline';
+import { MapPinIcon } from '@heroicons/react/24/outline';
 import {defineField, defineType} from 'sanity';
 
 export const place = defineType({
   name: 'place',
   title: 'Place',
   type: 'document',
-//  icon: MapPinIcon as any,
+  icon: MapPinIcon as any,
   fields: [
     defineField({
       name: 'name',
@@ -33,18 +33,37 @@ export const place = defineType({
       }
     }),
     defineField({
+      name: 'price',
+      title: 'Price range',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Low', value: 'low'},
+          {title: 'Average', value: 'average'},
+          {title: 'High', value: 'high'},
+          {title: 'Very high', value: 'very-high'},
+        ]
+      }
+    }),
+    defineField({
       name: 'categories',
       title: 'Categories',
-      type: 'array',
-      of: [{type: 'string'}],
+      type: 'tags',
       options: {
-        layout: 'tags'
-      }
+        predefinedTags: [
+          { value: 'breweries', label: 'Breweries' },
+          { value: 'pubs', label: 'Pubs' },
+          { value: 'beer-gardens', label: 'Beer gardens' },
+          { value: 'roasters', label: 'Roasters' },
+          { value: 'cafes', label: 'Cafes' },
+          { value: 'bakeries', label: 'Bakeries' },
+        ],
+      },
     }),
     defineField({
       name: 'location',
       title: 'Location',
-      type: 'geopoint',
+      type: 'geolocation',
     }),
     defineField({
       name: 'url',
@@ -68,8 +87,22 @@ export const place = defineType({
       type: 'array',
       of: [{type: 'image'}],
     }),
+    defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'text'
+    })
   ],
   preview: {
-    select: {title: 'name', media: 'images.0'},
+    select: {
+      title: 'name',
+      images: 'images'
+    },
+    prepare({ title, images }) {
+      return {
+        title: title,
+        media: images[0]
+      }
+    }
   },
 });

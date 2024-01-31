@@ -30,6 +30,7 @@ export const ListWrapper: FunctionComponent<ListWrapperProps> = ({ categories, s
                 {...item}
                 key={slug.current}
                 id={slug.current}
+                category={categories[0].label}
               />
             ))}
           </div>

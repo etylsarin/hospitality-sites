@@ -1,10 +1,10 @@
-// import { UserIcon } from '@heroicons/react/24/outline';
+import { UserIcon } from '@heroicons/react/24/outline';
 import {defineField, defineType} from 'sanity';
 
 export const person = defineType({
   name: 'person',
   title: 'Person',
-//  icon: UserIcon as any,
+  icon: UserIcon as any,
   type: 'document',
   fields: [
     defineField({
@@ -23,8 +23,8 @@ export const person = defineType({
       },
     }),
     defineField({
-      name: 'image',
-      title: 'Image',
+      name: 'avatar',
+      title: 'Avatar',
       type: 'image',
       options: {
         hotspot: true,

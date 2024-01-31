@@ -5,7 +5,7 @@ export const review = defineType({
   name: 'review',
   title: 'Review',
 //  icon: ChatBubbleBottomCenterTextIcon as any,
-  type: 'document',
+  type: 'object',
   fields: [
     defineField({
       name: 'author',
@@ -17,6 +17,11 @@ export const review = defineType({
       name: 'rating',
       title: 'Rating',
       type: 'rating',
+    }),
+    defineField({
+      name: 'date',
+      title: 'Date',
+      type: 'date',
     }),
     defineField({
       name: 'overview',

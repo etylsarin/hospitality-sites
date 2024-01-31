@@ -41,7 +41,7 @@ export const SearchForm: FunctionComponent<SearchFormProps> = ({ section }) => {
       location: locationInput.searchedLocation,
     };
     queryString = makeQueryString(queryObj);
-    router.push(`?${queryString}`);
+    router.push(`/places?${queryString}`);
   };
 
   return (
@@ -62,7 +62,7 @@ export const SearchForm: FunctionComponent<SearchFormProps> = ({ section }) => {
           world of {section}
         </Text>
         <Text className="mb-5 hidden leading-6 !text-secondary sm:block 3xl:leading-8 4xl:mb-6 4xl:text-lg">
-          Find the best {section} places around Eurpoe<br />and become an expert in {section} tasting.
+          Find the best {section} places in Eurpoe<br />and become real expert in {section} tasting.
         </Text>
       </div>
       <SearchAutocomplete

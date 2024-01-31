@@ -1,16 +1,16 @@
 import { FunctionComponent } from 'react';
 import { ListWrapper } from 'ui-kit';
 
-export interface CafesListPageProps {}
+export interface PlacesPageProps {}
 
 const categories = [
-  { id: 'roaster', label: 'Roaster' },
-  { id: 'cafe', label: 'Cafe' },
-  { id: 'bakery', label: 'Bakery' },
+  { id: 'roasters', label: 'Roasters' },
+  { id: 'cafes', label: 'Cafes' },
+  { id: 'bakeries', label: 'Bakeries' },
 ];
 
-const CafesListPage: FunctionComponent<CafesListPageProps> = () => (
+const PlacesPage: FunctionComponent<PlacesPageProps> = () => (
   <ListWrapper section="coffee" categories={categories} />
 )
 
-export default CafesListPage;
+export default PlacesPage;

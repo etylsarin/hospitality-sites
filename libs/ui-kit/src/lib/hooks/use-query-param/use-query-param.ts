@@ -7,7 +7,7 @@ import { makeQueryString } from '../../utils';
 
 const queryAtom = atom('');
 
-export function useQueryParam(pathname: string = 'list') {
+export function useQueryParam(pathname: string = 'places') {
   const [query, setQuery] = useAtom(queryAtom);
   const router = useRouter();
 
@@ -16,7 +16,7 @@ export function useQueryParam(pathname: string = 'list') {
     key.forEach((item) => url.searchParams.delete(item));
     setQuery(url.search);
     console.log('clearFilter');
-    // router.push(`${pathname}${url.search}`);
+    router.push(`${pathname}${url.search}`);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -37,7 +37,7 @@ export function useQueryParam(pathname: string = 'list') {
     url.searchParams.set(key, value.toString());
     setQuery(url.search);
     console.log('updateQueryparams', url.search);
-    // router.push(`${pathname}${url.search}`);
+    router.push(`${pathname}${url.search}`);
   };
 
   return {
