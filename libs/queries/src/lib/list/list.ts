@@ -2,6 +2,7 @@ import { groq } from 'next-sanity';
 
 import { client } from '../client/client';
 import { Review } from '../review/review';
+import { Location } from '../location/location';
 
 export interface QueryListParams {
     section: string;
@@ -27,7 +28,7 @@ export interface ListItem {
     name: string;
     reviews: Review[];
     established: string;
-    location: unknown;
+    location: Location;
     images: {
         url: string;
     }[]

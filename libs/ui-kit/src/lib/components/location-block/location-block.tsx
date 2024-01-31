@@ -1,10 +1,11 @@
-import { Geopoint } from '@sanity/google-maps-input';
+import { FunctionComponent } from 'react';
+import { Location } from 'queries';
+
 import { MapView } from '../map-view/map-view';
 import { Section } from '../section/section';
-import { FunctionComponent } from 'react';
 
 export interface LocationBlockProps {
-  location: Geopoint;
+  location: Location;
 }
 
 export const LocationBlock: FunctionComponent<LocationBlockProps> = ({ location }) => {
@@ -17,7 +18,7 @@ export const LocationBlock: FunctionComponent<LocationBlockProps> = ({ location 
       descriptionClassName="!text-gray !text-base"
     >
       <div className="mt-6 overflow-hidden rounded-xl">
-        <MapView mapContainerClassName="w-full h-[230px] sm:h-[400px] xl:h-[600px]" geopoint={location} googleMapsApiKey={`${process.env.SANITY_STUDIO_GMAPS_API_KEY}`} />
+        <MapView mapContainerClassName="w-full h-[230px] sm:h-[400px] xl:h-[600px]" geopoint={location.geopoint} googleMapsApiKey={`${process.env.SANITY_STUDIO_GMAPS_API_KEY}`} />
       </div>
     </Section>
   );

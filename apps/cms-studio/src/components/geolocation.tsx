@@ -23,7 +23,6 @@ export const Geolocation: ComponentType<ObjectInputProps<Record<string, any>, Ob
             const address = results[0].formatted_address;
             setAddress(address);
             set({ address }, ['geoaddress']);
-            console.log('members', members);
         })
         .catch(console.error);
     }, [geopointMember?.field.value])

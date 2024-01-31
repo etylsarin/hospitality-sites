@@ -15,7 +15,6 @@ export function useQueryParam(pathname: string = 'places') {
     const url = new URL(window.location.href);
     key.forEach((item) => url.searchParams.delete(item));
     setQuery(url.search);
-    console.log('clearFilter');
     router.push(`${pathname}${url.search}`);
   };
 
@@ -36,7 +35,6 @@ export function useQueryParam(pathname: string = 'places') {
     const url = new URL(window.location.href);
     url.searchParams.set(key, value.toString());
     setQuery(url.search);
-    console.log('updateQueryparams', url.search);
     router.push(`${pathname}${url.search}`);
   };
 

@@ -2,8 +2,6 @@ import { defineType } from 'sanity';
 
 import { Geolocation } from '../components/geolocation';
 
-console.log('schema', process.env.SANITY_STUDIO_GMAPS_API_KEY);
-
 export const geolocation = defineType({
     title: 'Location',
     name: 'geolocation',

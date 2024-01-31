@@ -1,10 +1,8 @@
 import { groq } from 'next-sanity';
 
-import type { Geopoint } from '@sanity/google-maps-input';
-
 import { client } from '../client/client';
 import { Review } from '../review/review';
-import { GeoAddress } from '../geo-address/geo-address';
+import { Location } from '../location/location';
 
 export interface QueryDetailParams {
     slug: string;
@@ -26,10 +24,7 @@ export interface DetailResponse {
     name: string;
     reviews: Review[];
     established: string;
-    location: {
-        geopoint: Geopoint;
-        geoaddress: GeoAddress;
-    };
+    location: Location;
     description: string;
     images: {
         url: string;

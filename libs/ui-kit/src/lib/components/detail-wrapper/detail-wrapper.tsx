@@ -18,8 +18,6 @@ export interface DetailWrapperProps {
 export const DetailWrapper: FunctionComponent<DetailWrapperProps> = ({ slug }) => {
     const data: DetailResponse = use(queryDetail({ slug }));
     const { images, reviews, name, established, location, description } = data;
-
-    console.log('location', location);
     return (
         <div className="container-fluid w-full 3xl:!px-12">
             <GallaryBlock images={images.map(image => image.url)} />

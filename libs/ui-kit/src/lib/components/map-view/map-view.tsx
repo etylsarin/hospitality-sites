@@ -35,7 +35,7 @@ export const MapView: FunctionComponent<MapViewProps> = ({ mapContainerClassName
   return (
     <GoogleMap
       mapContainerClassName={mapContainerClassName}
-      center={geopoint}
+      center={{ lat: geopoint.lat, lng: geopoint.lng }}
       zoom={16}
       options={options}
     ></GoogleMap>
