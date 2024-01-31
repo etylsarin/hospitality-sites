@@ -1,10 +1,10 @@
-import { Location } from 'queries';
+import { Geopoint } from '@sanity/google-maps-input';
 import { MapView } from '../map-view/map-view';
 import { Section } from '../section/section';
 import { FunctionComponent } from 'react';
 
 export interface LocationBlockProps {
-  location: Location;
+  location: Geopoint;
 }
 
 export const LocationBlock: FunctionComponent<LocationBlockProps> = ({ location }) => {

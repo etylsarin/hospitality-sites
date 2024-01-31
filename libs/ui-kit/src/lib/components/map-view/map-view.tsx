@@ -1,12 +1,11 @@
 'use client';
 
-import { Location } from 'queries';
-
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import { FunctionComponent, useEffect } from 'react';
+import { Geopoint } from '@sanity/google-maps-input';
 
 interface MapViewProps {
-  geopoint: Location;
+  geopoint: Geopoint;
   googleMapsApiKey: string;
   mapContainerClassName?: string;
 }
