@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ListItem } from 'queries';
+import { ListItem, Price } from 'queries';
 import { FunctionComponent } from 'react';
 import { CurrencyEuroIcon } from '@heroicons/react/24/outline';
 
@@ -17,10 +17,17 @@ import {
   Navigation,
   Pagination,
 } from '../slider/slider';
+import { getShortAddress } from '../../utils';
+
+const priceCounter = (price: Price) => ({
+  'low': 1,
+  'average': 2,
+  'high': 3,
+  'very-high': 4,
+}[price] || 0);
 
 export interface ListCardProps extends Omit<ListItem, 'slug'> {
   id: string;
-  category?: string;
 };
 
 export const ListCard: FunctionComponent<ListCardProps> = ({
@@ -28,8 +35,10 @@ export const ListCard: FunctionComponent<ListCardProps> = ({
   name,
   reviews,
   established,
+  location,
+  price,
   images,
-  category,
+  categories,
 }) => {
   const rating = reviews && reviews.length ? reviews.reduce((prev, curr) => prev + curr.rating, 0) / reviews.length : 0;
   const reviewCount = `${reviews?.length || 0} ${reviews?.length === 1 ? 'review' : 'reviews'}`;
@@ -100,22 +109,21 @@ export const ListCard: FunctionComponent<ListCardProps> = ({
           <div className="content pt-3">
             <div className="mb-1 flex items-center gap-5">
               <span className="relative flex items-center font-bold text-gray-dark before:absolute before:-right-3 before:block before:h-1 before:w-1 before:rounded-full before:bg-gray-dark">
-                #12 of 243 {category}
+                #12 of 243 {categories[0].label}
               </span>
               <span className="font-bold">{est}</span>
             </div>
             <h4 className="text-ellipsis text-gray-dark 2xl:mb-1.5">{name}</h4>
-            <p className="mb-3 text-gray-light xl:mb-3">LOCATION</p>
+            <p className="mb-3 text-gray-light xl:mb-3">{getShortAddress(location?.address)}</p>
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="text-gray-light">
                 <div
                   className={clsx(
                     '[&>svg]:outline-current',
-                    'flex h-[14px] w-[28px] 3xl:h-[18px] 3xl:w-[36px]'
+                    'flex h-[14px] 3xl:h-[18px]'
                   )}
                 >
-                  <CurrencyEuroIcon />
-                  <CurrencyEuroIcon />
+                  {[...Array(priceCounter(price))].map((_e, i) => <CurrencyEuroIcon key={i} />)}
                 </div>
               </div>
               <div className="flex items-center gap-3 leading-7">

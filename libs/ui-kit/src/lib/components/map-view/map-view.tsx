@@ -1,7 +1,7 @@
 'use client';
 
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent } from 'react';
 import { Geopoint } from '@sanity/google-maps-input';
 
 interface MapViewProps {
@@ -17,13 +17,6 @@ const options = {
 };
 
 export const MapView: FunctionComponent<MapViewProps> = ({ mapContainerClassName, geopoint, googleMapsApiKey }) => {
-  useEffect(() => {
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${geopoint.lat},${geopoint.lng}&key=${googleMapsApiKey}`)
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-  }, [])
-
-
   const { isLoaded } = useLoadScript({
     googleMapsApiKey,
   });

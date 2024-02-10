@@ -47,7 +47,7 @@ export const Filter: FunctionComponent<FilterProps> = ({ categories, className }
             type="reset"
             variant="text"
             className="hidden !p-0 text-base text-gray focus:!ring-0 sm:block"
-            onClick={() => router.push('/')}
+            onClick={() => router.push('/places')}
           >
             Reset
           </Button>
@@ -78,7 +78,7 @@ export const Filter: FunctionComponent<FilterProps> = ({ categories, className }
               type="reset"
               variant="text"
               className="!p-0 text-base text-gray underline focus:!ring-0"
-              onClick={() => router.push('/')}
+              onClick={() => router.push('/places')}
             >
               Reset
             </Button>

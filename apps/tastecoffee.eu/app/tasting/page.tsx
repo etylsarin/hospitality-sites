@@ -1,17 +1,11 @@
 import { FunctionComponent } from 'react';
 import { TransparentHeader, Text } from 'ui-kit';
-
-export const metadata = {
-    title: 'tastecoffee.eu',
-    description: 'Welcome to tastecoffee.eu',
-    // icons: ['/images/logo.svg'],
-    viewport: { width: 'device-width', initialScale: 1, maximumScale: 1 },
-  };
+import { appConfig } from '../config';
 
 const TastingPage: FunctionComponent = () => (
 
 <>
-  <TransparentHeader title={metadata.title} description={metadata.description} className="no-background" />
+  <TransparentHeader title={appConfig.metadata.title} description={appConfig.metadata.description} className="no-background" />
   <main className="flex-grow">
     <div className="container-fluid w-full !max-w-[1248px] pt-12 lg:pt-20 2xl:pb-8 3xl:px-0 3xl:pt-24">
       <div className="text-center">

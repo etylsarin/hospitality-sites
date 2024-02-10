@@ -7,6 +7,7 @@ import { DescriptionBlock } from '../description-block/descripton-block';
 import { LocationBlock } from '../location-block/location-block';
 import { ListingDetailsHeroBlock } from '../hero-block/hero-block';
 import { ReviewBlock } from '../review-block/review-block';
+import { getShortAddress } from '../../utils';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { use } = require('react');
@@ -18,15 +19,19 @@ export interface DetailWrapperProps {
 export const DetailWrapper: FunctionComponent<DetailWrapperProps> = ({ slug }) => {
     const data: DetailResponse = use(queryDetail({ slug }));
     const { images, reviews, name, established, location, description } = data;
+    const adjustedLocation = {
+        ...location,
+        address: getShortAddress(location?.address),
+    };
     return (
         <div className="container-fluid w-full 3xl:!px-12">
             <GallaryBlock images={images.map(image => image.url)} />
             <div className="flex justify-between gap-5 lg:gap-8 xl:gap-12 4xl:gap-16">
                 <div className="w-full">
-                <ListingDetailsHeroBlock name={name} category='CATEGORY' established={established} location='LOCATION' />
+                <ListingDetailsHeroBlock name={name} category='CATEGORY' established={established} location={adjustedLocation.address} />
                 <DescriptionBlock description={description} />
                 {/* <SpecificationBlock specifications={[]} /> */}
-                <LocationBlock location={location} />
+                <LocationBlock location={adjustedLocation} />
                 <ReviewBlock reviews={reviews || []} />
                 </div>
                 <div className="hidden w-full max-w-sm pb-11 lg:block xl:max-w-md 3xl:max-w-lg">

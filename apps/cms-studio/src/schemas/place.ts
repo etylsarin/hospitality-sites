@@ -22,26 +22,16 @@ export const place = defineType({
       },
     }),
     defineField({
-      name: 'sections',
-      title: 'Sections',
-      type: 'string',
+      name: 'domains',
+      title: 'Domains',
+      type: 'array',
+      of: [{ type: 'string' }],
       options: {
         list: [
           {title: 'Beer', value: 'beer'},
-          {title: 'Coffee', value: 'coffee'}
-        ]
-      }
-    }),
-    defineField({
-      name: 'price',
-      title: 'Price range',
-      type: 'string',
-      options: {
-        list: [
-          {title: 'Low', value: 'low'},
-          {title: 'Average', value: 'average'},
-          {title: 'High', value: 'high'},
-          {title: 'Very high', value: 'very-high'},
+          {title: 'Coffee', value: 'coffee'},
+          {title: 'Vino', value: 'vino'},
+          {title: 'Guide', value: 'guide'},
         ]
       }
     }),
@@ -71,6 +61,19 @@ export const place = defineType({
       type: 'url',
     }),
     defineField({
+      name: 'price',
+      title: 'Price range',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Low', value: 'low'},
+          {title: 'Average', value: 'average'},
+          {title: 'High', value: 'high'},
+          {title: 'Very high', value: 'very-high'},
+        ]
+      }
+    }),
+    defineField({
       name: 'reviews',
       title: 'Reviews',
       type: 'array',
@@ -90,7 +93,7 @@ export const place = defineType({
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'text'
+      type: 'markdown'
     })
   ],
   preview: {

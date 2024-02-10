@@ -3,6 +3,7 @@ import { groq } from 'next-sanity';
 import { client } from '../client/client';
 import { Review } from '../review/review';
 import { Location } from '../location/location';
+import { Price } from '../price/price';
 
 export interface QueryDetailParams {
     slug: string;
@@ -23,6 +24,7 @@ export const queryDetail = async ({ slug }: QueryDetailParams) => {
 export interface DetailResponse {
     name: string;
     reviews: Review[];
+    price: Price;
     established: string;
     location: Location;
     description: string;

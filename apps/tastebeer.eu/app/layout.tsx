@@ -1,10 +1,9 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { PageWrapper } from 'ui-kit';
-
-import cfg from '../package.json';
+import { appConfig } from './config';
 
 const RootLayout: FunctionComponent<PropsWithChildren> = ({ children }) => (
-  <PageWrapper version={cfg.version}>
+  <PageWrapper version={appConfig.version}>
     {children}
   </PageWrapper>
 );

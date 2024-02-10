@@ -1,9 +1,10 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { PageHeader } from 'ui-kit';
+import { appConfig } from '../config';
 
 const PlacesLayout: FunctionComponent<PropsWithChildren> = ({ children }) => (
   <>
-    <PageHeader title='tastebeer.eu' description='Welcome to tastebeer.eu' />
+    <PageHeader title={appConfig.metadata.title} description={appConfig.metadata.description} />
     {children}
   </>
 );

@@ -1,35 +1,43 @@
-import {
-    setKey,
-    geocode,
-    RequestType,
-  } from 'react-geocode';
-import { ComponentType, useEffect, useState } from 'react';
-import { FieldMember, MemberField, ObjectInputProps, ObjectSchemaType, set } from 'sanity';
-import { Stack, Text } from '@sanity/ui';
-import { Geopoint } from '@sanity/google-maps-input';
+import { ComponentType, useCallback } from 'react';
+import { FieldMember, InputProps, MemberField, ObjectInputProps, StringInputProps } from 'sanity';
+import { Stack } from '@sanity/ui';
+import { AddressInput } from './addressInput';
 
-export const Geolocation: ComponentType<ObjectInputProps<Record<string, any>, ObjectSchemaType>> = ({ members, renderField, renderInput, renderItem, renderPreview }) => {
+export interface GeolocationObjectProps {
+    [key: string]: any;
+}
+
+export type GeolocationObjectInputProps = ObjectInputProps<GeolocationObjectProps>;
+
+export const GeolocationObjectInput: ComponentType<GeolocationObjectInputProps> = ({ value, members, renderField, renderInput, renderItem, renderPreview }) => {
     const geopointMember = members.find(
         (member): member is FieldMember => member.kind === 'field' && member.name === 'geopoint'
     )
-    const [address, setAddress] = useState('');
+    const addressMember = members.find(
+        (member): member is FieldMember => member.kind === 'field' && member.name === 'address'
+    )
 
-    setKey(process.env.SANITY_STUDIO_GMAPS_API_KEY as string);
-
-    useEffect(() => {
-        const geopoint = geopointMember?.field.value as Geopoint;
-        geocode(RequestType.LATLNG, `${geopoint?.lat},${geopoint?.lng}`)
-        .then(({ results }) => {
-            const address = results[0].formatted_address;
-            setAddress(address);
-            set({ address }, ['geoaddress']);
-        })
-        .catch(console.error);
-    }, [geopointMember?.field.value])
+      // Define a custom renderInput function
+  const customRenderInput = useCallback(
+    (renderInputCallbackProps: Omit<InputProps, 'renderDefault'>) => {
+      return (
+          <AddressInput {...(renderInputCallbackProps as StringInputProps)} geopoint={value?.geopoint} />
+      )
+    },
+    [renderInput, value?.geopoint]
+  )
 
     return (
         <Stack space={4}>
-            <Text size={1}>{address}</Text>
+            {addressMember && (
+                <MemberField
+                    member={addressMember}
+                    renderInput={customRenderInput}
+                    renderField={renderField}
+                    renderItem={renderItem}
+                    renderPreview={renderPreview}
+                />
+            )}
             {geopointMember && (
                 <MemberField
                     member={geopointMember}

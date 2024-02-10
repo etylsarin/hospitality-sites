@@ -16,15 +16,19 @@ const sortingOptions = [
   { id: 'opt-1', label: 'Newer listed', checked: true },
 ];
 
-export const FilterTopbar: FunctionComponent = () => {
+export interface FilterTopbarProps {
+  totalCount: number;
+}
+
+export const FilterTopbar: FunctionComponent<FilterTopbarProps> = ({ totalCount }) => {
   const [drawerSate, setDrawerState] = useAtom(drawerStateAtom);
   const [selected, setSelected] = useState(sortingOptions[0]);
   return (
     <div className="mb-8 flex items-center justify-between">
       <Text className="text-sm font-bold text-gray-dark md:text-base">
-        Showing 1 - 20{' '}
+        Showing 1 - {totalCount}{' '}
         <Text className="font-normal text-gray" tag="span">
-          out of 2356 Places{' '}
+          out of {totalCount} Places{' '}
         </Text>
       </Text>
       <Button

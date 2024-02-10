@@ -14,10 +14,10 @@ type QueryStringType = {
 };
 
 export interface SearchFormProps {
-  section: string;
+  domain: string;
 }
 
-export const SearchForm: FunctionComponent<SearchFormProps> = ({ section }) => {
+export const SearchForm: FunctionComponent<SearchFormProps> = ({ domain }) => {
   const router = useRouter();
   const [searchBox, setSearchBox] = useState<any>();
   const [locationInput, setLocationInput] = useState({
@@ -59,10 +59,10 @@ export const SearchForm: FunctionComponent<SearchFormProps> = ({ section }) => {
           className="leading-12 mb-2 !text-xl !font-black uppercase text-gray-dark sm:!text-[28px] sm:!leading-9  4xl:!text-4xl 4xl:!leading-[52px]"
         >
           Discover the <br className="hidden sm:block" />
-          world of {section}
+          world of {domain}
         </Text>
         <Text className="mb-5 hidden leading-6 !text-secondary sm:block 3xl:leading-8 4xl:mb-6 4xl:text-lg">
-          Find the best {section} places in Eurpoe<br />and become real expert in {section} tasting.
+          Find the best {domain} places in Eurpoe<br />and become real expert in {domain} tasting.
         </Text>
       </div>
       <SearchAutocomplete

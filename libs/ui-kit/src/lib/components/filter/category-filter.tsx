@@ -36,7 +36,7 @@ export const CategoryFilter: FunctionComponent<CategoryFilterProps> = ({ data })
     const m = manf?.split(',');
     const updatedItems = [...selected];
     updatedItems.map((elem) => {
-      if (m?.includes(elem.label)) elem.checked = true;
+      if (m?.includes(elem.id)) elem.checked = true;
     });
     setSelected(updatedItems);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,7 +46,7 @@ export const CategoryFilter: FunctionComponent<CategoryFilterProps> = ({ data })
   useEffect(() => {
     const checkedItems = [];
     for (const item of selected) {
-      if (item.checked) checkedItems.push(item.label);
+      if (item.checked) checkedItems.push(item.id);
     }
     updateQueryparams('category', checkedItems.toString());
     // eslint-disable-next-line react-hooks/exhaustive-deps

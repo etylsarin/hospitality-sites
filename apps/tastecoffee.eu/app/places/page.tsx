@@ -1,16 +1,11 @@
 import { FunctionComponent } from 'react';
 import { ListWrapper } from 'ui-kit';
+import { appConfig } from '../config';
 
 export interface PlacesPageProps {}
 
-const categories = [
-  { id: 'roasters', label: 'Roasters' },
-  { id: 'cafes', label: 'Cafes' },
-  { id: 'bakeries', label: 'Bakeries' },
-];
-
 const PlacesPage: FunctionComponent<PlacesPageProps> = () => (
-  <ListWrapper section="coffee" categories={categories} />
+  <ListWrapper domain={appConfig.domain} categories={appConfig.categories} />
 )
 
 export default PlacesPage;

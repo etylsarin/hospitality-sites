@@ -3,22 +3,26 @@ import { groq } from 'next-sanity';
 import { client } from '../client/client';
 import { Review } from '../review/review';
 import { Location } from '../location/location';
+import { Price } from '../price/price';
+import { Category } from '../category/category';
 
 export interface QueryListParams {
-    section: string;
+    domain: string;
 }
 
-export const queryList = async ({ section }: QueryListParams) => {
+export const queryList = async ({ domain }: QueryListParams) => {
     return await client.fetch(groq`
-        *[_type == "place" && $section == sections]{
+        *[_type == "place" && $domain in domains]{
         slug,
         name,
         reviews,
+        categories,
+        price,
         established,
         location,
         images[] {"url": asset->url}
         }
-    `, { section });
+    `, { domain });
 };
 
 export interface ListItem {
@@ -26,7 +30,9 @@ export interface ListItem {
         current: string;
     };
     name: string;
+    price: Price;
     reviews: Review[];
+    categories: Category[];
     established: string;
     location: Location;
     images: {

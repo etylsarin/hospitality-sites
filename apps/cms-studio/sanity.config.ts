@@ -2,7 +2,8 @@ import { googleMapsInput } from '@sanity/google-maps-input';
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
 import { deskTool } from 'sanity/desk';
-import { tags } from 'sanity-plugin-tags'
+import { tags } from 'sanity-plugin-tags';
+import { markdownSchema } from 'sanity-plugin-markdown';
 
 import { schemaTypes } from './src';
 
@@ -14,6 +15,7 @@ export default defineConfig({
   dataset: process.env.SANITY_STUDIO_DATASET as string,
   plugins: [
     tags(),
+    markdownSchema(),
     deskTool(),
     visionTool(),
     googleMapsInput({
