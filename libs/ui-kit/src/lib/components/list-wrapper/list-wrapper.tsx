@@ -1,5 +1,8 @@
-import { ListResponse, queryList } from 'queries';
+'use client';
+
+import { ListResponse, MapsConfigProps, SanityConfigProps, queryList } from 'queries';
 import { FunctionComponent } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 import { FilterTopbar } from '../filter-topbar/filter-topbar';
 import { Filter } from '../filter/filter';
@@ -12,15 +15,20 @@ const { use } = require('react');
 export interface ListWrapperProps {
   domain: string;
   categories: CategoryFilterItemProps[];
+  sanity: SanityConfigProps;
+  maps: MapsConfigProps;
 }
 
-export const ListWrapper: FunctionComponent<ListWrapperProps> = ({ categories, domain }) => {
-  const data: ListResponse = use(queryList({ domain }));
+export const ListWrapper: FunctionComponent<ListWrapperProps> = ({ categories, domain, sanity, maps }) => {
+  const searchParams = useSearchParams();
+  const locationQuery = searchParams.get('location') || undefined;
+  
+  const data: ListResponse = use(queryList({ domain, sanity, locationQuery }));
   return (
     <div className="container-fluid mb-12 pt-6 lg:mb-16">
       <FilterTopbar totalCount={data.length} />
       <div className="grid grid-cols-1 gap-8 xl:grid-cols-[330px_5fr] 3xl:gap-12">
-        <Filter categories={categories} className="hidden xl:block" />
+        <Filter categories={categories} className="hidden xl:block" maps={maps} />
         <ResultsList data={data} />
       </div>
     </div>

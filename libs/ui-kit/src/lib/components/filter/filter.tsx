@@ -12,13 +12,15 @@ import { Text } from '../text/text';
 import { CategoryFilter, CategoryFilterItemProps } from './category-filter';
 import { DistanceFilter } from './distance-filter';
 import { LocationInputFilter } from './location-input-filter';
+import { MapsConfigProps } from 'queries';
 
 interface FilterProps {
   categories: CategoryFilterItemProps[];
+  maps: MapsConfigProps;
   className?: string;
 }
 
-export const Filter: FunctionComponent<FilterProps> = ({ categories, className }) => {
+export const Filter: FunctionComponent<FilterProps> = ({ categories, className, maps }) => {
   const router = useRouter();
   const [drawerSate, setDrawerState] = useAtom(drawerStateAtom);
   const searchParams = useSearchParams();
@@ -67,7 +69,7 @@ export const Filter: FunctionComponent<FilterProps> = ({ categories, className }
         </Button>
       </div>
       <div className="grid grid-cols-1 gap-8 px-5 pb-3 md:px-7 xl:p-0 xl:pb-0">
-        <LocationInputFilter />
+        <LocationInputFilter maps={maps} />
         <CategoryFilter data={categories} />
         <DistanceFilter />
       </div>

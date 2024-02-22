@@ -1,6 +1,6 @@
 import { groq } from 'next-sanity';
 
-import { client } from '../client/client';
+import { SanityConfigProps, client } from '../client/client';
 import { Review } from '../review/review';
 import { Location } from '../location/location';
 import { Price } from '../price/price';
@@ -8,11 +8,13 @@ import { Category } from '../category/category';
 
 export interface QueryListParams {
     domain: string;
+    sanity: SanityConfigProps;
+    locationQuery?: string;
 }
 
-export const queryList = async ({ domain }: QueryListParams) => {
-    return await client.fetch(groq`
-        *[_type == "place" && $domain in domains]{
+export const queryList = async ({ domain, sanity, locationQuery = '' }: QueryListParams) => {
+    return await client(sanity).fetch(groq`
+        *[_type == "place" && $domain in domains && location.address match "${locationQuery}*"]{
         slug,
         name,
         reviews,
@@ -22,7 +24,7 @@ export const queryList = async ({ domain }: QueryListParams) => {
         location,
         images[] {"url": asset->url}
         }
-    `, { domain });
+    `, { domain, locationQuery });
 };
 
 export interface ListItem {

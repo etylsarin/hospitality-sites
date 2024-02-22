@@ -8,6 +8,7 @@ import { SearchAutocomplete } from '../search-autocomplete/search-autocomplete';
 import { MapMarkerIcon } from '../icons';
 import { Text } from '../text/text';
 import { Button } from '../button/button';
+import { MapsConfigProps } from 'queries';
 
 type QueryStringType = {
   location?: string;
@@ -15,9 +16,10 @@ type QueryStringType = {
 
 export interface SearchFormProps {
   domain: string;
+  maps: MapsConfigProps;
 }
 
-export const SearchForm: FunctionComponent<SearchFormProps> = ({ domain }) => {
+export const SearchForm: FunctionComponent<SearchFormProps> = ({ domain, maps }) => {
   const router = useRouter();
   const [searchBox, setSearchBox] = useState<any>();
   const [locationInput, setLocationInput] = useState({
@@ -68,6 +70,7 @@ export const SearchForm: FunctionComponent<SearchFormProps> = ({ domain }) => {
       <SearchAutocomplete
         onLoad={onLoad}
         onPlacesChanged={onPlacesChanged}
+        maps={maps}
         loader={
           <LocationInput
             label="Loading . . ."

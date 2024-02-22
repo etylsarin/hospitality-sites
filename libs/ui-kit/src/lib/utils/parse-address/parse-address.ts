@@ -5,9 +5,9 @@ export interface AddressArrayItem {
 }
 
 export const parseAddress = (addressJsonString: string) => {
-    const addressArray: AddressArrayItem[] = addressJsonString ? JSON.parse(addressJsonString) : [];
+    const addressArray: AddressArrayItem[] = addressJsonString ? JSON.parse(addressJsonString).value : [];
     const addressObj: { [key: string]: string } = {};
-    addressArray.forEach(({ short_name, types }) => {
+    addressArray?.forEach(({ short_name, types }) => {
         types.forEach(type => {
             addressObj[type] = short_name;
         });
@@ -17,5 +17,5 @@ export const parseAddress = (addressJsonString: string) => {
 
 export const getShortAddress = (addressJsonString: string) => {
     const addressObj = parseAddress(addressJsonString);
-    return `${addressObj.route} ${addressObj.street_number}, ${addressObj.sublocality}`;
+    return `${addressObj.route} ${addressObj.street_number}, ${addressObj.sublocality || addressObj.postal_town}`;
 };

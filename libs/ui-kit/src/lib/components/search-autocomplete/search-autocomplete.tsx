@@ -1,10 +1,12 @@
 'use client';
 
 import { StandaloneSearchBox, useLoadScript } from '@react-google-maps/api';
+import { MapsConfigProps } from 'queries';
 import { FunctionComponent } from 'react';
 
 export interface SearchAutocompleteProps {
   children: React.ReactNode;
+  maps: MapsConfigProps;
   loader?: React.ReactNode;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onLoad: (ref: any) => void;
@@ -16,12 +18,13 @@ const libraries: l = ['places'];
 
 export const SearchAutocomplete: FunctionComponent<SearchAutocompleteProps> = ({
   children,
+  maps,
   loader,
   onLoad,
   onPlacesChanged,
 }) => {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: `${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`,
+    googleMapsApiKey: maps.apiKey,
     libraries,
   });
 

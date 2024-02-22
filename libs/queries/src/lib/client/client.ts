@@ -1,8 +1,17 @@
+import { memoize } from 'lodash/fp';
 import { createClient } from 'next-sanity';
 
-export const client = createClient({
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID as string,
-  dataset: process.env.SANITY_STUDIO_DATASET as string,
-  apiVersion: '2024-01-24',
+export interface SanityConfigProps {
+  projectId: string;
+  dataset: string;
+  apiVersion: string;
+}
+
+export const sanityClient = ({ projectId, dataset, apiVersion }: SanityConfigProps) => createClient({
+  projectId,
+  dataset,
+  apiVersion,
   useCdn: false,
 });
+
+export const client = memoize(sanityClient);

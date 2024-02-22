@@ -9,7 +9,7 @@ export const metadata = appConfig.metadata;
 const Index: FunctionComponent = () => (
   <>
     <TransparentHeader title={metadata.title} description={metadata.description} />
-    <main className="flex-grow"><HeroBanner imageUrl={appConfig.backgroundImage} imageAlt={appConfig.metadata.title} domain={appConfig.domain} /></main>
+    <main className="flex-grow"><HeroBanner imageUrl={appConfig.backgroundImage} imageAlt={appConfig.metadata.title} domain={appConfig.domain} maps={appConfig.maps} /></main>
   </>
 );
 

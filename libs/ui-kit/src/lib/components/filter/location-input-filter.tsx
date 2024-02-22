@@ -8,8 +8,13 @@ import { useQueryParam } from '../../hooks';
 import { Input } from '../form-fields';
 import { MapMarkerIcon } from '../icons';
 import { SearchAutocomplete } from '../search-autocomplete/search-autocomplete';
+import { MapsConfigProps } from 'queries';
 
-export const LocationInputFilter: FunctionComponent = () => {
+export interface LocationInputFilterProps {
+  maps: MapsConfigProps;
+}
+
+export const LocationInputFilter: FunctionComponent<LocationInputFilterProps> = ({ maps }) => {
   const { clearFilter, updateQueryparams } = useQueryParam();
   const searchParams = useSearchParams();
   const location = searchParams?.get('location');
@@ -54,6 +59,7 @@ export const LocationInputFilter: FunctionComponent = () => {
 
   return (
     <SearchAutocomplete
+      maps={maps}
       onLoad={onLoad}
       onPlacesChanged={onPlacesChanged}
       loader={

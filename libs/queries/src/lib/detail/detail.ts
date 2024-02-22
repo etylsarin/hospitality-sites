@@ -1,16 +1,17 @@
 import { groq } from 'next-sanity';
 
-import { client } from '../client/client';
+import { SanityConfigProps, client } from '../client/client';
 import { Review } from '../review/review';
 import { Location } from '../location/location';
 import { Price } from '../price/price';
 
 export interface QueryDetailParams {
     slug: string;
+    sanity: SanityConfigProps;
 }
 
-export const queryDetail = async ({ slug }: QueryDetailParams) => {
-    return await client.fetch(groq`
+export const queryDetail = async ({ slug, sanity }: QueryDetailParams) => {
+    return await client(sanity).fetch(groq`
         *[_type == "place" && slug.current == $slug][0]{
             name,
             reviews,

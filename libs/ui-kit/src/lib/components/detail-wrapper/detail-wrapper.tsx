@@ -1,4 +1,4 @@
-import { DetailResponse, queryDetail } from 'queries';
+import { DetailResponse, MapsConfigProps, SanityConfigProps, queryDetail } from 'queries';
 import { FunctionComponent } from 'react';
 
 import { GallaryBlock } from '../gallery-block/gallary-block';
@@ -14,10 +14,12 @@ const { use } = require('react');
 
 export interface DetailWrapperProps {
     slug: string;
+    sanity: SanityConfigProps;
+    maps: MapsConfigProps;
 } 
 
-export const DetailWrapper: FunctionComponent<DetailWrapperProps> = ({ slug }) => {
-    const data: DetailResponse = use(queryDetail({ slug }));
+export const DetailWrapper: FunctionComponent<DetailWrapperProps> = ({ slug, sanity, maps }) => {
+    const data: DetailResponse = use(queryDetail({ slug, sanity }));
     const { images, reviews, name, established, location, description } = data;
     const adjustedLocation = {
         ...location,
@@ -31,7 +33,7 @@ export const DetailWrapper: FunctionComponent<DetailWrapperProps> = ({ slug }) =
                 <ListingDetailsHeroBlock name={name} category='CATEGORY' established={established} location={adjustedLocation.address} />
                 <DescriptionBlock description={description} />
                 {/* <SpecificationBlock specifications={[]} /> */}
-                <LocationBlock location={adjustedLocation} />
+                <LocationBlock location={adjustedLocation} maps={maps} />
                 <ReviewBlock reviews={reviews || []} />
                 </div>
                 <div className="hidden w-full max-w-sm pb-11 lg:block xl:max-w-md 3xl:max-w-lg">

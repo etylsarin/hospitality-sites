@@ -1,14 +1,15 @@
 import { FunctionComponent } from 'react';
-import { Location } from 'queries';
+import { Location, MapsConfigProps } from 'queries';
 
 import { MapView } from '../map-view/map-view';
 import { Section } from '../section/section';
 
 export interface LocationBlockProps {
   location: Location;
+  maps: MapsConfigProps;
 }
 
-export const LocationBlock: FunctionComponent<LocationBlockProps> = ({ location }) => {
+export const LocationBlock: FunctionComponent<LocationBlockProps> = ({ location, maps }) => {
   return (
     <Section
       className="py-5 xl:py-7"
@@ -18,7 +19,7 @@ export const LocationBlock: FunctionComponent<LocationBlockProps> = ({ location 
       descriptionClassName="!text-gray !text-base"
     >
       <div className="mt-6 overflow-hidden rounded-xl">
-        <MapView mapContainerClassName="w-full h-[230px] sm:h-[400px] xl:h-[600px]" geopoint={location.geopoint} googleMapsApiKey={`${process.env.SANITY_STUDIO_GMAPS_API_KEY}`} />
+        <MapView mapContainerClassName="w-full h-[230px] sm:h-[400px] xl:h-[600px]" geopoint={location.geopoint} googleMapsApiKey={maps.apiKey} />
       </div>
     </Section>
   );
