@@ -4,8 +4,7 @@
   "info": {
     "singularName": "place",
     "pluralName": "places",
-    "displayName": "Place",
-    "description": ""
+    "displayName": "Place"
   },
   "options": {
     "draftAndPublish": true
@@ -18,17 +17,8 @@
     },
     "Slug": {
       "type": "uid",
-      "targetField": "Name"
-    },
-    "Domains": {
-      "type": "customField",
-      "options": [
-        "Beer",
-        "Coffee",
-        "Vino",
-        "Guide"
-      ],
-      "customField": "plugin::multi-select.multi-select"
+      "targetField": "Name",
+      "required": true
     }
   }
 }
