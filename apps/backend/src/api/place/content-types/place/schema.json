@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "places",
+  "info": {
+    "singularName": "place",
+    "pluralName": "places",
+    "displayName": "Place",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Slug": {
+      "type": "uid",
+      "targetField": "Name"
+    },
+    "Domains": {
+      "type": "customField",
+      "options": [
+        "Beer",
+        "Coffee",
+        "Vino",
+        "Guide"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    }
+  }
+}
