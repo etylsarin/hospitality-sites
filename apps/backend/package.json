@@ -9,13 +9,12 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
-    "@notum-cz/strapi-plugin-location": "^1.2.4",
     "@strapi/plugin-cloud": "4.20.3",
     "@strapi/plugin-i18n": "4.20.3",
     "@strapi/plugin-users-permissions": "4.20.3",
     "@strapi/strapi": "4.20.3",
+    "@strapi/typescript-utils": "^4.20.3",
     "better-sqlite3": "8.6.0",
     "pg": "^8.11.3",
     "pg-connection-string": "^2.6.2",

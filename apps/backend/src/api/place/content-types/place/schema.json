@@ -19,6 +19,16 @@
       "type": "uid",
       "targetField": "Name",
       "required": true
+    },
+    "Domains": {
+      "type": "customField",
+      "options": [
+        "Beer",
+        "Coffee",
+        "Vino",
+        "Guide"
+      ],
+      "customField": "plugin::multi-select.multi-select"
     }
   }
 }

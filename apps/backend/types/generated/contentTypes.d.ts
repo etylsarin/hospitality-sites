@@ -368,14 +368,13 @@ export interface ApiPlacePlace extends Schema.CollectionType {
     singularName: 'place';
     pluralName: 'places';
     displayName: 'Place';
-    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     Name: Attribute.String & Attribute.Required;
-    Slug: Attribute.UID<'api::place.place', 'Name'>;
+    Slug: Attribute.UID<'api::place.place', 'Name'> & Attribute.Required;
     Domains: Attribute.JSON &
       Attribute.CustomField<
         'plugin::multi-select.multi-select',
@@ -549,6 +548,8 @@ export interface PluginContentReleasesRelease extends Schema.CollectionType {
   attributes: {
     name: Attribute.String & Attribute.Required;
     releasedAt: Attribute.DateTime;
+    scheduledAt: Attribute.DateTime;
+    timezone: Attribute.String;
     actions: Attribute.Relation<
       'plugin::content-releases.release',
       'oneToMany',
