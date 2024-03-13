@@ -7,9 +7,12 @@
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
+    "@hookform/resolvers": "^3.3.4",
     "@react-google-maps/api": "^2.19.2",
+    "@sanity/cli": "^3.32.0",
     "@sanity/google-maps-input": "^3.0.2",
-    "@sanity/vision": "^3.27.1",
+    "@sanity/ui": "2.0.7",
+    "@sanity/vision": "^3.32.0",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
     "@vercel/speed-insights": "^1.0.9",
@@ -25,14 +28,17 @@
     "react-datepicker": "^4.25.0",
     "react-dom": "^18.3.0-canary-0ac3ea471-20240111",
     "react-geocode": "^1.0.0-alpha.1",
+    "react-hook-form": "^7.51.0",
     "react-icons": "^5.0.1",
     "react-phone-input-2": "^2.15.1",
-    "sanity": "^3.27.1",
+    "react-router-dom": "5.3.4",
+    "sanity": "^3.32.0",
     "sanity-plugin-markdown": "^4.1.1",
     "sanity-plugin-tags": "^2.0.1",
     "styled-components": "^6.1.8",
     "swiper": "^11.0.5",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@babel/core": "^7.14.5",

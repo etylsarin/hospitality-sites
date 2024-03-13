@@ -9,6 +9,7 @@ import GalleryCarouselView from '../gallery/view';
 import { AssetProvider } from '../assets-provider/assets-provider';
 
 import { Footer } from "../footer/footer";
+import { SanityConfigProps } from 'queries';
 
 const lato = Lato({
   subsets: ['latin'],
@@ -23,11 +24,12 @@ const satisfy = Satisfy({
 });
 
 export interface PageWrapperProps {
-    children?: ReactNode;
+  sanity: SanityConfigProps;
+  children?: ReactNode;
     version?: string;
 }
 
-export const PageWrapper: FunctionComponent<PageWrapperProps> = ({ version, children }) => (
+export const PageWrapper: FunctionComponent<PageWrapperProps> = ({ version, sanity, children }) => (
   <AssetProvider>
     <html
       lang="en"
@@ -43,7 +45,7 @@ export const PageWrapper: FunctionComponent<PageWrapperProps> = ({ version, chil
         {children}
         <Footer />
         <ModalContainer />
-        <DrawerContainer />
+        <DrawerContainer sanity={sanity} />
         <GalleryCarouselView />
         <SpeedInsights />
       </body>

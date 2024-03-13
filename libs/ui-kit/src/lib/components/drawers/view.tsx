@@ -2,16 +2,16 @@
 
 import clsx from 'clsx';
 import { atom, useAtom } from 'jotai';
-// import dynamic from 'next/dynamic';
+import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import { FunctionComponent, useEffect } from 'react';
 
 import { Drawer } from '../drawer/drawer';
+import { SanityConfigProps } from 'queries';
 
-
-// const PhotoGallery = dynamic(
-//   () => import('@/components/ui/drawers/photo-gallery')
-// );
+const PhotoGallery = dynamic(
+  () => import('./photo-gallery')
+);
 // const SideMenu = dynamic(() => import('@/components/ui/drawers/side-menu'));
 // const Filter = dynamic(() => import('@/components/explore/filter'));
 // const BookingFormModal = dynamic(
@@ -25,10 +25,10 @@ export type DRAWER_VIEW =
   | 'FILTER_MENU';
 
 // render drawer contents
-function renderDrawerContent(view: DRAWER_VIEW | string) {
+function renderDrawerContent(view: DRAWER_VIEW | string, sanity: SanityConfigProps) {
   switch (view) {
-    // case 'PHOTO_GALLERY':
-    //   return <PhotoGallery />;
+    case 'PHOTO_GALLERY':
+      return <PhotoGallery sanity={sanity} />;
     // case 'SIDE_MENU':
     //   return <SideMenu />;
     // case 'FILTER_MENU':
@@ -53,7 +53,11 @@ export const drawerStateAtom = atom<DrawerPropsType>({
   view: 'SIDE_MENU',
 });
 
-export const DrawerContainer: FunctionComponent = () => {
+export interface DrawerContainerProps {
+  sanity: SanityConfigProps;
+}
+
+export const DrawerContainer: FunctionComponent<DrawerContainerProps> = ({ sanity }) => {
   const [drawerSate, setDrawerState] = useAtom(drawerStateAtom);
   const pathName = usePathname();
   useEffect(() => {
@@ -73,7 +77,7 @@ export const DrawerContainer: FunctionComponent = () => {
         )}
         onClose={() => setDrawerState({ ...drawerSate, isOpen: false })}
       >
-        {renderDrawerContent(drawerSate.view)}
+        {renderDrawerContent(drawerSate.view, sanity)}
       </Drawer>
     </>
   );
