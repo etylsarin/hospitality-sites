@@ -13,6 +13,7 @@ export interface QueryListParams {
 }
 
 export const queryList = async ({ domain, sanity, locationQuery = '' }: QueryListParams) => {
+    console.log('sanity', sanity);
     return await client(sanity).fetch(groq`
         *[_type == "place" && $domain in domains && location.address match "${locationQuery}*"]{
         slug,

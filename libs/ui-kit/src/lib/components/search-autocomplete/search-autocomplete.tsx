@@ -23,6 +23,7 @@ export const SearchAutocomplete: FunctionComponent<SearchAutocompleteProps> = ({
   onLoad,
   onPlacesChanged,
 }) => {
+  console.log('maps', maps);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: maps.apiKey,
     libraries,
