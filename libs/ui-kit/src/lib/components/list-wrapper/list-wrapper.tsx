@@ -23,7 +23,7 @@ export const ListWrapper: FunctionComponent<ListWrapperProps> = ({ categories, d
   const searchParams = useSearchParams();
   const locationQuery = searchParams.get('location') || undefined;
 
-  // console.log('APP_CONFIG', sanity, maps);
+  console.log('APP_CONFIG', sanity, maps);
   
   const data: ListResponse = use(queryList({ domain, sanity, locationQuery }));
   return (
