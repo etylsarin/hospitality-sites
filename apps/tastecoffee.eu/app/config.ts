@@ -15,7 +15,9 @@ export const appConfig = {
     metadata: {
         title: 'tastecoffee.eu',
         description: 'Welcome to tastecoffee.eu',
-        // icons: ['/images/logo.svg'],
+        icons: {
+            icon: '/icon.png',
+        },
         viewport: { width: 'device-width', initialScale: 1, maximumScale: 1 },
     },
     categories: [

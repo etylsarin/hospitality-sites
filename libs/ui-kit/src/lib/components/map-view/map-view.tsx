@@ -1,6 +1,6 @@
 'use client';
 
-import { GoogleMap, useLoadScript } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import { FunctionComponent } from 'react';
 import { Geopoint } from '@sanity/google-maps-input';
 
@@ -16,9 +16,13 @@ const options = {
   streetViewControl: false,
 };
 
+type l = 'places'[];
+const libraries: l = ['places'];
+
 export const MapView: FunctionComponent<MapViewProps> = ({ mapContainerClassName, geopoint, googleMapsApiKey }) => {
-  const { isLoaded } = useLoadScript({
+  const { isLoaded } = useJsApiLoader({
     googleMapsApiKey,
+    libraries,
   });
 
   if (!isLoaded) {

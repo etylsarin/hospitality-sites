@@ -1,6 +1,6 @@
 'use client';
 
-import { StandaloneSearchBox, useLoadScript } from '@react-google-maps/api';
+import { StandaloneSearchBox, useJsApiLoader } from '@react-google-maps/api';
 import { MapsConfigProps } from 'queries';
 import { FunctionComponent } from 'react';
 
@@ -23,7 +23,7 @@ export const SearchAutocomplete: FunctionComponent<SearchAutocompleteProps> = ({
   onLoad,
   onPlacesChanged,
 }) => {
-  const { isLoaded } = useLoadScript({
+  const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: maps.apiKey,
     libraries,
   });

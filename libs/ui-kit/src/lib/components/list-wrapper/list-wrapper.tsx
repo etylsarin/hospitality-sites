@@ -22,9 +22,6 @@ export interface ListWrapperProps {
 export const ListWrapper: FunctionComponent<ListWrapperProps> = ({ categories, domain, sanity, maps }) => {
   const searchParams = useSearchParams();
   const locationQuery = searchParams.get('location') || undefined;
-
-  console.log('APP_CONFIG', sanity, maps);
-  
   const data: ListResponse = use(queryList({ domain, sanity, locationQuery }));
   return (
     <div className="container-fluid mb-12 pt-6 lg:mb-16" data-config-sanity={sanity.projectId} data-config-maps={maps.apiKey}>

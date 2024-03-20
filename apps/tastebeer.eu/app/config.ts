@@ -15,7 +15,9 @@ export const appConfig = {
     metadata: {
         title: 'tastebeer.eu',
         description: 'Welcome to tastebeer.eu',
-        // icons: ['/images/logo.svg'],
+        icons: {
+            icon: '/icon.png',
+        },
         viewport: { width: 'device-width', initialScale: 1, maximumScale: 1 },
     },
     categories: [
