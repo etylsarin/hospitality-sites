@@ -2,8 +2,8 @@ import { googleMapsInput } from '@sanity/google-maps-input';
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
 import { deskTool } from 'sanity/desk';
-import { tags } from 'sanity-plugin-tags';
 import { markdownSchema } from 'sanity-plugin-markdown';
+import { tags } from 'sanity-plugin-tags';
 
 import { schemaTypes } from './src';
 

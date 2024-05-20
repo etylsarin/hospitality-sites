@@ -41,14 +41,44 @@ export const place = defineType({
       type: 'tags',
       options: {
         predefinedTags: [
-          { value: 'breweries', label: 'Breweries' },
-          { value: 'pubs', label: 'Pubs' },
-          { value: 'beer-gardens', label: 'Beer gardens' },
-          { value: 'roasters', label: 'Roasters' },
-          { value: 'cafes', label: 'Cafes' },
-          { value: 'bakeries', label: 'Bakeries' },
+          { value: 'brewery', label: 'Brewery' },
+          { value: 'pub', label: 'Pub' },
+          { value: 'beer-garden', label: 'Beer garden' },
+          { value: 'roaster', label: 'Roaster' },
+          { value: 'cafe', label: 'Cafe' },
+          { value: 'bakery', label: 'Bakery' },
+          { value: 'bistro', label: 'Bistro' },
+          { value: 'restaurant', label: 'Restaurant' },
         ],
       },
+    }),
+    defineField({
+      name: 'services',
+      title: 'Services',
+      type: 'tags',
+      options: {
+        predefinedTags: [
+          { value: 'kids-play-area', label: 'Kids play area' },
+          { value: 'outdoor-playground', label: 'Outdoor playground' },
+          { value: 'outdoor-seating', label: 'Outdoor seating' },
+          { value: 'wheelchair-access', label: 'Wheelchair access' },
+          { value: 'dog-friendly', label: 'Dog friendly' },
+          { value: 'vegan-options', label: 'Vegan options' },
+        ],
+      },
+    }),
+    defineField({
+      name: 'payment_options',
+      title: 'Payment options',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        list: [
+          {title: 'Cash', value: 'cash'},
+          {title: 'Card', value: 'card'},
+          {title: 'QR code', value: 'qr-code'},
+        ]
+      }
     }),
     defineField({
       name: 'location',
@@ -104,7 +134,7 @@ export const place = defineType({
     prepare({ title, images }) {
       return {
         title: title,
-        media: images[0]
+        media: images?.[0]
       }
     }
   },

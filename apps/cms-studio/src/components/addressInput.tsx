@@ -1,13 +1,14 @@
+import { Geopoint } from '@sanity/google-maps-input';
+import { TextInput } from '@sanity/ui';
+import { FunctionComponent, useEffect, useState } from 'react';
 import {
   setKey,
   geocode,
   RequestType,
 } from 'react-geocode';
-
-import { FunctionComponent, useEffect, useState } from 'react';
-import { TextInput } from '@sanity/ui';
 import { StringInputProps, set, unset } from 'sanity';
-import { Geopoint } from '@sanity/google-maps-input';
+
+import { getShortAddress } from '../utils/parse-address/parse-address';
 
 export interface AddressInputProps extends StringInputProps {
   geopoint?: Geopoint;
@@ -26,12 +27,17 @@ export const AddressInput: FunctionComponent<AddressInputProps> = (props) => {
         if (latLngStr !== parsedValue.key) {
           geocode(RequestType.LATLNG, latLngStr)
             .then(({ results }) => {
-                const { formatted_address, address_components } = results[0];
+                const { address_components } = results[0];
                 const addresJson = address_components ? JSON.stringify({key: latLngStr, value: address_components}) : '';
-                setValue(formatted_address);
+                setValue(getShortAddress(JSON.stringify(address_components)));
                 onChange(addresJson ? set(addresJson) : unset());
             })
-            .catch(console.error);
+            .catch((error) => {
+              console.log('GEOCODE ERROR BELOW:');
+              console.error(error);
+            });
+        } else {
+          setValue(getShortAddress(props.value!));
         }
       } else {
         onChange(unset());
