@@ -3,9 +3,11 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
     "build": {
+      "cache": true,
       "dependsOn": ["^build"]
     },
     "lint": {
+      "cache": true,
       "inputs": [
         "default",
         "{workspaceRoot}/.eslintrc.json",
@@ -14,6 +16,7 @@
       ]
     },
     "@nx/jest:jest": {
+      "cache": true,
       "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
       "options": {
         "passWithNoTests": true
@@ -26,7 +29,7 @@
       }
     }
   },
-  "nxCloudAccessToken": "NjA3Yzc1ZDMtYWQ5MS00ZmE3LThjMDAtOWU0ZWI2MDUzNjk2fHJlYWQtd3JpdGU=",
+  "neverConnectToCloud": true,
   "generators": {
     "@nx/react": {
       "application": {
