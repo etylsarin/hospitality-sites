@@ -85,5 +85,8 @@
   ],
   "resolutions": {
     "@sanity/google-maps-input/styled-components": "^6.1.6"
+  },
+  "engines": {
+    "node": "20.x.x"
   }
 }
