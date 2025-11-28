@@ -255,7 +255,7 @@ The project is deployed to Vercel using **GitHub Integration** (not GitHub Actio
 |-----|----------------|
 | tastebeer.eu | `tastebeer.eu` or `tastebeer-eu.vercel.app` |
 | tastecoffee.eu | `tastecoffee.eu` or `tastecoffee-eu.vercel.app` |
-| cms-studio | `sanity-studio-git-main-filip-mares-projects.vercel.app` |
+| cms-studio | `taste-guide.vercel.app` |
 
 ### No Custom CI/CD
 
