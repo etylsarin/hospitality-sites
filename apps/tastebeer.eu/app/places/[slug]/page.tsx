@@ -10,8 +10,9 @@ export interface PlaceDetailPageProps {
     };
 } 
 
-const PlaceDetailPage: FunctionComponent<PlaceDetailPageProps> = ({ params }) => (
-    <DetailWrapper slug={params.slug} sanity={appConfig.sanity} maps={appConfig.maps} />
-);
+const PlaceDetailPage: FunctionComponent<PlaceDetailPageProps> = async props => {
+    const params = await props.params;
+    return (<DetailWrapper slug={params.slug} sanity={appConfig.sanity} maps={appConfig.maps} />);
+};
 
 export default PlaceDetailPage;
