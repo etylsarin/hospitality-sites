@@ -29,11 +29,15 @@
         "plugin:import/typescript",
         "plugin:react/jsx-runtime"
       ],
-      "parserOptions": { "project": "./tsconfig.*?.json" },
+      "parserOptions": {
+        "project": "./tsconfig.*?.json"
+      },
       "rules": {
         "react/function-component-definition": [
           2,
-          { "namedComponents": "arrow-function" }
+          {
+            "namedComponents": "arrow-function"
+          }
         ],
         "react/jsx-props-no-spreading": 0,
         "import/prefer-default-export": 0,
@@ -44,7 +48,14 @@
         "jest/no-mocks-import": 0,
         "react/no-multi-comp": 2,
         "default-case": 0,
-        "prefer-destructuring": [2, { "AssignmentExpression": { "array": false } }],
+        "prefer-destructuring": [
+          2,
+          {
+            "AssignmentExpression": {
+              "array": false
+            }
+          }
+        ],
         "prefer-regex-literals": 0,
         "import/no-cycle": 1,
         "import/no-extraneous-dependencies": 0,
@@ -66,13 +77,18 @@
               "caseInsensitive": true
             }
           }
-        ]
+        ],
+        "@typescript-eslint/no-extra-semi": "error",
+        "no-extra-semi": "off"
       }
     },
     {
       "files": ["*.js", "*.jsx"],
       "extends": ["plugin:@nx/javascript"],
-      "rules": {}
+      "rules": {
+        "@typescript-eslint/no-extra-semi": "error",
+        "no-extra-semi": "off"
+      }
     },
     {
       "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],

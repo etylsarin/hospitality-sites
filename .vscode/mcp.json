@@ -3,6 +3,11 @@
     "Sanity": {
       "url": "https://mcp.sanity.io",
       "type": "http"
+    },
+    "chrome-devtools": {
+      "command": "/Users/filip/.nvm/versions/node/v20.19.6/bin/node",
+      "args": ["/Users/filip/.nvm/versions/node/v20.19.6/lib/node_modules/chrome-devtools-mcp/build/src/index.js"],
+      "type": "stdio"
     }
   }
 }
