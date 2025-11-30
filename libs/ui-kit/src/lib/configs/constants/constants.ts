@@ -1,10 +1,14 @@
+import type { Easing } from 'framer-motion';
+
+const easing: Easing = 'easeInOut';
+
 export const fadeInBottom = (duration: number = 0.3) => {
   return {
     from: {
       top: '100%',
       opacity: 0.5,
       transition: {
-        type: 'easeInOut',
+        ease: easing,
         duration: duration,
       },
     },
@@ -12,7 +16,7 @@ export const fadeInBottom = (duration: number = 0.3) => {
       top: 0,
       opacity: 1,
       transition: {
-        type: 'easeInOut',
+        ease: easing,
         duration: duration,
       },
     },
@@ -24,7 +28,7 @@ export const fromOpacity = (duration: number = 0.5, delay: number = 0.5) => {
     from: {
       opacity: 0,
       transition: {
-        type: 'easeInOut',
+        ease: easing,
         duration: duration,
         delay: delay,
       },
@@ -32,7 +36,7 @@ export const fromOpacity = (duration: number = 0.5, delay: number = 0.5) => {
     to: {
       opacity: 1,
       transition: {
-        type: 'easeInOut',
+        ease: easing,
         duration: duration,
         delay: delay,
       },

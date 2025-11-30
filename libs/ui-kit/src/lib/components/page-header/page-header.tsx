@@ -14,7 +14,7 @@ export interface PageHeaderProps {
 }
 
 export const PageHeader: FunctionComponent<PageHeaderProps> = (props) => {
-  const headerRef = useRef(null);
+  const headerRef = useRef<HTMLElement>(null);
   addScrollingClass(headerRef);
 
   return (

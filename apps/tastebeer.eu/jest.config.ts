@@ -1,5 +1,4 @@
-/* eslint-disable */
-export default {
+ export default {
   displayName: 'tastebeer.eu',
   preset: '../../jest.preset.js',
   transform: {

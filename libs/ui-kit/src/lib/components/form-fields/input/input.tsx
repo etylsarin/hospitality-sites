@@ -225,7 +225,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <div
             className={clsx(
               'relative',
-              (startIcon || endIcon || clearable) && inputClasses.size[size]
+              Boolean(startIcon || endIcon || clearable) && inputClasses.size[size]
             )}
           >
             {startIcon && (
@@ -257,14 +257,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 variantStyle.color[color],
                 // hide/invisible fallback screen reader only placeholder
                 !placeholder && 'placeholder:opacity-0',
-                clearable && inputClearableClasses.base,
-                clearable &&
+                Boolean(clearable) && inputClearableClasses.base,
+                Boolean(clearable) &&
                   (endIcon
                     ? inputClearableClasses.hasEndIcon[size]
                     : inputClearableClasses.size[size]),
-                (clearable || startIcon || endIcon) && 'absolute inset-0',
-                startIcon && inputClassesWithIcon.startPadding.size[size],
-                endIcon && inputClassesWithIcon.endPadding.size[size],
+                Boolean(clearable || startIcon || endIcon) && 'absolute inset-0',
+                Boolean(startIcon) && inputClassesWithIcon.startPadding.size[size],
+                Boolean(endIcon) && inputClassesWithIcon.endPadding.size[size],
                 error && inputClasses.error,
                 inputClassName
               )}

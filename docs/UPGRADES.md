@@ -1,6 +1,6 @@
 # Hospitality Sites - Upgrade Recommendations
 
-> **Last Updated:** July 2025
+> **Last Updated:** November 2025
 > **Priority Scale:** 🔴 Critical | 🟠 High | 🟡 Medium | 🟢 Low
 
 This document outlines recommended upgrades and improvements for the hospitality-sites project, prioritized by impact and effort.
@@ -9,171 +9,69 @@ This document outlines recommended upgrades and improvements for the hospitality
 
 ## Executive Summary
 
-The project is currently behind on several major dependencies:
-- **Next.js**: 13.5.6 → 16.0.5 (3 major versions behind)
-- **NX**: 17.2.8 → 22.1.3 (5 major versions behind)
-- **React**: Using canary build → Should move to stable 19.x
+✅ **COMPLETED**: Major upgrades completed in November 2025:
+- **NX**: 17.2.8 → 22.1.3 ✅
+- **Next.js**: 13.5.6 → 16.0.5 ✅
+- **React**: Canary → 19.2.0 stable ✅
+- **Framer Motion**: 11.0.6 → 12.23.24 ✅
 
 ---
 
-## 🔴 Critical Priority
+## ✅ Completed Upgrades (November 2025)
 
-### 1. Upgrade React from Canary to Stable
+### 1. NX Workspace Upgrade (17.2.8 → 22.1.3)
+**Status:** ✅ Completed
 
-**Current:** `^18.3.0-canary-0ac3ea471-20240111`
-**Target:** `^19.2.0` (stable)
+Upgraded through all 5 major versions:
+- 17.2.8 → 18.x → 19.x → 20.x → 21.x → 22.1.3
+- Applied all migrations automatically via `nx migrate`
 
-**Why Critical:**
-- Canary builds are not production-ready
-- Security patches may not be backported
-- Can cause unpredictable behavior
-- Next.js 16 requires React 19.2
+### 2. Next.js Upgrade (13.5.6 → 16.0.5)
+**Status:** ✅ Completed
 
-**Effort:** Medium
-**Risk:** Low-Medium (some API changes in React 19)
+Migration path completed:
+- 13.5.6 → 14.2.33 (via NX @nx/next upgrade)
+- 14.2.33 → 15.1.0 (via @next/codemod)
+- 15.1.0 → 16.0.5 (via @next/codemod)
 
-**Steps:**
-```bash
-# Update package.json
-yarn add react@^19.2.0 react-dom@^19.2.0
-yarn add -D @types/react@^19.0.0 @types/react-dom@^19.0.0
+**Changes made:**
+- `images.domains` → `remotePatterns` configuration
+- Viewport metadata moved to separate export
+- `useSearchParams` wrapped in Suspense boundaries
+- Pages using `useSearchParams` marked as `dynamic = 'force-dynamic'`
 
-# Test all components for breaking changes
-yarn nx run-many --target=test --all
-```
+### 3. React Upgrade (Canary → 19.2.0)
+**Status:** ✅ Completed
 
-**Breaking Changes to Watch:**
-- `useEffect` timing changes
-- Stricter hooks rules
-- Server Components refinements
+- Upgraded from `^18.3.0-canary-0ac3ea471-20240111` to `19.2.0`
+- Installed `@types/react@^19.0.0` and `@types/react-dom@^19.0.0`
+- Fixed RefObject type signatures for React 19 compatibility
 
----
+### 4. Framer Motion Upgrade (11.0.6 → 12.23.24)
+**Status:** ✅ Completed
 
-### 2. Upgrade Next.js 13.5.6 → 16.x
+- Upgraded to version with React 19 support
+- Fixed transition type signatures (`type: 'easeInOut'` → `ease: 'easeInOut'`)
 
-**Current:** `13.5.6`
-**Target:** `16.0.5`
+### 5. ESLint Upgrade (8.48.0 → 9.39.1)
+**Status:** ✅ Completed
 
-**Why Critical:**
-- 3 major versions behind
-- Missing security patches
-- Missing performance improvements (Turbopack)
-- App Router improvements and bug fixes
+- Migrated from legacy `.eslintrc.json` to ESLint 9 flat config (`eslint.config.mjs`)
+- Updated @typescript-eslint packages to v8.x
+- Removed deprecated `@typescript-eslint/no-extra-semi` rule
+- Added proper globals for Node.js and browser environments
 
-**Effort:** High
-**Risk:** Medium-High (breaking changes across 3 versions)
+### 6. Additional Fixes Applied
+**Status:** ✅ Completed
 
-**Migration Path:**
-1. **13.5.6 → 14.x** (first milestone)
-2. **14.x → 15.x** (second milestone)
-3. **15.x → 16.x** (final milestone)
-
-**Key Breaking Changes:**
-
-| Version | Change | Action Required |
-|---------|--------|-----------------|
-| 14.x | `images.domains` deprecated | Replace with `remotePatterns` |
-| 15.x | Async request APIs | Update `params` usage in routes |
-| 15.x | Caching defaults changed | Review caching strategy |
-| 16.x | Turbopack default | Test build with Turbopack |
-| 16.x | React Compiler support | Review memoization patterns |
-
-**Immediate Fix (before full upgrade):**
-```javascript
-// next.config.js - Replace deprecated images.domains
-const nextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
-      },
-    ],
-  },
-};
-```
-
-**Steps:**
-```bash
-# Use Next.js codemod CLI for automated migration
-npx @next/codemod@latest
-
-# Test incrementally
-yarn nx run tastebeer.eu:build
-yarn nx run tastebeer.eu:serve
-```
+- Fixed ESLint flat config duplicate imports
+- Fixed clsx type issues with Boolean() wrapping
+- Added `@types/lodash` for lodash/fp imports
+- Fixed `addScrollingClass` hook to accept nullable refs
 
 ---
 
-## 🟠 High Priority
-
-### 3. Upgrade NX 17.2.8 → 22.x
-
-**Current:** `17.2.8`
-**Target:** `22.1.3`
-
-**Why High:**
-- 5 major versions behind
-- Missing task caching improvements
-- Missing CI/CD optimizations
-- Better monorepo performance
-
-**Effort:** Medium
-**Risk:** Medium
-
-**Steps:**
-```bash
-# NX provides migration command
-npx nx migrate latest
-
-# Apply migrations
-yarn install
-npx nx migrate --run-migrations
-
-# Verify workspace
-yarn nx run-many --target=build --all
-```
-
-**Key Changes:**
-- Project graph improvements
-- Task pipeline enhancements
-- Better caching strategies
-- Improved error messages
-
----
-
-### 4. Fix Deprecated Next.js Image Configuration
-
-**Current Issue:**
-```javascript
-images: {
-  domains: ['cdn.sanity.io'], // DEPRECATED
-}
-```
-
-**Target Fix:**
-```javascript
-images: {
-  remotePatterns: [
-    {
-      protocol: 'https',
-      hostname: 'cdn.sanity.io',
-      pathname: '/images/**',
-    },
-  ],
-}
-```
-
-**Effort:** Low
-**Risk:** Low
-
-**Files to Update:**
-- `apps/tastebeer.eu/next.config.js`
-- `apps/tastecoffee.eu/next.config.js`
-
----
-
-### 5. Add Proper TypeScript Strict Mode
+## 🟠 High Priority (Remaining)
 
 **Current:** Partial strict mode
 **Target:** Full strict mode with noUncheckedIndexedAccess
@@ -377,22 +275,22 @@ export function ErrorBoundary({ children, fallback }) {
 
 ## Upgrade Roadmap
 
-### Phase 1: Critical Updates (Week 1-2)
-1. ⬜ Fix deprecated `images.domains` configuration
-2. ⬜ Upgrade React from canary to stable 19.x
-3. ⬜ Upgrade Next.js 13.5.6 → 14.x
+### Phase 1: Critical Updates ✅ COMPLETED
+1. ✅ Fix deprecated `images.domains` configuration
+2. ✅ Upgrade React from canary to stable 19.x
+3. ✅ Upgrade Next.js 13.5.6 → 14.x
 
-### Phase 2: Core Infrastructure (Week 3-4)
-4. ⬜ Upgrade Next.js 14.x → 15.x
-5. ⬜ Upgrade NX 17.x → 20.x
+### Phase 2: Core Infrastructure ✅ COMPLETED
+4. ✅ Upgrade Next.js 14.x → 15.x
+5. ✅ Upgrade NX 17.x → 22.x
 6. ⬜ Clean up Strapi experiment
 
-### Phase 3: Stabilization (Week 5-6)
-7. ⬜ Upgrade Next.js 15.x → 16.x
-8. ⬜ Upgrade NX 20.x → 22.x
+### Phase 3: Stabilization ✅ MOSTLY COMPLETE
+7. ✅ Upgrade Next.js 15.x → 16.x
+8. ✅ Fix type compatibility issues
 9. ⬜ Add error boundaries and loading states
 
-### Phase 4: Enhancements (Week 7+)
+### Phase 4: Enhancements (Future)
 10. ⬜ Enable TypeScript strict mode
 11. ⬜ Implement proper SEO metadata
 12. ⬜ Add E2E testing
@@ -402,17 +300,20 @@ export function ErrorBoundary({ children, fallback }) {
 
 ## Dependency Version Reference
 
-| Package | Current | Latest | Gap |
-|---------|---------|--------|-----|
-| next | 13.5.6 | 16.0.5 | 3 major |
-| react | 18.3.0-canary | 19.2.0 | 1 major + canary |
-| nx | 17.2.8 | 22.1.3 | 5 major |
+| Package | Previous | Current | Status |
+|---------|----------|---------|--------|
+| next | 13.5.6 | 16.0.5 | ✅ Updated |
+| react | 18.3.0-canary | 19.2.0 | ✅ Updated |
+| nx | 17.2.8 | 22.1.3 | ✅ Updated |
+| framer-motion | 11.0.6 | 12.23.24 | ✅ Updated |
+| eslint | 8.48.0 | 9.39.1 | ✅ Updated |
+| @types/lodash | - | 4.17.21 | ✅ Added |
+| globals | - | 16.5.0 | ✅ Added |
 | sanity | 4.19.0 | 4.19.0 | ✅ Current |
-| typescript | 5.2.2 | 5.7.x | 5 minor |
-| tailwindcss | 3.4.1 | 4.0.x | 1 major |
-| eslint | 8.48.0 | 9.x | 1 major |
-| jest | 29.4.1 | 29.7.0 | 3 minor |
-| @testing-library/react | 14.0.0 | 16.x | 2 major |
+| typescript | 5.2.2 | 5.2.2 | 🟡 Consider updating |
+| tailwindcss | 3.4.1 | 3.4.1 | 🟡 v4 available |
+| jest | 29.4.1 | 29.4.1 | ✅ Current |
+| @testing-library/react | 14.0.0 | 16.1.0 | ✅ Updated |
 
 ---
 

@@ -18,8 +18,8 @@ export const appConfig = {
         icons: {
             icon: '/icon.png',
         },
-        viewport: { width: 'device-width', initialScale: 1, maximumScale: 1 },
     },
+    viewport: { width: 'device-width', initialScale: 1, maximumScale: 1 },
     categories: [
         { id: 'breweries', label: 'Breweries' },
         { id: 'pubs', label: 'Pubs' },

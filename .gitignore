@@ -53,5 +53,6 @@ Thumbs.db
 
 # Next.js
 .next
+next-env.d.ts
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
