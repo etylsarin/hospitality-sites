@@ -1,3 +1,4 @@
+import React from 'react';
 export const HeartIcon: React.FC<React.SVGAttributes<object>> = (props) => {
   return (
     <svg

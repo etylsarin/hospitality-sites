@@ -1,3 +1,4 @@
+import React from 'react';
 export const TelegramIcon: React.FC<React.SVGAttributes<object>> = (props) => {
   return (
     <svg

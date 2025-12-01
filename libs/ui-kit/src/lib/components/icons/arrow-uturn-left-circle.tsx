@@ -1,3 +1,4 @@
+import React from 'react';
 export const ArrowUturnLeftCircleIcon: React.FC<React.SVGAttributes<object>> = (
   props
 ) => {

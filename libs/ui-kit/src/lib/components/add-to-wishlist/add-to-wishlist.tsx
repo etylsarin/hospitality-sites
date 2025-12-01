@@ -6,7 +6,7 @@ import { FunctionComponent, useState } from 'react';
 import { HeartIcon } from '../icons';
 
 export interface AddToWishlistProps {
-  onClick: (data: boolean) => void;
+  onClick: (_value: boolean) => void;
   isWishListed: boolean;
 };
 export const AddToWishlist: FunctionComponent<AddToWishlistProps>  = ({

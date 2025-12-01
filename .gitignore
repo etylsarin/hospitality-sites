@@ -23,6 +23,13 @@ node_modules
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+!.vscode/mcp.json
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+*.local.env
 
 # misc
 /.sass-cache
@@ -34,12 +41,18 @@ yarn-error.log
 testem.log
 /typings
 .sanity
+_backup
+_middlewares.ts
 
 # System Files
 .DS_Store
 Thumbs.db
 
 .nx/cache
+.nx/workspace-data
 
 # Next.js
 .next
+next-env.d.ts
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md

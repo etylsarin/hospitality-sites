@@ -21,7 +21,7 @@ function renderGalleryContent(
   }
 }
 
-export default function GalleryCarouselView() {
+const GalleryCarouselView = () => {
   const { open, view, initialSlide } = useGallery();
 
   return (
@@ -39,4 +39,6 @@ export default function GalleryCarouselView() {
       )}
     </AnimatePresence>
   );
-}
+};
+
+export default GalleryCarouselView;

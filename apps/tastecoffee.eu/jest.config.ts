@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 export default {
   displayName: 'tastecoffee.eu',
   preset: '../../jest.preset.js',

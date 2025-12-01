@@ -10,11 +10,19 @@ import { SelectBox } from '../select-box/select-box';
 import { Text } from '../text/text';
 
 
-const sortingOptions = [
+type SortingOption = { id: string; label: string; checked: boolean };
+
+const sortingOptions: SortingOption[] = [
   { id: 'opt-1', label: 'Recently listed', checked: true },
-  { id: 'opt-1', label: 'Previous listed', checked: true },
-  { id: 'opt-1', label: 'Newer listed', checked: true },
+  { id: 'opt-2', label: 'Previous listed', checked: false },
+  { id: 'opt-3', label: 'Newer listed', checked: false },
 ];
+
+const defaultSortingOption: SortingOption = {
+  id: 'opt-1',
+  label: 'Recently listed',
+  checked: true,
+};
 
 export interface FilterTopbarProps {
   totalCount: number;
@@ -22,7 +30,7 @@ export interface FilterTopbarProps {
 
 export const FilterTopbar: FunctionComponent<FilterTopbarProps> = ({ totalCount }) => {
   const [drawerSate, setDrawerState] = useAtom(drawerStateAtom);
-  const [selected, setSelected] = useState(sortingOptions[0]);
+  const [selected, setSelected] = useState<SortingOption>(defaultSortingOption);
   return (
     <div className="mb-8 flex items-center justify-between">
       <Text className="text-sm font-bold text-gray-dark md:text-base">

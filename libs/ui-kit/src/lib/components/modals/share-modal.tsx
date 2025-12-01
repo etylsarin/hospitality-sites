@@ -47,13 +47,13 @@ const list = [
 export const ShareModal: FunctionComponent = () => {
   const { closeModal } = useModal();
   const [copied, setCopied] = useState(false);
-  const [state, setState] = useState(
+  const [shareUrl] = useState(
     'https://www.figma.com/file/NlfVhYygR9mAQasa'
   );
 
   useEffect(() => {
     if (copied) {
-      navigator.clipboard.writeText(state);
+      navigator.clipboard.writeText(shareUrl);
       setTimeout(() => {
         setCopied(!copied);
       }, 1000);
@@ -99,7 +99,7 @@ export const ShareModal: FunctionComponent = () => {
       </Text>
       <div className="mt-4 flex w-full items-center justify-between gap-4 rounded-lg bg-gray-lightest p-2 sm:px-5 sm:py-4 md:mt-7">
         <p className="w-3/4 overflow-clip text-ellipsis   text-sm font-normal text-gray">
-          {state}
+          {shareUrl}
         </p>
         <ActionIcon
           size="sm"

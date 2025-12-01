@@ -1,3 +1,4 @@
+import React from 'react';
 export const CakeIcon: React.FC<React.SVGAttributes<object>> = (props) => {
   return (
     <svg

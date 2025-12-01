@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import RcRate from 'rc-rate';
 import type { RateProps as RcRateProps } from 'rc-rate/lib/Rate';
 import type { StarProps as RcStarProps } from 'rc-rate/lib/Star';
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
 const labelClasses = {
   size: {
@@ -55,13 +55,9 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
       disabled = false,
       character = <StarIcon />,
       label,
-      tooltips,
       error,
-      helperText,
       labelClassName,
       characterClassName,
-      errorClassName,
-      helperClassName,
       rateClassName,
       className,
       ...props

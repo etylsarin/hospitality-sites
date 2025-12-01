@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
 import { FieldError } from '../field-error/field-error';
 import { FieldHelperText } from '../field-helper-text/field-helper-text';

@@ -1,3 +1,4 @@
+import React from 'react';
 export const EmailIcon: React.FC<React.SVGAttributes<object>> = (props) => {
   return (
     <svg

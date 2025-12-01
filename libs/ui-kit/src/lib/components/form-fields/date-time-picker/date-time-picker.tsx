@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import DatePicker from 'react-datepicker';
 import type { ReactDatePickerProps } from 'react-datepicker';
 
@@ -35,13 +35,7 @@ const timeOnlyClasses = {
 export interface DateTimeProps<selectsRange extends boolean | undefined>
   extends Omit<ReactDatePickerProps, 'selectsRange' | 'onChange'> {
   /** Pass function in onChange prop to handle selecting value */
-  onChange(
-    date: selectsRange extends false | undefined
-      ? Date | null
-      : [Date | null, Date | null],
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    event: React.SyntheticEvent<any> | undefined
-  ): void;
+  onChange: ReactDatePickerProps['onChange'];
   /** Whether range selecting is enabled */
   selectsRange?: selectsRange;
   /** Pass input props to style input */
@@ -70,16 +64,14 @@ export const DateTime: FunctionComponent<DateTimeProps<boolean>> = ({
   calendarClassName,
   startIcon,
   startIconClassName,
-  endIcon,
   error,
   inputClassName,
   labelClassName,
   className,
   ...props
 }) => {
-  const [isCalenderOpen, setIsCalenderOpen] = useState(false);
-  const handleCalenderOpen = () => setIsCalenderOpen(true);
-  const handleCalenderClose = () => setIsCalenderOpen(false);
+  const handleCalenderOpen = () => { /* Calendar opened */ };
+  const handleCalenderClose = () => { /* Calendar closed */ };
 
   return (
     <div className={clsx(className)}>

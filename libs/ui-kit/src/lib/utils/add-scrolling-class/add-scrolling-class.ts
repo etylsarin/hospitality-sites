@@ -1,9 +1,9 @@
 'use client';
 
-/* eslint-disable */
 import { useEffect, RefObject } from 'react';
-export function addScrollingClass<T extends HTMLElement = HTMLElement>(
-  ref: RefObject<T>,
+
+export function useScrollingClass<T extends HTMLElement = HTMLElement>(
+  ref: RefObject<T | null>,
   topOffset: number = 80
 ) {
   useEffect(() => {
@@ -20,5 +20,5 @@ export function addScrollingClass<T extends HTMLElement = HTMLElement>(
     return () => {
       document.removeEventListener('scroll', listener);
     };
-  }, []);
+  }, [ref, topOffset]);
 }

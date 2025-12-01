@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 
 const inputIconClearClasses = {
   base: 'inline-flex shrink-0 transform items-center justify-center rounded-full p-[1px] text-gray-dark transition-all duration-200 ease-in-out',
@@ -22,7 +22,7 @@ const inputIconClearClasses = {
 interface InputIconClearProps {
   hasSuffix?: boolean;
   size?: keyof typeof inputIconClearClasses.size;
-  onClick?: (event: React.MouseEvent) => void;
+  onClick?: React.MouseEventHandler;
   className?: string;
 }
 

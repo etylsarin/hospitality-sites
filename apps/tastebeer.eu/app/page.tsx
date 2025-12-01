@@ -1,16 +1,22 @@
+import type { Metadata } from 'next';
 import { FunctionComponent } from 'react';
 import { HeroBanner, TransparentHeader } from 'ui-kit';
-import { appConfig } from './config';
+import { appConfig, getSiteTitle } from './config';
 
-export const metadata = appConfig.metadata;
+export const metadata: Metadata = {
+  ...appConfig.metadata,
+  title: 'tastebeer.eu - Discover the Best Beer Places',
+};
+
+const siteTitle = getSiteTitle();
 
 const Index: FunctionComponent = () => (
   <>
-    <TransparentHeader title={metadata.title} description={metadata.description} />
+    <TransparentHeader title={siteTitle} description={appConfig.metadata.description} />
     <main className="flex-grow">
       <HeroBanner
         imageUrl={appConfig.backgroundImage}
-        imageAlt={appConfig.metadata.title}
+        imageAlt={siteTitle}
         domain={appConfig.domain}
         maps={appConfig.maps}
       />

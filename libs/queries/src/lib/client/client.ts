@@ -1,5 +1,5 @@
 import { memoize } from 'lodash/fp';
-import { createClient } from 'next-sanity';
+import { createClient, type SanityClient } from 'next-sanity';
 
 export interface SanityConfigProps {
   projectId: string;
@@ -7,7 +7,7 @@ export interface SanityConfigProps {
   apiVersion: string;
 }
 
-export const sanityClient = ({ projectId, dataset, apiVersion }: SanityConfigProps) => createClient({
+export const sanityClient = ({ projectId, dataset, apiVersion }: SanityConfigProps): SanityClient => createClient({
   projectId,
   dataset,
   apiVersion,

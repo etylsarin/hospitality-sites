@@ -30,7 +30,10 @@ export const ReviewBlock: FunctionComponent<ReviewBlockProps> = ({ reviews }) =>
     prev[key] ? prev[key] += 1 : prev[key] = 1;
     return prev;
   }, {} as { [key: string]: number });
-  const stars = Array.from({length: 5}, (v, i) => ({ count: i + 1, percent: totalReviews && starsCount[i + 1] ? starsCount[i + 1] * 100 / totalReviews : 0})) 
+  const stars = Array.from({length: 5}, (_, i) => {
+    const count = starsCount[i + 1] ?? 0;
+    return { count: i + 1, percent: totalReviews ? count * 100 / totalReviews : 0 };
+  }); 
   const stats = {
     totalReviews,
     averageRating,

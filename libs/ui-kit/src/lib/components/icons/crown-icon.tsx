@@ -1,3 +1,4 @@
+import React from 'react';
 export const CrownIcon: React.FC<React.SVGAttributes<object>> = (props) => {
   return (
     <svg

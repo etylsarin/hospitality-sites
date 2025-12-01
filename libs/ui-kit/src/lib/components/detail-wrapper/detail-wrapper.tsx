@@ -9,7 +9,7 @@ import { ListingDetailsHeroBlock } from '../hero-block/hero-block';
 import { ReviewBlock } from '../review-block/review-block';
 import { getShortAddress } from '../../utils';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+ 
 const { use } = require('react');
 
 export interface DetailWrapperProps {
@@ -25,9 +25,18 @@ export const DetailWrapper: FunctionComponent<DetailWrapperProps> = ({ slug, san
         ...location,
         address: getShortAddress(location?.address),
     };
+
+    const imageUrls = images.map(image => image.url);
+    const galleryImages: [string, string, string, ...string[]] = [
+        imageUrls[0] ?? '/placeholder.jpg',
+        imageUrls[1] ?? '/placeholder.jpg',
+        imageUrls[2] ?? '/placeholder.jpg',
+        ...imageUrls.slice(3),
+    ];
+
     return (
         <div className="container-fluid w-full 3xl:!px-12">
-            <GallaryBlock images={images.map(image => image.url)} />
+            <GallaryBlock images={galleryImages} />
             <div className="flex justify-between gap-5 lg:gap-8 xl:gap-12 4xl:gap-16">
                 <div className="w-full">
                 <ListingDetailsHeroBlock name={name} category='CATEGORY' established={established} location={adjustedLocation.address} />

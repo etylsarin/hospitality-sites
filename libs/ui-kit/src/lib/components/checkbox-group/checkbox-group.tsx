@@ -7,14 +7,14 @@ import { Checkbox } from '../form-fields';
 import { Text } from '../text/text';
 
 interface CheckboxProps {
-  data: { id: string; label: string; checked?: boolean }[];
+  items: { id: string; label: string; checked?: boolean }[];
   label: string;
   labelClassName?: string;
-  onChange: (data: object) => void;
+  onChange: (_selected: object) => void;
 }
 
 export const CheckboxGroup: FunctionComponent<CheckboxProps> = ({
-  data,
+  items,
   label,
   labelClassName,
   onChange,
@@ -33,9 +33,9 @@ export const CheckboxGroup: FunctionComponent<CheckboxProps> = ({
         </Text>
       )}
 
-      {data.map((item) => (
+      {items.map((item) => (
         <Checkbox
-          onChange={(e) => onChange(item)}
+          onChange={() => onChange(item)}
           key={item.id}
           name={item.label}
           label={item.label}
