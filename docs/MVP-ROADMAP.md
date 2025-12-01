@@ -1,7 +1,8 @@
 # MVP Development Roadmap
 
 > **Created:** July 2025
-> **Status:** Planning Phase
+> **Last Updated:** 1 December 2025
+> **Status:** Active Development
 > **Priority Focus:** MVP Completion → Maps Migration → Data Automation
 
 ---
@@ -32,12 +33,13 @@
 | Sanity CMS integration | ✅ Complete | `cms-studio` app |
 | Google Maps in Sanity | ✅ Complete | `@sanity/google-maps-input` |
 | Responsive design | ✅ Complete | Tailwind CSS |
+| **Location search (geo-based)** | ✅ Complete | Server-side Nominatim geocoding + bounding box filtering |
+| **Sort by dropdown** | ✅ Complete | Distance, Recently Added, Rating, Name, Established |
 
 ### ⚠️ Partially Implemented
 
 | Feature | Status | Issue | Location |
 |---------|--------|-------|----------|
-| Location search | ⚠️ Limited | Uses `match` on address string only | `libs/queries/src/lib/list/list.ts` |
 | Google Maps display | ✅ Fixed | Billing enabled on Google Cloud project (Dec 2025) | `MapView` component |
 | Sign In flow | ⚠️ Mock only | localStorage-based, demo user | `use-auth.ts` |
 
@@ -270,64 +272,89 @@ export const OSMMap: FunctionComponent<OSMMapProps> = ({
 
 ---
 
-### Phase 2.2: Location Search Enhancement
+### Phase 2.2: Location Search Enhancement ✅ COMPLETED (1 December 2025)
 
 #### The Location Matching Problem
 
 **User's question:** "How do we match places with lat/long coordinates with a map search when someone searches for a particular City or county, when the search query is not exactly the same as what we have stored?"
 
-**Current approach (broken):**
-```groq
-location.address match "${locationQuery}*"
-```
-This only matches if the user types exactly what's in the stored address.
+**Solution Implemented:**
 
-**Solution: Multi-tier Search Strategy**
+We implemented a bounding-box based geo-search using Nominatim (OpenStreetMap):
 
-1. **Tier 1: Structured Fields (Best)**
-   - Add `city`, `region`, `country` fields to schema
-   - Direct text match on these fields
+1. **Server-side Geocoding with Nominatim**
+   - Free, no API key required
+   - Returns center coordinates + bounding box for search area
+   - Location: `libs/queries/src/lib/geocoding/geocoding.ts`
+
+2. **Bounding Box Filtering in GROQ**
+   - Filter places within the geocoded bounding box
+   - Works with existing `location.geopoint` data in Sanity
    
-2. **Tier 2: Geocoded Search (Fallback)**
-   - Convert user's city query to coordinates using Nominatim
-   - Find places within X km radius
-   
-3. **Tier 3: Fuzzy Text Match (Last Resort)**
-   - Use Sanity's `match` with text scoring
+3. **Client-side Distance Calculation**
+   - Haversine formula calculates distance from search center
+   - Results sorted by distance when sorting by "Distance"
 
-**Implementation:**
+**Implementation Details:**
 
 ```typescript
-// Enhanced query with structured fields
-export const queryList = async ({ domain, sanity, locationQuery = '' }: QueryListParams) => {
-  // If locationQuery provided, geocode it first
-  let searchLat, searchLng;
-  if (locationQuery) {
-    const geocoded = await geocodeWithNominatim(locationQuery);
-    if (geocoded) {
-      searchLat = geocoded.lat;
-      searchLng = geocoded.lng;
-    }
-  }
-  
-  return await client(sanity).fetch(groq`
-    *[_type == "place" && $domain in domains] {
-      ...,
-      // Calculate distance if searching by location
-      "distance": ${searchLat && searchLng ? 
-        `geo::distance(location.geopoint, geo::latLng(${searchLat}, ${searchLng}))` : 
-        'null'
+// libs/queries/src/lib/geocoding/geocoding.ts
+export async function geocodeLocation(query: string): Promise<GeocodeResult | null> {
+  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`;
+  const response = await fetch(url, {
+    headers: { 'User-Agent': 'TasteCoffee/1.0' }
+  });
+  const data = await response.json();
+  if (data.length > 0) {
+    return {
+      center: { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) },
+      bounds: {
+        south: parseFloat(data[0].boundingbox[0]),
+        north: parseFloat(data[0].boundingbox[1]),
+        west: parseFloat(data[0].boundingbox[2]),
+        east: parseFloat(data[0].boundingbox[3])
       }
-    }
-    // Filter by distance (within 50km) or text match
-    [
-      !defined($searchLat) || distance < 50000 ||
-      location.city match $locationQuery + "*" ||
-      location.region match $locationQuery + "*"
-    ]
-    | order(distance asc)
-  `, { domain, locationQuery, searchLat, searchLng });
-};
+    };
+  }
+  return null;
+}
+```
+
+**Why Nominatim instead of Google Geocoding API:**
+- Google Maps API key has HTTP referrer restrictions
+- Server-side requests get `REQUEST_DENIED` errors
+- Nominatim is free, no key required, works server-side
+
+#### Sort Functionality ✅ COMPLETED (1 December 2025)
+
+Added 5 sort options to the places listing with URL-based state management:
+
+| Option | GROQ Order Clause | Description |
+|--------|-------------------|-------------|
+| Distance (default) | Client-side Haversine | Nearest to search location center |
+| Recently Added | `order(_createdAt desc)` | Newest entries first |
+| Highest Rated | `order(coalesce(math::avg(reviews[].rating), 0) desc)` | Best average review rating |
+| Name (A-Z) | `order(lower(name) asc)` | Alphabetical sorting |
+| Newest Established | `order(established desc)` | Most recently opened venues |
+
+**Implementation Details:**
+- Sort selection updates URL with `?sort=<option>` parameter
+- Server re-renders page with new GROQ query
+- Distance sorting uses Haversine formula (client-side) when geo-search active
+- Falls back to `_createdAt desc` when no location search is active
+
+**Files Modified:**
+- `libs/queries/src/lib/list/list.ts` - Added `SortOption` type, `getOrderClause()` function, Haversine calculation
+- `libs/ui-kit/src/lib/components/filter-topbar/filter-topbar.tsx` - Dropdown with URL navigation via `useRouter`
+- `libs/ui-kit/src/lib/components/list-wrapper/list-wrapper.tsx` - Added `currentSort` prop
+- `apps/tastecoffee.eu/app/places/page.tsx` - Parse `sort` URL param, pass to query
+- `apps/tastebeer.eu/app/places/page.tsx` - Same changes
+
+**Working Examples:**
+```
+/places?location=Prague              → 7 coffee places, sorted by distance
+/places?location=Prague&sort=rating  → 7 coffee places, sorted by rating
+/places?sort=recently-added          → All places, sorted by creation date
 ```
 
 ---
@@ -350,31 +377,31 @@ Automate data entry by scraping venues from:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                         SCRAPER SERVICE (NX Library)                     │
+│                         SCRAPER SERVICE (NX Library)                    │
 ├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
+│                                                                         │
 │  ┌──────────────┐    ┌──────────────────┐    ┌──────────────────┐       │
 │  │  CLI Runner  │───▶│  Puppeteer       │───▶│  Task Queue      │       │
 │  │  (Commander) │    │  Cluster         │    │  (URL Queue)     │       │
 │  └──────────────┘    │  (3-5 workers)   │    └──────────────────┘       │
 │                      └────────┬─────────┘                               │
-│                               │                                          │
+│                               │                                         │
 │           ┌───────────────────┼───────────────────┐                     │
 │           ▼                   ▼                   ▼                     │
-│  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐            │
-│  │ Google Maps    │  │ TripAdvisor    │  │ Future Sources │            │
-│  │ Scraper        │  │ Scraper        │  │ (Yelp, etc.)   │            │
-│  └────────┬───────┘  └────────┬───────┘  └────────────────┘            │
-│           │                   │                                          │
+│  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐             │
+│  │ Google Maps    │  │ TripAdvisor    │  │ Future Sources │             │
+│  │ Scraper        │  │ Scraper        │  │ (Yelp, etc.)   │             │
+│  └────────┬───────┘  └────────┬───────┘  └────────────────┘             │
+│           │                   │                                         │
 │           └─────────┬─────────┘                                         │
-│                     ▼                                                    │
+│                     ▼                                                   │
 │           ┌─────────────────┐                                           │
 │           │  Data Processor │                                           │
 │           │  - Normalize    │                                           │
 │           │  - Deduplicate  │                                           │
 │           │  - Validate     │                                           │
 │           └────────┬────────┘                                           │
-│                    ▼                                                     │
+│                    ▼                                                    │
 │           ┌─────────────────┐                                           │
 │           │ Sanity Uploader │                                           │
 │           │ (Mutation API)  │                                           │
@@ -1393,6 +1420,9 @@ async function searchPlacesAPI(query: string) {
 | 2025-12 | Create separate NX library for scraper | Clean separation, reusable across projects |
 | 2025-12 | Build CLI with Commander.js | Easy to use, supports dry-run mode for testing |
 | 2025-12 | Puppeteer for POC, APIs for production | Legal compliance - Google Places API, TripAdvisor Content API |
+| 2025-12-01 | Use Nominatim instead of Google Geocoding | Google API key has HTTP referrer restrictions, server-side requests get REQUEST_DENIED |
+| 2025-12-01 | Client-side distance calculation | Haversine formula in JS vs geo::distance in GROQ - simpler, no API version concerns |
+| 2025-12-01 | URL-based sort state | Enables server-side rendering, bookmarkable URLs, browser back/forward support |
 
 ---
 

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { FunctionComponent, Suspense } from 'react';
 import { ListWrapper } from 'ui-kit';
-import { queryList } from 'queries';
+import { queryList, parseSortOption } from 'queries';
 import { appConfig } from '../config';
 
 export const dynamic = 'force-dynamic';
@@ -18,16 +18,28 @@ export const metadata: Metadata = {
 };
 
 export interface PlacesPageProps {
-  searchParams: Promise<{ location?: string }>;
+  searchParams: Promise<{ location?: string; sort?: string }>;
 }
 
 const PlacesPage: FunctionComponent<PlacesPageProps> = async ({ searchParams }) => {
-  const { location } = await searchParams;
-  const dataPromise = queryList({ domain: appConfig.domain, sanity: appConfig.sanity, locationQuery: location });
+  const { location, sort } = await searchParams;
+  const sortBy = parseSortOption(sort);
+  
+  const dataPromise = queryList({ 
+    domain: appConfig.domain, 
+    sanity: appConfig.sanity, 
+    locationQuery: location,
+    sortBy,
+  });
   
   return (
     <Suspense fallback={<div className="container-fluid mb-12 pt-6 lg:mb-16">Loading...</div>}>
-      <ListWrapper dataPromise={dataPromise} categories={appConfig.categories} maps={appConfig.maps} />
+      <ListWrapper 
+        dataPromise={dataPromise} 
+        categories={appConfig.categories} 
+        maps={appConfig.maps}
+        currentSort={sortBy}
+      />
     </Suspense>
   );
 }

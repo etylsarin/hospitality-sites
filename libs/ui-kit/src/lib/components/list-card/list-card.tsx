@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ListItem, Price } from 'queries';
 import { FunctionComponent } from 'react';
-import { CurrencyEuroIcon } from '@heroicons/react/24/outline';
+import { CurrencyEuroIcon, MapPinIcon } from '@heroicons/react/24/outline';
 
 import { ActionIcon } from '../action-icon/action-icon';
 import { AddToWishlist } from '../add-to-wishlist/add-to-wishlist';
@@ -17,7 +17,7 @@ import {
   Navigation,
   Pagination,
 } from '../slider/slider';
-import { getShortAddress } from '../../utils';
+import { getShortAddress, formatDistance } from '../../utils';
 
 const priceCounter = (price: Price) => ({
   'low': 1,
@@ -39,6 +39,7 @@ export const ListCard: FunctionComponent<ListCardProps> = ({
   price,
   images,
   categories,
+  distance,
 }) => {
   const rating = reviews && reviews.length ? reviews.reduce((prev, curr) => prev + curr.rating, 0) / reviews.length : 0;
   const reviewCount = `${reviews?.length || 0} ${reviews?.length === 1 ? 'review' : 'reviews'}`;
@@ -114,7 +115,15 @@ export const ListCard: FunctionComponent<ListCardProps> = ({
               <span className="font-bold">{est}</span>
             </div>
             <h4 className="text-ellipsis text-gray-dark 2xl:mb-1.5">{name}</h4>
-            <p className="mb-3 text-gray-light xl:mb-3">{getShortAddress(location?.address)}</p>
+            <p className="mb-3 text-gray-light xl:mb-3">
+              {getShortAddress(location?.address)}
+              {distance !== undefined && (
+                <span className="ml-2 inline-flex items-center text-sm text-gray">
+                  <MapPinIcon className="mr-1 h-3.5 w-3.5" />
+                  {formatDistance(distance)}
+                </span>
+              )}
+            </p>
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="text-gray-light">
                 <div
