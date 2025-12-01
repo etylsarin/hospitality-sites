@@ -38,7 +38,7 @@
 | Feature | Status | Issue | Location |
 |---------|--------|-------|----------|
 | Location search | ⚠️ Limited | Uses `match` on address string only | `libs/queries/src/lib/list/list.ts` |
-| Google Maps display | ⚠️ Issues | "Stopped working" (API key/quota?) | `MapView` component |
+| Google Maps display | ✅ Fixed | Billing enabled on Google Cloud project (Dec 2025) | `MapView` component |
 | Sign In flow | ⚠️ Mock only | localStorage-based, demo user | `use-auth.ts` |
 
 ### ❌ Not Implemented / Mocked
@@ -1398,7 +1398,7 @@ async function searchPlacesAPI(query: string) {
 
 ## Open Questions
 
-1. **Google Maps API Issue:** What exactly stopped working? API key expired? Quota exceeded? Need to debug.
+1. ~~**Google Maps API Issue:** What exactly stopped working? API key expired? Quota exceeded? Need to debug.~~ ✅ **RESOLVED (Dec 2025):** Billing was not enabled on the Google Cloud project. Fixed by enabling billing - maps now working.
 
 2. **Authentication Strategy:** When auth is needed, use:
    - NextAuth.js?
