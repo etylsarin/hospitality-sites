@@ -3,7 +3,7 @@
 import { Listbox, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
-import { Fragment, FunctionComponent } from 'react';
+import React, { Fragment, FunctionComponent } from 'react';
 
 import { InputIconOnClear } from '../form-fields';
 
@@ -38,8 +38,8 @@ interface SelectBoxProps {
   arrowIconClassName?: string;
   optionsContainerClassName?: string;
   ClearableClassName?: string;
-  onChange: (value: { [key: string]: unknown; id: string; checked: boolean; label: string; }) => void;
-  onClearClick?: (event: React.MouseEvent) => void;
+  onChange: (_value: { [key: string]: unknown; id: string; checked: boolean; label: string; }) => void;
+  onClearClick?: React.MouseEventHandler;
   variant?: keyof typeof buttonClasses.variant;
   clearable?: boolean;
 }
@@ -73,7 +73,7 @@ export const SelectBox: FunctionComponent<SelectBoxProps> = ({
       </label>
       <Listbox value={value} onChange={onChange}>
         <Listbox.Button as="div">
-          {({ open, value }) => (
+          {({ open, value: selectedOption }) => (
             <button
               className={clsx(
                 buttonClasses.base,
@@ -82,8 +82,8 @@ export const SelectBox: FunctionComponent<SelectBoxProps> = ({
                 open && '!border-gray-1000 !ring-[1px] !ring-gray-900/20'
               )}
             >
-              {optionIcon && <span className="block pr-4">{value.icon}</span>}
-              <span className="block flex-grow truncate">{value.label}</span>
+              {optionIcon && <span className="block pr-4">{selectedOption.icon}</span>}
+              <span className="block flex-grow truncate">{selectedOption.label}</span>
               <span
                 className={clsx(
                   'absolute inset-y-0 flex items-center transition-transform duration-200',

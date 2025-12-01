@@ -4,6 +4,7 @@ import nxPlugin from '@nx/eslint-plugin';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import reactPlugin from 'eslint-plugin-react';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import globals from 'globals';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -18,7 +19,7 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: ['**/node_modules/**', '**/dist/**', '**/.next/**', '**/build/**', '**/*.d.ts'],
+    ignores: ['**/node_modules/**', '**/dist/**', '**/.next/**', '**/build/**', '**/*.d.ts', '**/.sanity/**'],
   },
   js.configs.recommended,
   {
@@ -26,6 +27,7 @@ export default [
       '@nx': nxPlugin,
       '@typescript-eslint': tsPlugin,
       react: reactPlugin,
+      'react-hooks': reactHooksPlugin,
     },
   },
   {
@@ -52,6 +54,9 @@ export default [
       parser: tsParser,
       parserOptions: {
         project: './tsconfig.*?.json',
+        ecmaFeatures: {
+          jsx: true,
+        },
       },
       globals: {
         ...globals.node,
@@ -64,6 +69,20 @@ export default [
       },
     },
     rules: {
+      // React hooks rules
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+      // Allow unused variables that start with underscore
+      'no-unused-vars': ['error', { 
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_'
+      }],
+      '@typescript-eslint/no-unused-vars': ['error', { 
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_'
+      }],
       'react/function-component-definition': [
         2,
         {

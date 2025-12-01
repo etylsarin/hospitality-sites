@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
 import { InputIconOnClear } from '../field-clear-btn/field-clear-btn';
 import { FieldError } from '../field-error/field-error';
@@ -169,7 +169,7 @@ export interface InputProps
   label?: string;
   error?: string;
   clearable?: boolean;
-  onClearClick?: (event: React.MouseEvent) => void;
+  onClearClick?: React.MouseEventHandler;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   startIconClassName?: string;

@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 // import { SpinnerIcon } from '@/assets/icons/spinner';
 
 // const spinnerSize = {

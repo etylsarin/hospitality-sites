@@ -21,7 +21,6 @@ const logoMap: {[key: string]: ReactNode} = {
 export const Logo: FunctionComponent<AnchorHTMLAttributes<object> & LogoProps> = ({
   className,
   title,
-  description,
   ...props
 }) => {
   return (

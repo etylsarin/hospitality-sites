@@ -2,14 +2,15 @@
 
 import { StandaloneSearchBox, useJsApiLoader } from '@react-google-maps/api';
 import { MapsConfigProps } from 'queries';
-import { FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
+
+/* global google */
 
 export interface SearchAutocompleteProps {
   children: React.ReactNode;
   maps: MapsConfigProps;
   loader?: React.ReactNode;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onLoad: (ref: any) => void;
+  onLoad: (_ref: google.maps.places.SearchBox) => void;
   onPlacesChanged: () => void;
 };
 

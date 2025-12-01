@@ -1,3 +1,4 @@
+import React from 'react';
 export const CalenderIcon: React.FC<React.SVGAttributes<object>> = (props) => {
   return (
     <svg

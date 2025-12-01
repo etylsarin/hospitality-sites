@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { FunctionComponent, useRef } from 'react';
-import { addScrollingClass } from '../../utils';
+import { useScrollingClass } from '../../utils';
 import { SearchIconBtn } from '../search-icon-btn/search-icon-btn';
 import { Menu } from '../menu/menu';
 import { Logo } from '../logo/logo';
@@ -15,7 +15,7 @@ export interface TransparentHeaderProps {
 
 export const TransparentHeader: FunctionComponent<TransparentHeaderProps> = (props) => {
   const headerRef = useRef(null);
-  addScrollingClass(headerRef);
+  useScrollingClass(headerRef);
 
   return (
     <header

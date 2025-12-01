@@ -66,7 +66,7 @@ export const CategoryFilter: FunctionComponent<CategoryFilterProps> = ({ data })
     <CheckboxGroup
       label="Categories"
       labelClassName="!text-sm lg:!text-base mb-4 lg:mb-2"
-      data={selected}
+      items={selected}
       onChange={(item: object) => handleInputChange(item as CategoryFilterItemProps)}
     />
   );

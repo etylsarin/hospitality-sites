@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect, FunctionComponent } from 'react';
+import React, { useRef, useState, useEffect, FunctionComponent } from 'react';
 import clsx from 'clsx';
 import { Button } from '../button/button';
 

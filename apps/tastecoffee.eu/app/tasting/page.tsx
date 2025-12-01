@@ -1,11 +1,13 @@
 import { FunctionComponent } from 'react';
 import { TransparentHeader, Text } from 'ui-kit';
-import { appConfig } from '../config';
+import { appConfig, getSiteTitle } from '../config';
+
+const siteTitle = getSiteTitle();
 
 const TastingPage: FunctionComponent = () => (
 
 <>
-  <TransparentHeader title={appConfig.metadata.title} description={appConfig.metadata.description} className="no-background" />
+  <TransparentHeader title={siteTitle} description={appConfig.metadata.description} className="no-background" />
   <main className="flex-grow">
     <div className="container-fluid w-full !max-w-[1248px] pt-12 lg:pt-20 2xl:pb-8 3xl:px-0 3xl:pt-24">
       <div className="text-center">

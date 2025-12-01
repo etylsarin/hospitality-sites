@@ -6,7 +6,9 @@ import { FunctionComponent, useEffect, useState } from 'react';
 import { useQueryParam } from '../../hooks';
 import { SelectBox } from '../select-box/select-box';
 
-const options = [
+type DistanceOption = { label: string; disabled?: boolean };
+
+const options: DistanceOption[] = [
   { label: 'Select distance', disabled: true },
   { label: '20 km' },
   { label: '40 km' },
@@ -15,11 +17,13 @@ const options = [
   { label: '100 km' },
 ];
 
+const defaultOption: DistanceOption = { label: 'Select distance', disabled: true };
+
 export const DistanceFilter: FunctionComponent = () => {
   const searchParams = useSearchParams();
   const dis = searchParams?.get('distance');
   const { clearFilter, updateQueryparams } = useQueryParam();
-  const [selected, setSelected] = useState(options[0]);
+  const [selected, setSelected] = useState<DistanceOption>(defaultOption);
 
   useEffect(() => {
     if (selected.disabled) {
@@ -27,6 +31,8 @@ export const DistanceFilter: FunctionComponent = () => {
     } else {
       updateQueryparams('distance', selected.label);
     }
+    // Intentionally excluding clearFilter and updateQueryparams to avoid infinite loops
+    // These functions are stable references from useQueryParam hook
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
@@ -38,9 +44,8 @@ export const DistanceFilter: FunctionComponent = () => {
         setSelected(d);
       }
     } else {
-      setSelected(options[0]);
+      setSelected(defaultOption);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dis]);
 
   return (
@@ -54,7 +59,7 @@ export const DistanceFilter: FunctionComponent = () => {
       clearable={selected.disabled ? false : true}
       onClearClick={(e) => {
         e.stopPropagation();
-        setSelected(options[0]);
+        setSelected(defaultOption);
       }}
     />
   );

@@ -4,11 +4,11 @@ interface EmptySVGIconProps {
   className?: string;
 }
 
-export function DefaultIcon({
+export const DefaultIcon = ({
   width = 184,
   height = 152,
   className,
-}: EmptySVGIconProps) {
+}: EmptySVGIconProps) => {
   return (
     <svg
       width={width}

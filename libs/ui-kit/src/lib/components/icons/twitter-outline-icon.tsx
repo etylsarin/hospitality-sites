@@ -1,3 +1,4 @@
+import React from 'react';
 export const TwitterOutlineIcon: React.FC<React.SVGAttributes<object>> = (
   props
 ) => {

@@ -67,40 +67,68 @@ Migration path completed:
 - Fixed ESLint flat config duplicate imports
 - Fixed clsx type issues with Boolean() wrapping
 - Added `@types/lodash` for lodash/fp imports
-- Fixed `addScrollingClass` hook to accept nullable refs
+- Fixed `useScrollingClass` hook (renamed from `addScrollingClass`) to accept nullable refs
+- Added explicit `import React from 'react'` to all files using `React.*` types (React.FC, React.ReactNode, etc.)
+- Split multi-component files (`hero-block.tsx`, `review-stat.tsx`) to comply with `react/no-multi-comp` rule
+- Converted function declarations to arrow functions for component definitions
+- Added explicit type annotation to `sanityClient` in queries library for Rollup compatibility
 
----
+### 7. Export Target Removal
+**Status:** ✅ Completed
 
-## 🟠 High Priority (Remaining)
+**Background:**
+- The `@nx/next:export` executor was removed in NX 22 because:
+  - Next.js 13.3.0 deprecated `next export` in favor of `output: 'export'` in `next.config.js`
+  - Next.js 14.0.0 completely removed the `next export` command
+  - NX followed suit by removing the executor
 
-**Current:** Partial strict mode
-**Target:** Full strict mode with noUncheckedIndexedAccess
+**Changes Made:**
+- Removed obsolete `export` targets from `apps/tastebeer.eu/project.json` and `apps/tastecoffee.eu/project.json`
 
-**Why High:**
-- Better type safety
-- Catch more bugs at compile time
-- Better developer experience
-
-**Effort:** Medium-High (may require fixing type errors)
-**Risk:** Low
-
-**Update tsconfig.base.json:**
-```json
-{
-  "compilerOptions": {
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
-  }
-}
+**New Static Export Approach (if needed):**
+If static HTML export is required in the future, add to `next.config.js`:
+```javascript
+const nextConfig = {
+  output: 'export',
+  // Optional: trailingSlash: true,
+  // Optional: distDir: 'dist',
+};
 ```
+Then simply run `build` - it will generate static HTML/CSS/JS in the `out` folder.
+
+**Note:** Static export has limitations - no Server Actions, no dynamic routes without `generateStaticParams`, etc. See [Next.js Static Exports docs](https://nextjs.org/docs/app/building-your-application/deploying/static-exports) for details.
+
+### 8. TypeScript Strict Mode
+**Status:** ✅ Completed
+
+Enabled full strict mode in `tsconfig.base.json`:
+- `strict: true`
+- `noUncheckedIndexedAccess: true`
+- `noImplicitReturns: true`
+- `noFallthroughCasesInSwitch: true`
+
+### 9. Error Boundaries and Loading States
+**Status:** ✅ Completed
+
+Added Next.js App Router error and loading conventions:
+- `apps/tastebeer.eu/app/error.tsx`
+- `apps/tastebeer.eu/app/loading.tsx`
+- `apps/tastecoffee.eu/app/error.tsx`
+- `apps/tastecoffee.eu/app/loading.tsx`
+
+### 10. SEO Metadata
+**Status:** ✅ Completed
+
+Implemented proper SEO metadata using Next.js Metadata API:
+- Static `metadata` exports on main pages
+- Dynamic `generateMetadata` for place detail pages (`/places/[slug]`)
+- Metadata includes titles, descriptions, and OpenGraph data
 
 ---
 
 ## 🟡 Medium Priority
 
-### 6. Clean Up Strapi Experiment
+### 1. Clean Up Strapi Experiment
 
 **Action:** Remove inactive `apps/backend/` and `apps/_backup/` directories
 
@@ -124,68 +152,7 @@ rm -rf apps/_backup
 
 ---
 
-### 7. Add Proper Error Boundaries
-
-**Current:** No error boundaries in apps
-**Target:** Error boundaries for graceful error handling
-
-**Why Medium:**
-- Better user experience on errors
-- Prevents full page crashes
-- Required for production apps
-
-**Effort:** Medium
-**Risk:** Low
-
-**Implementation:**
-```tsx
-// libs/ui-kit/src/lib/components/error-boundary/error-boundary.tsx
-'use client';
-
-export function ErrorBoundary({ children, fallback }) {
-  // Implementation
-}
-```
-
----
-
-### 8. Add Loading States
-
-**Current:** Limited loading states
-**Target:** Suspense boundaries with loading.tsx files
-
-**Why Medium:**
-- Better perceived performance
-- Smoother user experience
-- Next.js App Router best practice
-
-**Effort:** Low-Medium
-**Risk:** Low
-
-**Files to Add:**
-- `apps/tastebeer.eu/app/loading.tsx`
-- `apps/tastebeer.eu/app/places/loading.tsx`
-- `apps/tastecoffee.eu/app/loading.tsx`
-- `apps/tastecoffee.eu/app/places/loading.tsx`
-
----
-
-### 9. Implement Proper SEO Metadata
-
-**Current:** Basic metadata in config
-**Target:** Dynamic metadata with generateMetadata
-
-**Why Medium:**
-- Better SEO
-- Social sharing previews
-- Open Graph images
-
-**Effort:** Medium
-**Risk:** Low
-
----
-
-### 10. Add Authentication System
+### 2. Add Authentication System
 
 **Current:** No authentication
 **Target:** User authentication for reviews
@@ -285,16 +252,17 @@ export function ErrorBoundary({ children, fallback }) {
 5. ✅ Upgrade NX 17.x → 22.x
 6. ⬜ Clean up Strapi experiment
 
-### Phase 3: Stabilization ✅ MOSTLY COMPLETE
+### Phase 3: Stabilization ✅ COMPLETED
 7. ✅ Upgrade Next.js 15.x → 16.x
 8. ✅ Fix type compatibility issues
-9. ⬜ Add error boundaries and loading states
+9. ✅ Add error boundaries and loading states
+10. ✅ Enable TypeScript strict mode
+11. ✅ Implement proper SEO metadata
 
 ### Phase 4: Enhancements (Future)
-10. ⬜ Enable TypeScript strict mode
-11. ⬜ Implement proper SEO metadata
-12. ⬜ Add E2E testing
-13. ⬜ Consider authentication system
+12. ⬜ Clean up Strapi experiment
+13. ⬜ Add E2E testing
+14. ⬜ Consider authentication system
 
 ---
 

@@ -13,7 +13,7 @@ import { Button } from '../button/button';
 import { DetailResponse, SanityConfigProps, queryDetail } from 'queries';
 import { FunctionComponent } from 'react';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+ 
 const { use } = require('react');
 
 export interface PhotoGallertProps {

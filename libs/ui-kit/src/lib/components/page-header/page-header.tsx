@@ -2,7 +2,7 @@
 
 import { FunctionComponent, useRef } from 'react';
 
-import { addScrollingClass } from '../../utils';
+import { useScrollingClass } from '../../utils';
 import { Logo } from '../logo/logo';
 import { Searchbox } from '../search-box/search-box';
 import { SearchIconBtn } from '../search-icon-btn/search-icon-btn';
@@ -15,7 +15,7 @@ export interface PageHeaderProps {
 
 export const PageHeader: FunctionComponent<PageHeaderProps> = (props) => {
   const headerRef = useRef<HTMLElement>(null);
-  addScrollingClass(headerRef);
+  useScrollingClass(headerRef);
 
   return (
     <header

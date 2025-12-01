@@ -18,7 +18,6 @@ export function useQueryParam(pathname: string = 'places') {
     router.push(`${pathname}${url.search}`);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const setQueryparams = (data: any) => {
     let queryString = '';
     if (typeof data !== 'string') {

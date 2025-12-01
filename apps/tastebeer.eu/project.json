@@ -39,12 +39,6 @@
         }
       }
     },
-    "export": {
-      "executor": "@nx/next:export",
-      "options": {
-        "buildTarget": "tastebeer.eu:build:production"
-      }
-    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],

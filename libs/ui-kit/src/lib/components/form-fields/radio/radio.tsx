@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
 const containerClasses = {
   base: 'inline-flex items-center',

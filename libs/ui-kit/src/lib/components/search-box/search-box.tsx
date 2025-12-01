@@ -33,22 +33,12 @@ export const Searchbox: FunctionComponent<SearchboxProps> = ({ className }) => {
 
   // clearable icon true or false
   useEffect(() => {
-    if (state) {
-      setIsClearable(true);
-    } else {
-      setIsClearable(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setIsClearable(Boolean(state));
   }, [state]);
 
   // if already exists in the url
   useEffect(() => {
-    if (search) {
-      setState(search);
-    } else {
-      setState('');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setState(search ?? '');
   }, [search]);
 
   return (
