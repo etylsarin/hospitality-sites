@@ -4343,7 +4343,7 @@
   resolved "https://registry.yarnpkg.com/@sanity/blueprints-parser/-/blueprints-parser-0.3.0.tgz#ef7fa3b92be178dbe557d6d1c1fc4e7087aeefba"
   integrity sha512-kS/MU3r71MXExzatvP6lCO7J/mhnmxO2qSsC+/j+YXm1qZo9BoXTRMsC8f0M/Hi5r+1i/l/6NSk3RUsNEtHAyg==
 
-"@sanity/cli@4.20.1":
+"@sanity/cli@4.20.1", "@sanity/cli@^4.19.0":
   version "4.20.1"
   resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-4.20.1.tgz#c8bc3eb5c358bbafac8de7cb211129896fa0358e"
   integrity sha512-ToLaUYj+ufV3ss8VDKZcXKCaWqEqAjmy4srecdOaurCPirb46ISJL3kYwqjJYBndVXMqnBVOkdzYi8hOiXQy4w==
@@ -4364,29 +4364,6 @@
     groq-js "^1.22.0"
     pkg-dir "^5.0.0"
     prettier "^3.7.3"
-    semver "^7.7.2"
-
-"@sanity/cli@^4.19.0":
-  version "4.20.0"
-  resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-4.20.0.tgz#a2b6cd1b7b4b3d560255b8d5a0ed79f2e84aee87"
-  integrity sha512-6Ed5nF08xOLoIQeCGtPRADFwts6F2l5okYM0gYhvRzee5eraNXyImTjg7WAjkaIN6FCFD9zXWcpbAXGELqsrBg==
-  dependencies:
-    "@babel/parser" "^7.28.5"
-    "@babel/traverse" "^7.28.5"
-    "@sanity/client" "^7.13.1"
-    "@sanity/codegen" "4.20.0"
-    "@sanity/runtime-cli" "^11.1.4"
-    "@sanity/telemetry" "^0.8.0"
-    "@sanity/template-validator" "^2.4.3"
-    chalk "^4.1.2"
-    debug "^4.4.3"
-    esbuild "0.27.0"
-    esbuild-register "^3.6.0"
-    get-it "^8.6.10"
-    get-latest-version "^5.1.0"
-    groq-js "^1.21.0"
-    pkg-dir "^5.0.0"
-    prettier "^3.7.2"
     semver "^7.7.2"
 
 "@sanity/client@^6.12.4":
@@ -4913,7 +4890,7 @@
     react-refractor "^4.0.0"
     use-effect-event "^2.0.3"
 
-"@sanity/util@4.20.1":
+"@sanity/util@4.20.1", "@sanity/util@^4.3.0":
   version "4.20.1"
   resolved "https://registry.yarnpkg.com/@sanity/util/-/util-4.20.1.tgz#c74b5186f6dec002f06313ca49826ac19b8731dd"
   integrity sha512-NltP9r62FJ9/oKXMcJQYzdStJ1mqczkESIPzJOv2UHqDStVUmiEL2zIIPKz3aelGan/Z/Z34t/B8VAVDeyPr2A==
@@ -4922,18 +4899,6 @@
     "@date-fns/utc" "^2.1.1"
     "@sanity/client" "^7.13.1"
     "@sanity/types" "4.20.1"
-    date-fns "^4.1.0"
-    rxjs "^7.8.2"
-
-"@sanity/util@^4.3.0":
-  version "4.20.0"
-  resolved "https://registry.yarnpkg.com/@sanity/util/-/util-4.20.0.tgz#9596a475979868545c06818a8ad00c2802642391"
-  integrity sha512-U5ifvFPThIjOyNDUQ0+VqlUYzq5pltfdW6RqyuziLCCqRUgFEwR+9PUxL4EuJa89XofdXCvCk4gksbuSQD+JUA==
-  dependencies:
-    "@date-fns/tz" "^1.4.1"
-    "@date-fns/utc" "^2.1.1"
-    "@sanity/client" "^7.13.1"
-    "@sanity/types" "4.20.0"
     date-fns "^4.1.0"
     rxjs "^7.8.2"
 
@@ -14273,12 +14238,7 @@ prettier@^2.6.2:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
   integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
 
-prettier@^3.7.2:
-  version "3.7.3"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.7.3.tgz#99a8891f6c990cfa54bcff2a0d276e6f845e59ab"
-  integrity sha512-QgODejq9K3OzoBbuyobZlUhznP5SKwPqp+6Q6xw6o8gnhr4O85L2U915iM2IDcfF2NPXVaM9zlo9tdwipnYwzg==
-
-prettier@^3.7.3:
+prettier@^3.7.2, prettier@^3.7.3:
   version "3.7.4"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.7.4.tgz#d2f8335d4b1cec47e1c8098645411b0c9dff9c0f"
   integrity sha512-v6UNi1+3hSlVvv8fSaoUbggEM5VErKmmpGA7Pl3HF8V6uKY7rvClBOJlH6yNwQtfTueNkGVpOv/mtWL9L4bgRA==
