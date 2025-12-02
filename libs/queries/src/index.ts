@@ -8,6 +8,7 @@ export * from './lib/geocoding/geocoding';
 export * from './lib/list/list';
 export * from './lib/location/location';
 export * from './lib/maps/maps';
+export * from './lib/place/place';
 export * from './lib/price/price';
 export * from './lib/review/review';
 export * from './lib/sort/sort';

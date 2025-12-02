@@ -20,7 +20,7 @@ export interface DetailWrapperProps {
 
 export const DetailWrapper: FunctionComponent<DetailWrapperProps> = ({ slug, sanity, maps }) => {
     const data: DetailResponse = use(queryDetail({ slug, sanity }));
-    const { images, reviews, name, established, location, description } = data;
+    const { images = [], reviews, name, established, location, description } = data || {};
     const adjustedLocation = {
         ...location,
         address: getShortAddress(location?.address),
@@ -39,8 +39,8 @@ export const DetailWrapper: FunctionComponent<DetailWrapperProps> = ({ slug, san
             <GallaryBlock images={galleryImages} />
             <div className="flex justify-between gap-5 lg:gap-8 xl:gap-12 4xl:gap-16">
                 <div className="w-full">
-                <ListingDetailsHeroBlock name={name} category='CATEGORY' established={established} location={adjustedLocation.address} />
-                <DescriptionBlock description={description} />
+                <ListingDetailsHeroBlock name={name || ''} category='CATEGORY' established={established || ''} location={adjustedLocation.address || ''} />
+                <DescriptionBlock description={description || ''} />
                 {/* <SpecificationBlock specifications={[]} /> */}
                 <LocationBlock location={adjustedLocation} maps={maps} />
                 <ReviewBlock reviews={reviews || []} />

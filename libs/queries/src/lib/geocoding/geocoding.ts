@@ -14,8 +14,11 @@ interface NominatimResult {
   boundingbox: [string, string, string, string]; // [south, north, west, east]
 }
 
+const CACHE_TTL = 60 * 60 * 24 * 30; // 30 days in seconds
+
 /**
  * Server-side geocoding using OpenStreetMap Nominatim (free, no API key required)
+ * Results are cached using Next.js data cache for 30 days to reduce API calls.
  * Note: Nominatim has usage policy - max 1 request per second, include User-Agent
  * https://operations.osmfoundation.org/policies/nominatim/
  */
@@ -26,14 +29,17 @@ export async function geocodeLocation(
     return null;
   }
 
+  const normalizedQuery = query.toLowerCase().trim();
+
   try {
     const response = await fetch(
       `https://nominatim.openstreetmap.org/search?` +
-        `q=${encodeURIComponent(query)}&format=json&limit=1`,
+        `q=${encodeURIComponent(normalizedQuery)}&format=json&limit=1`,
       {
         headers: {
           'User-Agent': 'tastecoffee.eu/1.0 (contact@tastecoffee.eu)',
         },
+        next: { revalidate: CACHE_TTL },
       }
     );
 

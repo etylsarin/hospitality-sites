@@ -1,13 +1,10 @@
 import { groq } from 'next-sanity';
 
 import { SanityConfigProps, client } from '../client/client';
-import { Review } from '../review/review';
-import { Location } from '../location/location';
-import { Price } from '../price/price';
-import { Category } from '../category/category';
 import { geocodeLocation, GeocodingResult } from '../geocoding/geocoding';
 import { SortOption, getOrderClause } from '../sort/sort';
 import { calculateDistance } from '../geo/distance';
+import { PlaceListItem } from '../place/place';
 
 export interface QueryListParams {
     domain: string;
@@ -17,9 +14,26 @@ export interface QueryListParams {
 }
 
 export interface GeoSearchResult {
-    items: ListItem[];
+    items: PlaceListItem[];
     geocodedLocation: GeocodingResult | null;
 }
+
+// GROQ projection for list items - fetches fields needed for list/card views
+const LIST_PROJECTION = `{
+    _id,
+    _createdAt,
+    slug,
+    name,
+    reviews,
+    categories,
+    serving,
+    services,
+    price,
+    established,
+    location,
+    openingHours,
+    images[] {"url": asset->url}
+}`;
 
 export const queryList = async ({ domain, sanity, locationQuery = '', sortBy = 'distance' }: QueryListParams): Promise<GeoSearchResult> => {
     // If location query provided, geocode it server-side using Nominatim (no API key needed)
@@ -34,7 +48,7 @@ export const queryList = async ({ domain, sanity, locationQuery = '', sortBy = '
         const { bounds, center } = geocodedLocation;
         const orderClause = getOrderClause(sortBy);
 
-        const rawItems = await client(sanity).fetch<ListItem[]>(groq`
+        const rawItems = await client(sanity).fetch<PlaceListItem[]>(groq`
             *[_type == "place" 
               && $domain in domains
               && defined(location.geopoint)
@@ -42,17 +56,7 @@ export const queryList = async ({ domain, sanity, locationQuery = '', sortBy = '
               && location.geopoint.lat <= $neLat
               && location.geopoint.lng >= $swLng
               && location.geopoint.lng <= $neLng
-            ] ${orderClause} {
-              slug,
-              name,
-              reviews,
-              categories,
-              price,
-              established,
-              location,
-              _createdAt,
-              images[] {"url": asset->url}
-            }
+            ] ${orderClause} ${LIST_PROJECTION}
         `, {
             domain,
             swLat: bounds.southwest.lat,
@@ -85,38 +89,13 @@ export const queryList = async ({ domain, sanity, locationQuery = '', sortBy = '
     // Fallback: no location query - fetch all with sorting
     const orderClause = sortBy === 'distance' ? '| order(_createdAt desc)' : getOrderClause(sortBy);
     
-    const items = await client(sanity).fetch<ListItem[]>(groq`
-        *[_type == "place" && $domain in domains] ${orderClause} {
-          slug,
-          name,
-          reviews,
-          categories,
-          price,
-          established,
-          location,
-          _createdAt,
-          images[] {"url": asset->url}
-        }
+    const items = await client(sanity).fetch<PlaceListItem[]>(groq`
+        *[_type == "place" && $domain in domains] ${orderClause} ${LIST_PROJECTION}
     `, { domain });
 
     return { items, geocodedLocation: null };
 };
 
-export interface ListItem {
-    slug: {
-        current: string;
-    };
-    name: string;
-    price: Price;
-    reviews: Review[];
-    categories: Category[];
-    established: string;
-    location: Location;
-    distance?: number; // Distance in meters from search center
-    _createdAt?: string;
-    images: {
-        url: string;
-    }[]
-}
-
-export type ListResponse = ListItem[]
+// Re-export types for backward compatibility
+export type ListItem = PlaceListItem;
+export type ListResponse = PlaceListItem[];

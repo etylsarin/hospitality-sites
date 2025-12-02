@@ -411,15 +411,24 @@ export function formatDistance(meters: number): string {
 
 ---
 
-## Next Steps
+## Implementation Status
 
-1. [ ] Create `libs/queries/src/lib/geocoding/geocoding.ts`
-2. [ ] Update `libs/queries/src/lib/list/list.ts` with geo query
-3. [ ] Create API route `apps/tastebeer.eu/app/api/search/location/route.ts`
-4. [ ] Create `LocationSearch` component in ui-kit
-5. [ ] Integrate with list page
-6. [ ] Add distance display to list items
-7. [ ] Consider Google Places Autocomplete for better UX
+### ✅ Completed (1 December 2025)
+
+1. [x] Create `libs/queries/src/lib/geocoding/geocoding.ts` - Using Nominatim (OpenStreetMap)
+2. [x] Update `libs/queries/src/lib/list/list.ts` with geo bounding box query
+3. [x] Add client-side Haversine distance calculation (`libs/queries/src/lib/geo/distance.ts`)
+4. [x] Integrate with list page - both tastecoffee.eu and tastebeer.eu
+5. [x] Add distance display to list items (`formatDistance` utility)
+6. [x] Add sort functionality with 5 options (Distance, Recently Added, Rating, Name, Established)
+7. [x] Create shared sort utilities (`libs/queries/src/lib/sort/sort.ts`)
+
+### 📝 Future Improvements
+
+- [ ] Consider self-hosting Nominatim for production scale (current: public API with 1 req/sec limit)
+- [ ] Add Google Places Autocomplete for better location input UX
+- [x] ~~Cache geocoding results to reduce API calls~~ ✅ Implemented with Next.js data cache (30-day TTL)
+- [ ] Add "Search this area" button when map is panned
 
 ---
 

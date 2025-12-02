@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ListItem, Price } from 'queries';
+import { ListItem, PriceRange } from 'queries';
 import { FunctionComponent } from 'react';
 import { CurrencyEuroIcon, MapPinIcon } from '@heroicons/react/24/outline';
 
@@ -19,12 +19,12 @@ import {
 } from '../slider/slider';
 import { getShortAddress, formatDistance } from '../../utils';
 
-const priceCounter = (price: Price) => ({
+const priceCounter = (price?: PriceRange) => ({
   'low': 1,
   'average': 2,
   'high': 3,
   'very-high': 4,
-}[price] || 0);
+}[price ?? 'low'] || 0);
 
 export interface ListCardProps extends Omit<ListItem, 'slug'> {
   id: string;
@@ -110,7 +110,7 @@ export const ListCard: FunctionComponent<ListCardProps> = ({
           <div className="content pt-3">
             <div className="mb-1 flex items-center gap-5">
               <span className="relative flex items-center font-bold text-gray-dark before:absolute before:-right-3 before:block before:h-1 before:w-1 before:rounded-full before:bg-gray-dark">
-                #12 of 243 {categories[0]?.label}
+                #12 of 243 {categories?.[0]?.label}
               </span>
               <span className="font-bold">{est}</span>
             </div>
