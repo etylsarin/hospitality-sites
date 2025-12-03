@@ -3,9 +3,9 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ListItem, Price } from 'queries';
+import { ListItem, PriceRange } from 'queries';
 import { FunctionComponent } from 'react';
-import { CurrencyEuroIcon } from '@heroicons/react/24/outline';
+import { CurrencyEuroIcon, MapPinIcon } from '@heroicons/react/24/outline';
 
 import { ActionIcon } from '../action-icon/action-icon';
 import { AddToWishlist } from '../add-to-wishlist/add-to-wishlist';
@@ -17,14 +17,14 @@ import {
   Navigation,
   Pagination,
 } from '../slider/slider';
-import { getShortAddress } from '../../utils';
+import { getShortAddress, formatDistance } from '../../utils';
 
-const priceCounter = (price: Price) => ({
+const priceCounter = (price?: PriceRange) => ({
   'low': 1,
   'average': 2,
   'high': 3,
   'very-high': 4,
-}[price] || 0);
+}[price ?? 'low'] || 0);
 
 export interface ListCardProps extends Omit<ListItem, 'slug'> {
   id: string;
@@ -39,6 +39,7 @@ export const ListCard: FunctionComponent<ListCardProps> = ({
   price,
   images,
   categories,
+  distance,
 }) => {
   const rating = reviews && reviews.length ? reviews.reduce((prev, curr) => prev + curr.rating, 0) / reviews.length : 0;
   const reviewCount = `${reviews?.length || 0} ${reviews?.length === 1 ? 'review' : 'reviews'}`;
@@ -109,12 +110,20 @@ export const ListCard: FunctionComponent<ListCardProps> = ({
           <div className="content pt-3">
             <div className="mb-1 flex items-center gap-5">
               <span className="relative flex items-center font-bold text-gray-dark before:absolute before:-right-3 before:block before:h-1 before:w-1 before:rounded-full before:bg-gray-dark">
-                #12 of 243 {categories[0]?.label}
+                #12 of 243 {categories?.[0]?.label}
               </span>
               <span className="font-bold">{est}</span>
             </div>
             <h4 className="text-ellipsis text-gray-dark 2xl:mb-1.5">{name}</h4>
-            <p className="mb-3 text-gray-light xl:mb-3">{getShortAddress(location?.address)}</p>
+            <p className="mb-3 text-gray-light xl:mb-3">
+              {getShortAddress(location?.address)}
+              {distance !== undefined && (
+                <span className="ml-2 inline-flex items-center text-sm text-gray">
+                  <MapPinIcon className="mr-1 h-3.5 w-3.5" />
+                  {formatDistance(distance)}
+                </span>
+              )}
+            </p>
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="text-gray-light">
                 <div

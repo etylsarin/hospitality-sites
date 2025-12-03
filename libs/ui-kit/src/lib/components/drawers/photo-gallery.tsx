@@ -68,7 +68,7 @@ export const PhotoGallery: FunctionComponent<PhotoGallertProps> = ({ sanity }) =
           Photo Gallery
         </Text>
         <div className="mt-6 columns-2 gap-x-2 lg:gap-x-3">
-          {images.map((image, index) => (
+          {images?.map((image, index) => (
             <div
               className="group relative mb-2 cursor-pointer overflow-hidden rounded-md transition-all duration-300 md:rounded-xl lg:mb-3"
               key={`gallery-img-${index}`}

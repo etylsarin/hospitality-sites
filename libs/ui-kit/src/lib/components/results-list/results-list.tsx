@@ -2,7 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import { FunctionComponent } from "react";
-import { Category, ListResponse } from "queries";
+import { ListResponse, Tag } from "queries";
 
 import { ListCard } from "../list-card/list-card";
 import { LoadMore } from "../load-more/load-more";
@@ -11,21 +11,25 @@ import styles from "./results-list.module.scss";
 
 interface ResultsListProps {
     data: ListResponse;
+    showDistance?: boolean;
 }
 
-export const ResultsList: FunctionComponent<ResultsListProps> = ({ data }) => {
+export const ResultsList: FunctionComponent<ResultsListProps> = ({ data, showDistance = false }) => {
   const searchParams = useSearchParams();
   const selectedCategories = searchParams?.get('category')?.split(',');
-  const hasIntersection = (array1: Category[], array2: string[]) => !!array1.filter(item => array2.includes(item.value)).length;
+  const hasIntersection = (array1: Tag[] | undefined, array2: string[]) => 
+    !!array1?.filter(item => array2.includes(item.value)).length;
   const filteredData = data.filter(item => selectedCategories ? hasIntersection(item.categories, selectedCategories) : true);
   return (
     <>
       <div className="mt-1 grid grid-cols-1 gap-x-5 gap-y-8 xs:grid-cols-2 lg:grid-cols-3 3xl:gap-y-10 4xl:grid-cols-4">
-        {filteredData.length ? filteredData.map(({ slug, ...item }) => (
+        {filteredData.length ? filteredData.map(({ slug, distance, ...item }) => (
           <ListCard
             {...item}
             key={slug.current}
-            id={slug.current} />
+            id={slug.current}
+            distance={showDistance ? distance : undefined}
+          />
         )) : <div className={styles.noResults}>No results to display</div>}
       </div>
       <LoadMore itemCount={filteredData.length} />

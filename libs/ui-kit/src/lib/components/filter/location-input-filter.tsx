@@ -1,10 +1,10 @@
- 
 'use client';
 
-import { useSearchParams } from 'next/navigation';
-import { FunctionComponent, useEffect, useState } from 'react';
+/* global google */
 
-import { useQueryParam } from '../../hooks';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { FunctionComponent, useEffect, useState, ChangeEvent } from 'react';
+
 import { Input } from '../form-fields';
 import { MapMarkerIcon } from '../icons';
 import { SearchAutocomplete } from '../search-autocomplete/search-autocomplete';
@@ -15,46 +15,52 @@ export interface LocationInputFilterProps {
 }
 
 export const LocationInputFilter: FunctionComponent<LocationInputFilterProps> = ({ maps }) => {
-  const { clearFilter, updateQueryparams } = useQueryParam();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const location = searchParams?.get('location');
 
-  const [searchBox, setSearchBox] = useState<any>();
+  const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox | null>(null);
   const [locationInput, setLocationInput] = useState({
-    searchedLocation: location,
-    searchedPlaceAPIData: [],
+    searchedLocation: location || '',
   });
 
-  const onLoad = (ref: any) => setSearchBox(ref);
+  const onLoad = (ref: google.maps.places.SearchBox) => setSearchBox(ref);
+
   const onPlacesChanged = () => {
+    if (!searchBox) return;
+    
     const places = searchBox.getPlaces();
-    setLocationInput({
-      searchedLocation: places && places[0] && places[0].formatted_address,
-      searchedPlaceAPIData: places ? places : [],
-    });
-    updateQueryparams(
-      'location',
-      places && places[0] && places[0].formatted_address
-    );
+    if (!places || places.length === 0) return;
+
+    const place = places[0];
+    if (!place) return;
+    
+    const address = place.formatted_address || place.name || '';
+    
+    setLocationInput({ searchedLocation: address });
+
+    // Only pass location name - geocoding happens server-side
+    const url = new URL(window.location.href);
+    url.searchParams.set('location', address);
+    
+    router.push(`/places${url.search}`);
   };
 
-  // removes value when reset
+  // Sync with URL when reset
   useEffect(() => {
     if (!location) {
-      setLocationInput({
-        ...locationInput,
-        searchedLocation: '',
-      });
+      setLocationInput({ searchedLocation: '' });
+    } else {
+      setLocationInput({ searchedLocation: location });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   function handleClearClick() {
-    setLocationInput({
-      ...locationInput,
-      searchedLocation: '',
-    });
-    clearFilter(['location']);
+    setLocationInput({ searchedLocation: '' });
+    
+    const url = new URL(window.location.href);
+    url.searchParams.delete('location');
+    router.push(`/places${url.search}`);
   }
 
   return (
@@ -82,17 +88,14 @@ export const LocationInputFilter: FunctionComponent<LocationInputFilterProps> = 
         labelClassName="lg:!text-base !mb-2 text-gray-dark"
         startIcon={<MapMarkerIcon className="h-5 w-5" />}
         startIconClassName="!left-1"
-        placeholder="Pilsen"
+        placeholder="Pilsen, Prague..."
         required
-        clearable={locationInput.searchedLocation ? true : false}
+        clearable={!!locationInput.searchedLocation}
         endIcon={true}
         onClearClick={handleClearClick}
-        value={locationInput.searchedLocation || ''}
-        onChange={(event: any) => {
-          setLocationInput({
-            ...locationInput,
-            searchedLocation: event.target.value,
-          });
+        value={locationInput.searchedLocation}
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+          setLocationInput({ searchedLocation: event.target.value });
         }}
       />
     </SearchAutocomplete>
