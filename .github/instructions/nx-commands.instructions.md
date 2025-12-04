@@ -94,10 +94,11 @@ jest --coverage | eslint --fix
 
 ## Workspace Structure
 
-- **Apps**: Located in `apps/` directory (tastebeer.eu, tastecoffee.eu, cms-studio, backend)
-- **Libraries**: Located in `libs/` directory
-- **UI Components**: Reusable UI components in `libs/ui-kit/`
-- **Data Queries**: Sanity queries and data fetching in `libs/queries/`
+See [docs/PROJECT.md](../../docs/PROJECT.md#architecture) for full project architecture.
+
+**Quick Reference:**
+- **Apps:** `apps/tastebeer.eu/`, `apps/tastecoffee.eu/`, `apps/cms-studio/`
+- **Libraries:** `libs/ui-kit/` (UI components), `libs/queries/` (data layer)
 
 ## CI/CD Integration
 

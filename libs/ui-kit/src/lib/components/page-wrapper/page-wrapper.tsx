@@ -8,7 +8,7 @@ import { DrawerContainer } from '../drawers/view';
 import GalleryCarouselView from '../gallery/view';
 import { AssetProvider } from '../assets-provider/assets-provider';
 
-import { Footer } from "../footer/footer";
+import { Footer, MenuItem } from "../footer/footer";
 import { SanityConfigProps } from 'queries';
 
 const lato = Lato({
@@ -26,10 +26,11 @@ const satisfy = Satisfy({
 export interface PageWrapperProps {
   sanity: SanityConfigProps;
   children?: ReactNode;
-    version?: string;
+  version?: string;
+  menuItems?: MenuItem[];
 }
 
-export const PageWrapper: FunctionComponent<PageWrapperProps> = ({ version, sanity, children }) => (
+export const PageWrapper: FunctionComponent<PageWrapperProps> = ({ version, sanity, menuItems, children }) => (
   <AssetProvider>
     <html
       lang="en"
@@ -43,9 +44,9 @@ export const PageWrapper: FunctionComponent<PageWrapperProps> = ({ version, sani
       <head />
       <body className="flex min-h-full flex-col">
         {children}
-        <Footer />
+        <Footer menuItems={menuItems} />
         <ModalContainer />
-        <DrawerContainer sanity={sanity} />
+        <DrawerContainer sanity={sanity} menuItems={menuItems} />
         <GalleryCarouselView />
         <SpeedInsights />
       </body>

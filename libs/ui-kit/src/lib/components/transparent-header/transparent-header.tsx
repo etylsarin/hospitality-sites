@@ -6,6 +6,7 @@ import { useScrollingClass } from '../../utils';
 import { SearchIconBtn } from '../search-icon-btn/search-icon-btn';
 import { Menu } from '../menu/menu';
 import { Logo } from '../logo/logo';
+import { SideNavButton } from '../side-nav-button/side-nav-button';
 
 export interface TransparentHeaderProps {
   title: string;
@@ -27,7 +28,10 @@ export const TransparentHeader: FunctionComponent<TransparentHeaderProps> = (pro
         )
       }
     >
-      <Logo {...props} />
+      <div className="flex items-center gap-2 md:gap-4">
+        <SideNavButton />
+        <Logo {...props} />
+      </div>
       <div className="flex items-center">
         <SearchIconBtn className="md:hidden" />
         <Menu />

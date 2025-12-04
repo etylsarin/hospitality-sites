@@ -6,7 +6,7 @@ import { appConfig } from './config';
 export const viewport: Viewport = appConfig.viewport;
 
 const RootLayout: FunctionComponent<PropsWithChildren> = ({ children }) => (
-  <PageWrapper version={appConfig.version} sanity={appConfig.sanity}>
+  <PageWrapper version={appConfig.version} sanity={appConfig.sanity} menuItems={appConfig.menuItems}>
     {children}
   </PageWrapper>
 );

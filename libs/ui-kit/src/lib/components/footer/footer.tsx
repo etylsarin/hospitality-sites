@@ -3,13 +3,19 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
-import { menuItems } from '../../configs';
+
+export interface MenuItem {
+  id: string;
+  label: string;
+  path: string;
+}
 
 export interface FooterProps {
   className?: string;
+  menuItems?: MenuItem[];
 }
 
-export const Footer: FunctionComponent<FooterProps> = ({ className }) => {
+export const Footer: FunctionComponent<FooterProps> = ({ className, menuItems = [] }) => {
   return (
     <footer>
       <div className={clsx('container-fluid mb-4', className)}>
