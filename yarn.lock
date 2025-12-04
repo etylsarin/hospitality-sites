@@ -4385,27 +4385,6 @@
     nanoid "^3.3.11"
     rxjs "^7.0.0"
 
-"@sanity/codegen@4.20.0":
-  version "4.20.0"
-  resolved "https://registry.yarnpkg.com/@sanity/codegen/-/codegen-4.20.0.tgz#48445c2a470f903cba56b4f089d7e8415449033b"
-  integrity sha512-PKPly4g9w7E259k4ihMG2ryR/uvAv0a7E8Dk7pcMGS58j1yoWHsUt2ucNH3ZDTlDcU5TgIrK21P6hwDYyQTGaw==
-  dependencies:
-    "@babel/core" "^7.28.5"
-    "@babel/generator" "^7.28.5"
-    "@babel/preset-env" "^7.28.5"
-    "@babel/preset-react" "^7.28.5"
-    "@babel/preset-typescript" "^7.28.5"
-    "@babel/register" "^7.28.3"
-    "@babel/traverse" "^7.28.5"
-    "@babel/types" "^7.28.5"
-    debug "^4.4.3"
-    globby "^11.1.0"
-    groq "4.20.0"
-    groq-js "^1.21.0"
-    json5 "^2.2.3"
-    tsconfig-paths "^4.2.0"
-    zod "^3.25.76"
-
 "@sanity/codegen@4.20.1":
   version "4.20.1"
   resolved "https://registry.yarnpkg.com/@sanity/codegen/-/codegen-4.20.1.tgz#d6bb3d9be86c7b5b2a9eaa04cbd9e80035d08d3c"
@@ -4834,14 +4813,6 @@
   dependencies:
     "@sanity/client" "^7.6.0"
     "@sanity/media-library-types" "^1.0.0"
-
-"@sanity/types@4.20.0":
-  version "4.20.0"
-  resolved "https://registry.yarnpkg.com/@sanity/types/-/types-4.20.0.tgz#a324a0b4eb3cd308d118abdf4526f60161dd5448"
-  integrity sha512-T/rpGYHFff44W+AM7v8zP/K8GilNp1xotKb2xhMj+caLpZ4eGbs+Ov8tyGzCNs60ark9e0/qoN9XowyQ2lBunA==
-  dependencies:
-    "@sanity/client" "^7.13.1"
-    "@sanity/media-library-types" "^1.0.1"
 
 "@sanity/types@4.20.1":
   version "4.20.1"
@@ -10010,11 +9981,6 @@ groq@3.88.1-typegen-experimental.0:
   resolved "https://registry.yarnpkg.com/groq/-/groq-3.88.1-typegen-experimental.0.tgz#62970237ba5224953194f881a799ba810369df9b"
   integrity sha512-6TZD6H1y3P7zk0BQharjFa7BOivV9nFL6KKVZbRZRH0yOSSyu2xHglTO48b1/2mCEdYoBQpvE7rjCDUf6XmQYQ==
 
-groq@4.20.0:
-  version "4.20.0"
-  resolved "https://registry.yarnpkg.com/groq/-/groq-4.20.0.tgz#88529faeb7933c15712621752ac1d3111cab645b"
-  integrity sha512-OiQZWNf+V+5NG0Ehcx07NDe8SHXcxYTSmQdzeJHUeSunkhflBeUmeJOL7Hw2tmC36AjsFjJPyTGxR4qJsRQzTA==
-
 groq@4.20.1:
   version "4.20.1"
   resolved "https://registry.yarnpkg.com/groq/-/groq-4.20.1.tgz#74baa321439a4c286938dc313186261da995e272"
@@ -14237,11 +14203,6 @@ prettier@^2.6.2:
   version "2.8.8"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
   integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
-
-prettier@^3.7.2, prettier@^3.7.3:
-  version "3.7.4"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.7.4.tgz#d2f8335d4b1cec47e1c8098645411b0c9dff9c0f"
-  integrity sha512-v6UNi1+3hSlVvv8fSaoUbggEM5VErKmmpGA7Pl3HF8V6uKY7rvClBOJlH6yNwQtfTueNkGVpOv/mtWL9L4bgRA==
 
 prettier@^3.7.3:
   version "3.7.4"
