@@ -58,7 +58,7 @@
     "@testing-library/react": "16.1.0",
     "@types/jest": "30.0.0",
     "@types/lodash": "^4.17.21",
-    "@types/node": "18.19.99",
+    "@types/node": "20",
     "@types/react": "19.2.7",
     "@types/react-datepicker": "^4.19.5",
     "@types/react-dom": "19.2.3",
