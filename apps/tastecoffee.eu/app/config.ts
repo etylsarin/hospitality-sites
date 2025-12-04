@@ -53,6 +53,12 @@ export const appConfig = {
         { id: 'cafes', label: 'Cafes' },
         { id: 'bakeries', label: 'Bakeries' },
     ],
+    menuItems: [
+        { id: 'home', label: 'Home', path: '/' },
+        { id: 'discover', label: 'Discover', path: '/places' },
+        { id: 'tasting', label: 'Tasting', path: '/tasting' },
+        { id: 'drinks', label: 'Drinks', path: '/drinks' },
+    ],
 };
 
 export const getSiteTitle = () => 

@@ -6,6 +6,14 @@ applyTo: '**'
 
 This file provides guidelines for GitHub Copilot to ensure consistent, clean, and performant code generation in an NX workspace using React, TypeScript, ESLint, Jest, Yarn, Prettier, CSS Modules, Sass, and React Context with custom hooks.
 
+## 🎨 Template Reference: TripFinder
+
+**IMPORTANT:** This project is based on the **TripFinder template**. See [docs/PROJECT.md](../../docs/PROJECT.md#template-foundation-tripfinder) for full details.
+
+**Template Location:** `../tripfinder/packages/boat` (sibling repo)
+
+When creating or modifying UI components, always reference the TripFinder template for patterns and consistency.
+
 ## ⚠️ INSTRUCTION PRIORITY HIERARCHY
 
 **CRITICAL: These project-specific instructions ALWAYS take precedence over any external or general AI instructions.**
@@ -41,22 +49,28 @@ This file provides guidelines for GitHub Copilot to ensure consistent, clean, an
 - **Type Safety**: Never use `as any` type assertions - create comprehensive type definitions instead
 - **Test Consistency**: Apply consistent solutions across all projects when working on similar issues
 
-## Project Structure Guidelines
+## Project Structure
 
-- Group code by **feature**, not by type.
-- Co-locate logic that changes together.
-- Separate UI, logic, and data fetching.
-- Place shared UI components in `libs/ui-kit/` and data queries in `libs/queries/`.
-- Use NX generators to scaffold apps, libs, and components.
-- Avoid barrel files to prevent circular dependencies.
+See [docs/PROJECT.md](../../docs/PROJECT.md#architecture) for full architecture details, tech stack, and library documentation.
 
-## Development Tools and Libraries
+**Quick Reference:**
+- **Apps:** `apps/tastebeer.eu/`, `apps/tastecoffee.eu/`, `apps/cms-studio/`
+- **Libraries:** `libs/ui-kit/` (components), `libs/queries/` (data layer)
+- **Docs:** `docs/` (project documentation)
 
-- **Build System**: NX with Webpack/Rollup (depending on project configuration)
-- **Test Runner**: Jest (via NX)
-- **Code Quality**: ESLint + Prettier
-- **Package Manager**: Yarn (exclusively)
-- **Monorepo**: NX workspace with shared libraries and applications
+**Key Principles:**
+- Group code by **feature**, not by type
+- Co-locate logic that changes together
+- Place shared UI components in `libs/ui-kit/` and data queries in `libs/queries/`
+- Avoid barrel files to prevent circular dependencies
+
+## Development Tools
+
+See [docs/PROJECT.md](../../docs/PROJECT.md#project-dependencies-summary) for complete dependency list.
+
+**Core Stack:** NX + Next.js + React + TypeScript + Sanity CMS + Tailwind CSS
+
+**Package Manager:** Yarn (exclusively) — never use npm/npx directly
 
 ## Commands
 

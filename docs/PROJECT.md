@@ -1,8 +1,8 @@
 # Hospitality Sites Project Documentation
 
-> **Last Updated:** July 2025
+> **Last Updated:** December 2025
 > **Project Status:** Active Development
-> **Node Version Required:** 20.x.x
+> **Node Version Required:** 22.x.x
 
 ## Overview
 
@@ -25,6 +25,18 @@ This is an NX monorepo containing hospitality venue discovery websites built wit
 
 ## Architecture
 
+### Template Foundation: TripFinder
+
+**This project is built on the TripFinder template** located at `../tripfinder/packages/boat` (sibling repository).
+
+The template provides:
+- **UI Component Library:** All components in `libs/ui-kit/` are derived from or inspired by the TripFinder template
+- **Design System:** Tailwind CSS configuration, color schemes, typography, and spacing conventions
+- **Layout Patterns:** PageWrapper, Section, Footer, TransparentHeader structures
+- **Styling Conventions:** Gradient backgrounds, rounded corners, responsive grids, color-coded cards
+
+When developing new features or components, **always reference the TripFinder template** to maintain design consistency and leverage existing patterns.
+
 ```
 hospitality-sites/
 ├── apps/
@@ -46,16 +58,16 @@ hospitality-sites/
 ### Tech Stack
 
 | Category | Technology | Version |
-|----------|-----------|---------|
-| Monorepo | NX | 17.2.8 |
-| Frontend | Next.js (App Router) | 13.5.6 |
-| React | React (Canary) | 18.3.0-canary |
-| CMS | Sanity | 4.19.0 |
+|----------|-----------|--------|
+| Monorepo | NX | 22.1.3 |
+| Frontend | Next.js (App Router) | 16.0.5 |
+| React | React | 19.2.0 |
+| CMS | Sanity | 4.20.1 |
 | Styling | Tailwind CSS + SCSS | 3.4.1 |
 | State | Jotai | 2.6.4 |
 | Forms | React Hook Form + Zod | 7.51.0 / 3.22.4 |
 | Maps | Google Maps React | 2.19.2 |
-| TypeScript | TypeScript | 5.2.2 |
+| TypeScript | TypeScript | 5.9.3 |
 | Testing | Jest + React Testing Library | 29.4.1 |
 | Package Manager | Yarn | - |
 
@@ -382,8 +394,8 @@ The `apps/backend/` and `apps/_backup/` directories can be safely removed to cle
 ## Project Dependencies Summary
 
 ### Production Dependencies
-- **Core:** Next.js 13.5.6, React 18.3.0-canary, TypeScript 5.2.2
-- **CMS:** Sanity 4.19.0, next-sanity 7.0.17
+- **Core:** Next.js 16.0.5, React 19.2.0, TypeScript 5.9.3
+- **CMS:** Sanity 4.20.1, next-sanity 9.8.28
 - **UI:** Tailwind CSS 3.4.1, Headless UI, Heroicons
 - **Maps:** @react-google-maps/api, react-geocode
 - **Forms:** react-hook-form, zod, react-datepicker
@@ -391,10 +403,10 @@ The `apps/backend/` and `apps/_backup/` directories can be safely removed to cle
 - **Utils:** lodash, clsx, swiper
 
 ### Dev Dependencies
-- **Build:** NX 17.2.8, @nx/next, @swc/core
+- **Build:** NX 22.1.3, @nx/next, @swc/core 1.15.3
 - **Testing:** Jest 29.4.1, @testing-library/react
-- **Linting:** ESLint 8.48.0, Prettier 2.6.2
-- **Styling:** Sass 1.62.1, postcss, autoprefixer
+- **Linting:** ESLint 9.39.1, Prettier 2.6.2
+- **Styling:** Sass 1.94.2, postcss, autoprefixer
 
 ---
 
@@ -406,13 +418,8 @@ The schema supports additional domains beyond beer and coffee:
 - `guide` - General hospitality guide
 
 ### Potential Improvements
-1. Upgrade Next.js to 14+ for improved App Router features
-2. Move from React canary to stable release
-3. Upgrade NX to version 20+
-4. Replace deprecated `images.domains` with `remotePatterns`
-5. Add authentication for user reviews
-6. Implement tasting experience feature
-7. Remove inactive Strapi directories
+1. Add authentication for user reviews
+2. Remove inactive Strapi directories (`apps/backend/`, `apps/_backup/`)
 
 ---
 

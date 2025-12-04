@@ -8,11 +8,12 @@ import { FunctionComponent, useEffect } from 'react';
 
 import { Drawer } from '../drawer/drawer';
 import { SanityConfigProps } from 'queries';
+import { MenuItem } from '../footer/footer';
 
 const PhotoGallery = dynamic(
   () => import('./photo-gallery')
 );
-// const SideMenu = dynamic(() => import('@/components/ui/drawers/side-menu'));
+const SideMenu = dynamic(() => import('./side-menu'));
 // const Filter = dynamic(() => import('@/components/explore/filter'));
 // const BookingFormModal = dynamic(
 //   () => import('@/components/ui/drawers/booking-form-drawer')
@@ -25,16 +26,12 @@ export type DRAWER_VIEW =
   | 'FILTER_MENU';
 
 // render drawer contents
-function renderDrawerContent(view: DRAWER_VIEW | string, sanity: SanityConfigProps) {
+function renderDrawerContent(view: DRAWER_VIEW | string, sanity: SanityConfigProps, menuItems?: MenuItem[]) {
   switch (view) {
     case 'PHOTO_GALLERY':
       return <PhotoGallery sanity={sanity} />;
-    // case 'SIDE_MENU':
-    //   return <SideMenu />;
-    // case 'FILTER_MENU':
-    //   return <Filter />;
-    // case 'BOOKING_FORM':
-    //   return <BookingFormModal />;
+    case 'SIDE_MENU':
+      return <SideMenu menuItems={menuItems} />;
     default:
       return null;
   }
@@ -55,9 +52,10 @@ export const drawerStateAtom = atom<DrawerPropsType>({
 
 export interface DrawerContainerProps {
   sanity: SanityConfigProps;
+  menuItems?: MenuItem[];
 }
 
-export const DrawerContainer: FunctionComponent<DrawerContainerProps> = ({ sanity }) => {
+export const DrawerContainer: FunctionComponent<DrawerContainerProps> = ({ sanity, menuItems }) => {
   const [drawerSate, setDrawerState] = useAtom(drawerStateAtom);
   const pathName = usePathname();
   useEffect(() => {
@@ -73,11 +71,12 @@ export const DrawerContainer: FunctionComponent<DrawerContainerProps> = ({ sanit
         customSize={drawerSate.customSize}
         containerClassName={clsx(
           drawerSate.view === 'BOOKING_FORM' && 'bg-white',
-          drawerSate.view === 'PHOTO_GALLERY' && 'bg-white overflow-y-auto'
+          drawerSate.view === 'PHOTO_GALLERY' && 'bg-white overflow-y-auto',
+          drawerSate.view === 'SIDE_MENU' && 'bg-white'
         )}
         onClose={() => setDrawerState({ ...drawerSate, isOpen: false })}
       >
-        {renderDrawerContent(drawerSate.view, sanity)}
+        {renderDrawerContent(drawerSate.view, sanity, menuItems)}
       </Drawer>
     </>
   );

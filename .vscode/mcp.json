@@ -9,7 +9,8 @@
       "type": "http"
     },
     "chrome-devtools": {
-      "command": "chrome-devtools-mcp",
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"],
       "type": "stdio"
     }
   }
