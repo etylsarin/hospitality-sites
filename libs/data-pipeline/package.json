@@ -1,0 +1,18 @@
+{
+  "name": "@hospitality-sites/data-pipeline",
+  "version": "0.0.1",
+  "description": "Data pipeline for hospitality venues: scrape, convert, enrich, validate, and import",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "private": true,
+  "scripts": {},
+  "keywords": [
+    "data-pipeline",
+    "scraper",
+    "puppeteer",
+    "puppeteer-cluster",
+    "google-maps",
+    "google-places-api",
+    "sanity"
+  ]
+}
