@@ -1,42 +1,33 @@
 'use client';
 
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import { FunctionComponent } from 'react';
-import { Geopoint } from '@sanity/google-maps-input';
+import dynamic from 'next/dynamic';
 
-interface MapViewProps {
+interface Geopoint {
+  lat: number;
+  lng: number;
+}
+
+export interface MapViewProps {
   geopoint: Geopoint;
-  googleMapsApiKey: string;
   mapContainerClassName?: string;
+  markerLabel?: string;
 }
 
-const options = {
-  mapTypeControl: false,
-  fullscreenControl: false,
-  streetViewControl: false,
+// Dynamically import the actual map component with SSR disabled
+const LeafletMap = dynamic(() => import('./leaflet-map').then(mod => mod.LeafletMap), {
+  ssr: false,
+  loading: () => (
+    <div style={{ background: '#e5e7eb', height: '100%', width: '100%' }}>
+      <div className="flex items-center justify-center h-full text-gray-500">
+        Loading map...
+      </div>
+    </div>
+  ),
+});
+
+export const MapView: FunctionComponent<MapViewProps> = (props) => {
+  return <LeafletMap {...props} />;
 };
-
-type l = 'places'[];
-const libraries: l = ['places'];
-
-export const MapView: FunctionComponent<MapViewProps> = ({ mapContainerClassName, geopoint, googleMapsApiKey }) => {
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey,
-    libraries,
-  });
-
-  if (!isLoaded) {
-    return <span>Loading...</span>;
-  }
-
-  return (
-    <GoogleMap
-      mapContainerClassName={mapContainerClassName}
-      center={{ lat: geopoint.lat, lng: geopoint.lng }}
-      zoom={16}
-      options={options}
-    ></GoogleMap>
-  );
-}
 
 MapView.displayName = 'MapView';

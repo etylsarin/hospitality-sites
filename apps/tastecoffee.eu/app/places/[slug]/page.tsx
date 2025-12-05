@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: PlaceDetailPageProps): Promis
 
 const PlaceDetailPage: FunctionComponent<PlaceDetailPageProps> = async props => {
     const params = await props.params;
-    return (<DetailWrapper slug={params.slug} sanity={appConfig.sanity} maps={appConfig.maps} />);
+    return (<DetailWrapper slug={params.slug} sanity={appConfig.sanity} />);
 };
 
 export default PlaceDetailPage;
