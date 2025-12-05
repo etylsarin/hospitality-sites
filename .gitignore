@@ -4,7 +4,6 @@
 dist
 tmp
 /out-tsc
-docs/imports/
 
 # dependencies
 node_modules
@@ -49,6 +48,12 @@ _middlewares.ts
 .DS_Store
 Thumbs.db
 
+# Scraper domain-specific folders
+docs/scrapers/
+libs/data-pipeline/src/scrapers/
+libs/data-pipeline/src/configs/
+
+# Nx specific folders
 .nx/cache
 .nx/workspace-data
 

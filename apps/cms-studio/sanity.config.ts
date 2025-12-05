@@ -3,7 +3,7 @@ import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
 import { deskTool } from 'sanity/desk';
 import { markdownSchema } from 'sanity-plugin-markdown';
-import { tags } from 'sanity-plugin-tags';
+import { tags } from 'sanity-plugin-tags-v4';
 
 import { schemaTypes } from './src';
 

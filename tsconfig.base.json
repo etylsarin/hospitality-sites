@@ -21,6 +21,7 @@
     "baseUrl": ".",
     "paths": {
       "queries": ["libs/queries/src/index.ts"],
+      "data-pipeline": ["libs/data-pipeline/src/index.ts"],
       "ui-kit": ["libs/ui-kit/src/index.ts"]
     }
   },

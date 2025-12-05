@@ -47,7 +47,8 @@ hospitality-sites/
 │   └── _backup/          # Strapi backup (inactive)
 ├── libs/
 │   ├── ui-kit/           # Shared React components (50+)
-│   └── queries/          # Sanity GROQ queries & data layer
+│   ├── queries/          # Sanity GROQ queries & data layer
+│   └── data-pipeline/    # Scraping, enrichment & import tools
 ├── .github/
 │   ├── instructions/     # AI/Copilot instruction files
 │   └── docs/             # Project documentation
@@ -60,15 +61,15 @@ hospitality-sites/
 | Category | Technology | Version |
 |----------|-----------|--------|
 | Monorepo | NX | 22.1.3 |
-| Frontend | Next.js (App Router) | 16.0.5 |
-| React | React | 19.2.0 |
+| Frontend | Next.js (App Router) | 16.0.7 |
+| React | React | 19.2.1 |
 | CMS | Sanity | 4.20.1 |
-| Styling | Tailwind CSS + SCSS | 3.4.1 |
+| Styling | Tailwind CSS + SCSS | 3.4.3 |
 | State | Jotai | 2.6.4 |
 | Forms | React Hook Form + Zod | 7.51.0 / 3.22.4 |
-| Maps | Google Maps React | 2.19.2 |
+| Maps | Google Maps React + Leaflet | 2.19.2 / 1.9.4 |
 | TypeScript | TypeScript | 5.9.3 |
-| Testing | Jest + React Testing Library | 29.4.1 |
+| Testing | Jest + React Testing Library | 30.0.5 |
 | Package Manager | Yarn | - |
 
 ---
@@ -163,6 +164,46 @@ hospitality-sites/
 | **Utilities** | AssetsProvider, Filter, FilterTopbar |
 
 **Exports:** All components are exported from `libs/ui-kit/src/index.ts`
+
+---
+
+### data-pipeline
+
+**Purpose:** Unified data pipeline for searching, enriching, and importing venue data
+
+**Location:** `libs/data-pipeline/`
+
+**Modules:**
+
+| Module | Purpose |
+|--------|--------|
+| `cli` | Unified command-line interface |
+| `cluster` | Puppeteer Cluster management |
+| `scrapers` | Web scrapers (see [docs/scrapers/](scrapers/) for details) |
+| `processors` | Data conversion, enrichment, validation (see [docs/processors/](processors/)) |
+| `sanity` | Sanity client and uploader |
+
+**CLI Commands:**
+```bash
+# Search Google Places API
+yarn nx run data-pipeline:cli -- search --query "breweries Prague" -o tmp/breweries.ndjson -d beer
+
+# Convert Google Takeout GeoJSON
+yarn nx run data-pipeline:cli -- convert input.geojson output.ndjson -d coffee
+
+# Enrich with Google Places API
+yarn nx run data-pipeline:cli -- enrich input.ndjson output.ndjson
+
+# Validate data
+yarn nx run data-pipeline:cli -- validate input.ndjson
+
+# Import to Sanity
+yarn nx run data-pipeline:cli -- import input.ndjson --dataset production
+```
+
+**Documentation:**
+- Scrapers: [docs/scrapers/](scrapers/)
+- Processors: [docs/processors/](processors/)
 
 ---
 
@@ -394,19 +435,19 @@ The `apps/backend/` and `apps/_backup/` directories can be safely removed to cle
 ## Project Dependencies Summary
 
 ### Production Dependencies
-- **Core:** Next.js 16.0.5, React 19.2.0, TypeScript 5.9.3
-- **CMS:** Sanity 4.20.1, next-sanity 9.8.28
-- **UI:** Tailwind CSS 3.4.1, Headless UI, Heroicons
-- **Maps:** @react-google-maps/api, react-geocode
-- **Forms:** react-hook-form, zod, react-datepicker
+- **Core:** Next.js 16.0.7, React 19.2.1, TypeScript 5.9.3
+- **CMS:** Sanity 4.20.1, next-sanity 7.0.17
+- **UI:** Tailwind CSS 3.4.3, Headless UI 1.7.18, Heroicons 2.1.1
+- **Maps:** @react-google-maps/api 2.19.2, Leaflet 1.9.4, react-leaflet 5.0.0
+- **Forms:** react-hook-form 7.51.0, zod 3.22.4, react-datepicker 4.25.0
 - **State:** Jotai 2.6.4
-- **Utils:** lodash, clsx, swiper
+- **Utils:** lodash 4.17.21, clsx 2.1.0, swiper 11.0.5
 
 ### Dev Dependencies
 - **Build:** NX 22.1.3, @nx/next, @swc/core 1.15.3
-- **Testing:** Jest 29.4.1, @testing-library/react
+- **Testing:** Jest 30.0.5, @testing-library/react 16.1.0
 - **Linting:** ESLint 9.39.1, Prettier 2.6.2
-- **Styling:** Sass 1.94.2, postcss, autoprefixer
+- **Styling:** Sass 1.94.2, postcss 8.4.38, autoprefixer 10.4.17
 
 ---
 
